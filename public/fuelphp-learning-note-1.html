@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>FuelPHP框架学习笔记（一）——基本安装配置 | iat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="FuelPHP是基于PHP5.3+开发的框架，拥有很多优秀的特性ORM、CURD、Auth等，包含了丰富的扩展库oil，可以通过命令轻松创建web应用。">
+<meta name="keywords" content="PHP,FuelPHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FuelPHP框架学习笔记（一）——基本安装配置">
+<meta property="og:url" content="https://iat.net.cn/fuelphp-learning-note-1.html">
+<meta property="og:site_name" content="iat">
+<meta property="og:description" content="FuelPHP是基于PHP5.3+开发的框架，拥有很多优秀的特性ORM、CURD、Auth等，包含了丰富的扩展库oil，可以通过命令轻松创建web应用。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://iat.net.cn/images/fuelphp-view-model.png">
+<meta property="og:image" content="https://iat.net.cn/images/fuelphp-bootstrap.png">
+<meta property="og:image" content="https://iat.net.cn/images/fuelphp-open-orm.png">
+<meta property="og:updated_time" content="2019-08-20T09:01:36.639Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FuelPHP框架学习笔记（一）——基本安装配置">
+<meta name="twitter:description" content="FuelPHP是基于PHP5.3+开发的框架，拥有很多优秀的特性ORM、CURD、Auth等，包含了丰富的扩展库oil，可以通过命令轻松创建web应用。">
+<meta name="twitter:image" content="https://iat.net.cn/images/fuelphp-view-model.png">
+  
+    <link rel="alternative" href="/atom.xml" title="iat" type="application/atom+xml">
+  
+  
+  <script src="./style.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="./avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">iat</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+	        
+				<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+	        
+				<li><a href="https://about.iat.net.cn">关于我</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">Archive</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">Tags</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">Links</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">About</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+		        
+					<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">iat</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="./avatar.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">iat</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+		        
+					<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+		        
+					<li><a href="https://about.iat.net.cn">关于我</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-fuelphp-learning-note-1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      FuelPHP框架学习笔记（一）——基本安装配置
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>FuelPHP是基于PHP5.3+开发的框架，拥有很多优秀的特性<strong>ORM</strong>、<strong>CURD</strong>、<strong>Auth</strong>等，包含了丰富的扩展库oil，可以通过命令轻松创建web应用。</p>
+<a id="more"></a>
+
+<h4 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h4><p>使用curl进行安装，命令如下</p>
+<p><code>curl get.fuelphp.com/oil | sh</code></p>
+<h4 id="二、创建项目"><a href="#二、创建项目" class="headerlink" title="二、创建项目"></a>二、创建项目</h4><p>接下来就可以使用oil命令创建一个项目了</p>
+<p><code>oil create myproject</code></p>
+<p>当然也可以从官网直接下载zip包，当前的版本是1.7.1.</p>
+<h4 id="三、框架结构"><a href="#三、框架结构" class="headerlink" title="三、框架结构"></a>三、框架结构</h4><p>介绍一下FuelPHP框架下web项目的主要MVC结构代码</p>
+<ul>
+<li><p>控制器controller，在fuel/app/classes/下，以Controller_为前缀，继承Controller类。</p>
+</li>
+<li><p>模型model，在fuel/app/classes/下，官方的说明给出的是直接类名，但感觉还是类似的以Model_为前缀的比较好，继承Model类。并且在用命令新建model的时候也是会有Model_前缀的，开头也会有一个use OrmModel;的命名空间。</p>
+</li>
+<li><p>视图view不是在fuel/app/classes下了，而是在在fuel/app/views/下，是html嵌套PHP的形式。</p>
+</li>
+<li><p>需要注意的是fuelPHP框架还提供一个叫做“视图模型”的概念，即viewmodel，viewmodel是和controller及model在同一级目录下，即fuel/app/classes下。view model视图模型按照示例里的注释就可以解释为”预处理将要在view里显示的数据，这样可以更加简化controller的工作“，也就是说当应用程序变得更加复杂的时候，不能决定处理逻辑是属于controller还是view，viewmodel便将它们连接起来，起到一个传值、传函数的作用。<br><img src="/images/fuelphp-view-model.png" alt="图片"></p>
+</li>
+</ul>
+<h4 id="四、配置"><a href="#四、配置" class="headerlink" title="四、配置"></a>四、配置</h4><p>配置文件在fuel/app/config/下,需要注意的是FuelPHP里有一个Environments的概念，分为四个环境：development、test、staging、production，每个环境下又会有自己独立的配置，这样比如我们将环境从development迁移到test下，只需用命令将FUEL_ENV变量的值设置为test就行了，</p>
+<p><code>env FUEL_ENV=test php oil -v</code></p>
+<p>而不需要去手动修改数据库连接上的等等配置了。</p>
+<ul>
+<li><p>1、在fuel/app/bootstrap.php文件里可以看到默认情况下环境是development<br><img src="/images/fuelphp-bootstrap.png" alt="图片"><br>这时候我们就需要在development文件夹下的db.php里配置数据库的主机名、数据库名等等。</p>
+</li>
+<li><p>2、修改fuel/app/config/config.php文件，打开Orm包<br><img src="/images/fuelphp-open-orm.png" alt="图片"><br>Orm是Object Relational Mapper的缩写，即“对象关系映射”，实现的是面向对象语言与关系数据库数据之间的转换。如果Orm没有打开，上面的use OrmModel;命名空间是无法使用的。</p>
+</li>
+</ul>
+<h4 id="五、新建文件"><a href="#五、新建文件" class="headerlink" title="五、新建文件"></a>五、新建文件</h4><p>FuelPHP里提供的“脚手架”scaffold思想可以让我们轻松通过命令建立好数据管理页面，新建完整的MVC文件命令如下：</p>
+<p><code>oil g scaffold article title:string body:text</code></p>
+<p>通过该命令可以创建article的controller、model、view，当然view还不止一个，包括了index、view、create、edit、_form这五个view下的文件。这样一个命令就可以将整个添加、修改、删除的过程全部搞定了。</p>
+<p>另外需要注意的是migrations文件夹下创建了一个数据迁移文件，打开这个数据迁移文件会发现里面是一个类，并且有up和down方法，up方法中会调用create_table()方法，同样，down方法中调用drop_table()方法。</p>
+<p><code>oil refine migrate</code></p>
+<p>调用命令去执行数据库的迁移文件，这时候就可以发现数据库中新建了一张article表，同时还有title、body字段(前提是前面数据库配置方面没有问题)。</p>
+<p>到这一步的话访问项目下的article就可以看到一个列表了，可以添加、修改、删除article。</p>
+<hr>
+<blockquote>
+<p>参考资料：</p>
+</blockquote>
+<ul>
+<li><a href="http://www.fuelphp.com/docs/installation/instructions.html" target="_blank" rel="noopener">http://www.fuelphp.com/docs/installation/instructions.html</a></li>
+</ul>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="./fuelphp-learning-note-1.html" class="archive-article-date">
+  	<time datetime="2014-07-13T04:12:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-07-13</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="./tags/FuelPHP/">FuelPHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="./tags/PHP/">PHP</a></li></ul>
+	</div>
+
+<!--
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="./categories/Study/">Study</a>
+	</div>
+
+
+-->
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="./fuelphp-learning-note-2.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          FuelPHP框架学习笔记（二）——详解MVC
+        
+      </div>
+    </a>
+  
+  
+    <a href="./fetion-send-weather-report.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">飞信发送天气预报的设计与实现</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2013-2019 iat
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/yaoshanliang/hexo-theme-yilia" target="_blank">Yilia</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: ,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "./"
+	}
+</script>
+
+<script src="././main.js"></script>
+
+
+
+
+
+<!-- Baidu Analytics -->
+<script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a8f517fee81bd1ee9a017d6f0cbfe789";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+      })();
+</script>
+<!-- End Baidu Analytics -->
+
+
+
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="./tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="./tags/Apache/" style="font-size: 10px;">Apache</a> <a href="./tags/Blog/" style="font-size: 12px;">Blog</a> <a href="./tags/Composer/" style="font-size: 10px;">Composer</a> <a href="./tags/DWZ/" style="font-size: 12px;">DWZ</a> <a href="./tags/FuelPHP/" style="font-size: 14px;">FuelPHP</a> <a href="./tags/HTML/" style="font-size: 18px;">HTML</a> <a href="./tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="./tags/Linux/" style="font-size: 10px;">Linux</a> <a href="./tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="./tags/PHP/" style="font-size: 20px;">PHP</a> <a href="./tags/Tool/" style="font-size: 10px;">Tool</a> <a href="./tags/UCenter/" style="font-size: 10px;">UCenter</a> <a href="./tags/Weapp/" style="font-size: 10px;">Weapp</a> <a href="./tags/WebSocket/" style="font-size: 14px;">WebSocket</a> <a href="./tags/Wechat/" style="font-size: 16px;">Wechat</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://limaolong.cn/">green</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://wanghuanming.com/">huanming</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://sukai.me/">kaiyao</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://maywanting.wang/">may</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://mikecoder.cn/">mike</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zalezone.cn/">zale</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Just a beginner.&lt;br /&gt;&lt;a href=&#39;https://about.iat.net.cn&#39; target=&#39;_blank&#39;&gt;profile&lt;/a&gt;</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>PHP中的两个等号与三个等号 | iat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="源起四脚猫每日一题里有这么一道题目：不运行，分析下以下PHP代码输出结果是多少？ 为什么会这样？ 1234$items = array(0=&amp;gt;1,&amp;quot;aa&amp;quot;=&amp;gt;2, 3, 4);foreach($items as $key=&amp;gt;$val)&amp;#123;    print($key == &amp;quot;aa&amp;quot; ? 5 : $val);&amp;#125;">
+<meta name="keywords" content="PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP中的两个等号与三个等号">
+<meta property="og:url" content="https://iat.net.cn/double-equals-and-triple-equals-in-php.html">
+<meta property="og:site_name" content="iat">
+<meta property="og:description" content="源起四脚猫每日一题里有这么一道题目：不运行，分析下以下PHP代码输出结果是多少？ 为什么会这样？ 1234$items = array(0=&amp;gt;1,&amp;quot;aa&amp;quot;=&amp;gt;2, 3, 4);foreach($items as $key=&amp;gt;$val)&amp;#123;    print($key == &amp;quot;aa&amp;quot; ? 5 : $val);&amp;#125;">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://iat.net.cn/images/comparison_with_various_types.png">
+<meta property="og:updated_time" content="2019-08-20T09:01:36.638Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP中的两个等号与三个等号">
+<meta name="twitter:description" content="源起四脚猫每日一题里有这么一道题目：不运行，分析下以下PHP代码输出结果是多少？ 为什么会这样？ 1234$items = array(0=&amp;gt;1,&amp;quot;aa&amp;quot;=&amp;gt;2, 3, 4);foreach($items as $key=&amp;gt;$val)&amp;#123;    print($key == &amp;quot;aa&amp;quot; ? 5 : $val);&amp;#125;">
+<meta name="twitter:image" content="https://iat.net.cn/images/comparison_with_various_types.png">
+  
+    <link rel="alternative" href="/atom.xml" title="iat" type="application/atom+xml">
+  
+  
+  <script src="./style.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="./avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">iat</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+	        
+				<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+	        
+				<li><a href="https://about.iat.net.cn">关于我</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">Archive</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">Tags</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">Links</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">About</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+		        
+					<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">iat</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="./avatar.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">iat</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+		        
+					<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+		        
+					<li><a href="https://about.iat.net.cn">关于我</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-double-equals-and-triple-equals-in-php" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      PHP中的两个等号与三个等号
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="源起"><a href="#源起" class="headerlink" title="源起"></a>源起</h4><p>四脚猫每日一题里有这么一道题目：不运行，分析下以下PHP代码输出结果是多少？ 为什么会这样？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$items = array(0=&gt;1,&quot;aa&quot;=&gt;2, 3, 4);</span><br><span class="line">foreach($items as $key=&gt;$val)&#123;</span><br><span class="line">    print($key == &quot;aa&quot; ? 5 : $val);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p>如果答案是1534的话就掉入陷阱了，关于该题的详细说明在<a href="http://blog.sijiaomao.com/?p=829" target="_blank" rel="noopener">http://blog.sijiaomao.com/?p=829</a>已经有了，关键<code>var_dump(0 == &quot;aa&quot;);</code>是true的，本文主要说明下<strong>null</strong> <strong>bool</strong> <strong>string</strong> <strong>number</strong>之间两个等号之间的关系。</p>
+<h4 id="提问"><a href="#提问" class="headerlink" title="提问"></a>提问</h4><p>如果下面的问题回答都能回答正确的话，也就基本可以忽略这篇文章了。。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var_dump(null == false);</span><br><span class="line">var_dump(false == &apos;&apos;);</span><br><span class="line">var_dump(&apos;&apos; == 0);</span><br><span class="line">var_dump(0 == null);</span><br><span class="line"></span><br><span class="line">var_dump(1 == true);</span><br><span class="line">var_dump(true == &apos;a&apos;);</span><br><span class="line">var_dump(1 == &apos;a&apos;);</span><br></pre></td></tr></table></figure>
+
+<p>答案是前六个是true，最后一个是false。故意分成前四个和后三个是有原因的，前是个正好涉及到null bool string number 四种类型，并且看上去那四个值是等价的。后面三个1是和true相等的，true是和’a’相等的，但是1和’a’是不等的，之间是没有’传递律‘的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var_dump(null == false);//bool(true)</span><br><span class="line">var_dump(false == &apos;&apos;);//bool(true)</span><br><span class="line">var_dump(&apos;&apos; == 0);//bool(true)</span><br><span class="line">var_dump(0 == null);//bool(true)</span><br><span class="line"></span><br><span class="line">var_dump(1 == true);//bool(true)</span><br><span class="line">var_dump(true == &apos;a&apos;);//bool(true)</span><br><span class="line">var_dump(1 == &apos;a&apos;);//bool(false)</span><br></pre></td></tr></table></figure>
+
+<h4 id="详解"><a href="#详解" class="headerlink" title="详解"></a>详解</h4><p>在PHP手册中有这么一张图，它比较清晰的展示了不同类型之间的比较运算。</p>
+<p><img src="/images/comparison_with_various_types.png" alt="图片"></p>
+<h5 id="null-PK-string"><a href="#null-PK-string" class="headerlink" title="null PK string"></a>null PK string</h5><p><code>var_dump(null == &#39;&#39;)</code> null转换为string类型中的空字符串”。</p>
+<h5 id="null-PK-number"><a href="#null-PK-number" class="headerlink" title="null PK number"></a>null PK number</h5><p><code>var_dump(null == 0)</code> 这时候null和0都要转为bool类型，都为false，所以是相等的。</p>
+<h5 id="string-PK-number"><a href="#string-PK-number" class="headerlink" title="string PK number"></a>string PK number</h5><p>string与number进行等于号判断的时候，string转为number类型。空字符”串转换为数字0，’1′转为1，’1abc’转为1。’a’转为0，所以<code>var_dump(1 == &#39;a&#39;)</code>也就是false了。</p>
+<h5 id="null-string-number-PK-bool"><a href="#null-string-number-PK-bool" class="headerlink" title="null string number PK bool"></a>null string number PK bool</h5><p>等号的一边是bool类型时都会将另一边转换为bool类型，然后进行bool类型的判断。如null转为false，”或‘0’字符串转为false，数字0转为false。</p>
+<h4 id="经历"><a href="#经历" class="headerlink" title="经历"></a>经历</h4><p>最近在修改防攀爬系统BUG中正好遇到了这样的问题，在模块管理的搜索页中，当下拉选择全部、心跳、故障、报警的时候都能够保持下拉状态，并且根据条件搜索出来的结果也是正确的，唯独“未知”出来的结果是全部的。这也就纳闷了，按照思路，从C到V，看到“最后联系事件”的<code>&lt;selest&gt;&lt;/select&gt;</code>下拉选项中all表示全部，0表示未知，1表示心跳，2表示故障，3表示报警。POST至controller中，调用model，看到原来在给变量赋值之前有一个if语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if ($this-&gt;input-&gt;post(&apos;node_msg_type&apos;)) &#123;</span><br><span class="line">    $this-&gt;session-&gt;set_userdata(&apos;node_msg_type&apos;, $this-&gt;input-&gt;post(&apos;node_msg_type&apos;));</span><br><span class="line">    $msg_type = $this-&gt;input-&gt;post(&apos;node_msg_type&apos;);</span><br><span class="line">&#125; else&#123;</span><br><span class="line">    $this-&gt;session-&gt;unset_userdata(&apos;node_msg_type&apos;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>正是这个if语句的问题，当下拉选择“未知”的时候，node_msg_type的值为数字0，这样的话if是不成立的，进入了else，也就导致了$msg_type变量未赋值，当然select出来的也就不是为0的了。</p>
+<h4 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h4><p>由于PHP是弱类型语言，有的不同类型之间的比较是可以的，并不会给出类型不一致不能比较的错误。两个等号是判断两个变量的值是否相等，三个等号是值相等并且变量的类型也相等。其它也有一些需要注意的地方，比如PHP中的变量名是区分大小写的，而类名和函数名是不区分的。</p>
+<hr>
+<blockquote>
+<p>参考资料：</p>
+</blockquote>
+<ul>
+<li><p><a href="http://blog.sijiaomao.com/?p=829" target="_blank" rel="noopener">http://blog.sijiaomao.com/?p=829</a></p>
+</li>
+<li><p><a href="http://php.net/manual/en/language.operators.comparison.php" target="_blank" rel="noopener">php.net/manual/en/language.operators.comparison.php</a></p>
+</li>
+<li><p><a href="http://stackoverflow.com/questions/80646/how-do-the-php-equality-double-equals-and-identity-triple-equals-comp" target="_blank" rel="noopener">stackoverflow.com/questions/80646/how-do-the-php-equality-double-equals-and-identity-triple-equals-comp</a></p>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="./double-equals-and-triple-equals-in-php.html" class="archive-article-date">
+  	<time datetime="2014-10-23T04:12:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-10-23</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="./tags/PHP/">PHP</a></li></ul>
+	</div>
+
+<!--
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="./categories/Study/">Study</a>
+	</div>
+
+
+-->
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="./ajax-javascript.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Ajax（一）——javascript实现
+        
+      </div>
+    </a>
+  
+  
+    <a href="./pdo.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">PDO</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2013-2019 iat
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/yaoshanliang/hexo-theme-yilia" target="_blank">Yilia</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: ,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "./"
+	}
+</script>
+
+<script src="././main.js"></script>
+
+
+
+
+
+<!-- Baidu Analytics -->
+<script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a8f517fee81bd1ee9a017d6f0cbfe789";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+      })();
+</script>
+<!-- End Baidu Analytics -->
+
+
+
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="./tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="./tags/Apache/" style="font-size: 10px;">Apache</a> <a href="./tags/Blog/" style="font-size: 12px;">Blog</a> <a href="./tags/Composer/" style="font-size: 10px;">Composer</a> <a href="./tags/DWZ/" style="font-size: 12px;">DWZ</a> <a href="./tags/FuelPHP/" style="font-size: 14px;">FuelPHP</a> <a href="./tags/HTML/" style="font-size: 18px;">HTML</a> <a href="./tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="./tags/Linux/" style="font-size: 10px;">Linux</a> <a href="./tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="./tags/PHP/" style="font-size: 20px;">PHP</a> <a href="./tags/Tool/" style="font-size: 10px;">Tool</a> <a href="./tags/UCenter/" style="font-size: 10px;">UCenter</a> <a href="./tags/Weapp/" style="font-size: 10px;">Weapp</a> <a href="./tags/WebSocket/" style="font-size: 14px;">WebSocket</a> <a href="./tags/Wechat/" style="font-size: 16px;">Wechat</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://limaolong.cn/">green</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://wanghuanming.com/">huanming</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://sukai.me/">kaiyao</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://maywanting.wang/">may</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://mikecoder.cn/">mike</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zalezone.cn/">zale</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Just a beginner.&lt;br /&gt;&lt;a href=&#39;https://about.iat.net.cn&#39; target=&#39;_blank&#39;&gt;profile&lt;/a&gt;</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

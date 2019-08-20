@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Ajax（二）——jQuery实现 | iat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前一节讲述了Ajax实现大致要经过新建对象、设置触发引用函数、创建请求、发送请求、获取返回数据这么一个流程，那么在jQuery中，Ajax是怎么实现的呢？">
+<meta name="keywords" content="JavaScript,Ajax">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ajax（二）——jQuery实现">
+<meta property="og:url" content="https://iat.net.cn/ajax-jquery.html">
+<meta property="og:site_name" content="iat">
+<meta property="og:description" content="前一节讲述了Ajax实现大致要经过新建对象、设置触发引用函数、创建请求、发送请求、获取返回数据这么一个流程，那么在jQuery中，Ajax是怎么实现的呢？">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-20T09:01:36.636Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ajax（二）——jQuery实现">
+<meta name="twitter:description" content="前一节讲述了Ajax实现大致要经过新建对象、设置触发引用函数、创建请求、发送请求、获取返回数据这么一个流程，那么在jQuery中，Ajax是怎么实现的呢？">
+  
+    <link rel="alternative" href="/atom.xml" title="iat" type="application/atom+xml">
+  
+  
+  <script src="./style.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="./avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">iat</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+	        
+				<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+	        
+				<li><a href="https://about.iat.net.cn">关于我</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">Archive</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">Tags</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">Links</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">About</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+		        
+					<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">iat</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="./avatar.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">iat</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+		        
+					<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+		        
+					<li><a href="https://about.iat.net.cn">关于我</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-ajax-jquery" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Ajax（二）——jQuery实现
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前一节讲述了Ajax实现大致要经过<strong>新建对象</strong>、<strong>设置触发引用函数</strong>、<strong>创建请求</strong>、<strong>发送请求</strong>、<strong>获取返回数据</strong>这么一个流程，那么在jQuery中，Ajax是怎么实现的呢？</p>
+<a id="more"></a>
+
+<h4 id="jQuery基础"><a href="#jQuery基础" class="headerlink" title="jQuery基础"></a>jQuery基础</h4><h5 id="jQuery版本"><a href="#jQuery版本" class="headerlink" title="jQuery版本"></a>jQuery版本</h5><p>目前官网jQuery上最新的版本为1.11.1和2.1.1，最新怎么还会有两个呢？这是因为jQuery-2.x系列的版本是不支持IE 6、7、8的，考虑到广大的IE用户群（此处略去20字）。按照官网的说法就是:<em>we recommend using the 1.x version unless you are certain no IE 6/7/8 users are visiting the site</em>.</p>
+<h5 id="的含义"><a href="#的含义" class="headerlink" title="$ 的含义"></a>$ 的含义</h5><p>从基础入手，jQuery中最常见的莫过于$符号了，那这个符号是什么意思呢？和PHP中的变量定义一样？</p>
+<p>在jQuery中，$是jQuery的别名，在源码中可以看到如下行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// Expose jQuery to the global object</span><br><span class="line">window.jQuery = window.$ = jQuery;</span><br></pre></td></tr></table></figure>
+
+<p>使用$的地方都可以使用jQuery替换，如<code>$(&quot;div&quot;).hide();</code>等同于<code>jQuery(&quot;div&quot;).hide();</code>。然而如果其它javascript库也使用$命名空间呢？冲突可想而知。</p>
+<blockquote>
+<p>解决jQuery与其它库$冲突的方法?</p>
+</blockquote>
+<p>法一：释放$</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">jQuery.noConflict();</span><br><span class="line">$(&quot;div&quot;).hide();//使用其它库的$命名空间，如果没有引用其它库或者其它库用的不是$，控制台里则会报错</span><br><span class="line">jQuery(&quot;div&quot;).hide();//使用jQuery</span><br></pre></td></tr></table></figure>
+
+<p>法二：自定义jQuery别名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var j = jQuery.noConflict();//取别名j，接下来就可以使用j代替jQuery</span><br><span class="line">j(&quot;div&quot;).hide();</span><br></pre></td></tr></table></figure>
+
+<p>法三：使用语句块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">jQuery.noConflict();</span><br><span class="line">jQuery(document).ready(function($) &#123;</span><br><span class="line">    (&quot;div&quot;).hide();//在整个ready事件的方法中使用的$都是jQuery中定义的$</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="ajax-方法"><a href="#ajax-方法" class="headerlink" title="$.ajax()方法"></a>$.ajax()方法</h4><p>下面介绍下几个重要的$.ajax()参数</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>url</td>
+<td>String</td>
+<td>发送请求的地址(默认: 当前页面)</td>
+</tr>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>数据请求方式，POST、GET、PUT、DELETE（默认GET）</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Object, String</td>
+<td>发送到服务器的数据，如果不是字符串则自动转换成字符串类型，如果是GET方式，那么字符串将附在url后面</td>
+</tr>
+<tr>
+<td>dataType</td>
+<td>String</td>
+<td>服务器返回的数据类型，包含的 script标记会在嵌入页面时执行;  ”html”: 返回纯文本 HTML 信息;  “text”：返回纯文本字符串;  “script”:返回纯文本 javascript 代码; “json”: 返回 JSON 数据; “xml”：返回可以被jQuery处理的xml文档; 如果不指定，jQuery 将自动根据 HTTP 包 MIME 信息返回 responseXML 或 responseText，并作为回调函数参数传递</td>
+</tr>
+<tr>
+<td>contentType</td>
+<td>String</td>
+<td>发送信息至服务器时内容编码类型（默认: “application/x-www-form-urlencoded”）</td>
+</tr>
+<tr>
+<td>beforeSend</td>
+<td>Function</td>
+<td>发送请求前触发的函数，可以在发送前修改XMLHttpRequest对象。如果该函数返回false，则取消本次请求。参数：XMLHttpRequest对象<code>beforeSend:function(XMLHttpRequest) {}</code></td>
+</tr>
+<tr>
+<td>success</td>
+<td>Function</td>
+<td>请求成功后回调函数。这个方法有两个参数：服务器返回数据，返回状态<code>success:function(data, textStatus) {}</code></td>
+</tr>
+<tr>
+<td>error</td>
+<td>Function</td>
+<td>请求失败后的回调函数，这个方法有三个参数：XMLHttpRequest 对象，错误信息，捕获的错误对象。<code>error:function(XMLHttpRequest, textStatus, errorObj) {}</code></td>
+</tr>
+<tr>
+<td>complete</td>
+<td>Function</td>
+<td>请求完成后回调函数，无论请求成功还是失败都会调用。参数： XMLHttpRequest 对象，成功信息字符串。<code>complete:function(XMLHttpRequest, textStatus) {}</code></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>先success后complete?</p>
+</blockquote>
+<p>对的，complete是在success之后执行的，即先请求成功，后请求完成。正如前面一篇提到的，XMLHttpRequest对象的readyState属性，当属性为3（交互中）时，此刻已经收到HTTP服务器返回的HTTP状态码（即已经请求成功，执行success:function(){}），但是消息主体部分还没有接受完毕，所以还未执行complete:function(){}，这也就是为什么先请求成功后请求完成了。</p>
+<h4 id="ajax-示例"><a href="#ajax-示例" class="headerlink" title="$.ajax()示例"></a>$.ajax()示例</h4><p>与上一篇类似，html页面中有一个文本框表单，有一个<div></div>是用来显示服务器返回数据的区域。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;input id = &quot;name&quot; type = &quot;text&quot; name = &quot;name&quot; value = &quot;&quot;&gt;</span><br><span class="line">&lt;div id = &quot;checkname&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>不过没有设置onblur失去焦点时触发的事件，而是调用jQuery中的blur()方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">$(&quot;#name&quot;).blur(function() &#123;</span><br><span class="line">    $.ajax(&#123;</span><br><span class="line">        url : &quot;checkname.php&quot;,</span><br><span class="line">        type : &quot;POST&quot;,</span><br><span class="line">        data : &#123;name : $(&quot;#name&quot;).val()&#125;,//post文本框中的值</span><br><span class="line">        datatype : &quot;text&quot;,</span><br><span class="line">        beforeSend : function() &#123;</span><br><span class="line">            //设置发送请求时触发的函数</span><br><span class="line">            console.log(&quot;beforeSend&quot;);//控制台里查看请求过程</span><br><span class="line">        &#125;,</span><br><span class="line">        success : function(data) &#123;</span><br><span class="line">            //设置请求成功时触发的函数</span><br><span class="line">            $(&quot;#checkname&quot;).html(data);</span><br><span class="line">            console.log(&quot;success&quot;);</span><br><span class="line">        &#125;,</span><br><span class="line">        error : function() &#123;</span><br><span class="line">            //设置请求失败时触发的函数</span><br><span class="line">            $(&quot;#checkname&quot;).html(&quot;异步请求失败&quot;);</span><br><span class="line">            console.log(&quot;error&quot;);</span><br><span class="line">        &#125;,</span><br><span class="line">        complete : function() &#123;</span><br><span class="line">            //设置请求完成时触发的函数</span><br><span class="line">            console.log(&quot;complete&quot;);</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>异步请求的页面checkname.php中只做了一个简单的验证，判断文本框中时候包含中文：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if(isset($_POST[&apos;name&apos;]) &amp;&amp; $_POST[&apos;name&apos;] != &apos;&apos;) &#123;</span><br><span class="line">    echo preg_match(&quot;/[\x&#123;4e00&#125;-\x&#123;9fa5&#125;]+/u&quot;,$_POST[&apos;name&apos;]) ? &apos;用户名不能包含中文&apos; : &apos;&apos;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Ajax全局函数与全局事件"><a href="#Ajax全局函数与全局事件" class="headerlink" title="Ajax全局函数与全局事件"></a>Ajax全局函数与全局事件</h4><h5 id="ajaxSetup全局函数"><a href="#ajaxSetup全局函数" class="headerlink" title="$.ajaxSetup全局函数"></a>$.ajaxSetup全局函数</h5><p>在使用$.ajax()方法时，有时需要调用多个ajax方法，如果每个方法都设置请求url、请求类型、数据类型等，将是一件很繁琐的事情。为了简化这种工作，在jQuery中，可以使用$.ajaxSetup()方法设置全局的Ajax默认选项，其参数同$.ajax()。</p>
+<p>例如，每次请求都是check.php页面，并且都是POST数据过去，check区域显示验证不通过的提示消息，每一个blur事件中将POST当前文本框的数据进行验证</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$.ajaxSetup(&#123;</span><br><span class="line">    url : &quot;check.php&quot;,</span><br><span class="line">    type : &quot;POST&quot;,</span><br><span class="line">    success : function(data) &#123;</span><br><span class="line">        $(&quot;#check&quot;).html(data);</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br><span class="line">$(&quot;#name&quot;).blur(&#123;</span><br><span class="line">    $.ajax(&#123;</span><br><span class="line">        data : &#123;name : $(&quot;#name&quot;).val()&#125;,</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">$(&quot;#age&quot;).blur(&#123;</span><br><span class="line">    $.ajax(&#123;</span><br><span class="line">        data : &#123;age : $(&quot;#age&quot;).val()&#125;,</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="6个全局事件"><a href="#6个全局事件" class="headerlink" title="6个全局事件"></a>6个全局事件</h5><p>在jQuery中，除了全局性的函数外，还有6个全局性的Ajax事件。由于在使用$.ajax()方法时，其中的选项参数global的默认参数为true，所以，所有执行的Ajax请求都绑定了全局事件。</p>
+<p>事件名称 | 描述 | 事件名称 | 描述<br>—– | —– | —–<br>ajaxSend | 请求发送前执行 | ajaxComplete | 请求完成时执行<br>ajaxStart | 请求开始时执行 | ajaxStop | 请求结束时执行<br>ajaxSuccess | 请求成功时执行 | ajaxError | 请求发生错误时执行</p>
+<p>ajaxStart当请求开始执行时触发，往往用于编写一些准备性的工作，如提示“正在加载”字样或者显示一个加载中的图片；ajaxStop当请求结束时触发，常常与ajaxStart配合使用，如将“正在加载”改为“加载完毕”，然后渐渐消失。</p>
+<blockquote>
+<p>$(“#name”).ajaxStart()事件无效？</p>
+</blockquote>
+<p>很纠结的发现，ajaxStart事件始终无法触发，将jQuery版本从1.11.1换为1.7.1就可以了，莫非新版的jQuery不支持了？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(&quot;#name&quot;).ajaxStart(function() &#123;</span><br><span class="line">    $(&quot;#check&quot;).html(&quot;loading...&quot;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>查阅资料后发现，在jQuery 1.9及以上版本中，全局事件只能在documet元素删触发，见官方升级说明<a href="http://jquery.com/upgrade-guide/1.9/#ajax-events-should-be-attached-to-document" target="_blank" rel="noopener">jQuery Core 1.9 Upgrade Guide</a>。而前面的版本，全局事件可以绑定在页面的任何一个元素中，这样确实不合理，既然是全局，绑定在任何元素上确实太随意了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(&quot;#name&quot;).ajaxStart(function() &#123;</span><br><span class="line">    $(&quot;#check&quot;).html(&quot;loading...&quot;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="ajax-的封装"><a href="#ajax-的封装" class="headerlink" title="$.ajax()的封装"></a>$.ajax()的封装</h4><p>除了$.ajax()这种jQuery最底层的方法，还有一些基于$.ajax()的更加方便实现异步的全局性函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">load(url, data, callback)</span><br></pre></td></tr></table></figure>
+
+<p>参数url为被加载的页面地址；可选项data表示发送至服务器的数据，键值对的格式；可选项callback为加载成功后，返回至加载页的回调函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">get(url, data, callback, type)</span><br><span class="line">post(url, data, callback, type)</span><br></pre></td></tr></table></figure>
+
+<p>get与post的参数一样，前三个参数同load方法，第四个参数表示返回数据的格式，可以为html、XML、javascript、json、text等。</p>
+<p>其它还有getJSON、getScript等方法实现异步请求。</p>
+<hr>
+<blockquote>
+<p>参考资料：</p>
+</blockquote>
+<ul>
+<li><p><a href="www.cnblogs.com/RascallySnake/archive/2010/05/07/1729417.html">jQuery的$命名冲突</a></p>
+</li>
+<li><p><a href="http://jquery.com/upgrade-guide/1.9/#ajax-events-should-be-attached-to-document" target="_blank" rel="noopener">jQuery1.9升级说明</a></p>
+</li>
+<li><p>《jQuery权威指南（第2版）》（机械工业出版社） 第6章 Ajax在jQuery中的应用</p>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="./ajax-jquery.html" class="archive-article-date">
+  	<time datetime="2014-11-16T04:12:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-11-16</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="./tags/Ajax/">Ajax</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="./tags/JavaScript/">JavaScript</a></li></ul>
+	</div>
+
+<!--
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="./categories/Study/">Study</a>
+	</div>
+
+
+-->
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="./blog-v2.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          博客V2.0出生记
+        
+      </div>
+    </a>
+  
+  
+    <a href="./ajax-javascript.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Ajax（一）——javascript实现</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2013-2019 iat
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/yaoshanliang/hexo-theme-yilia" target="_blank">Yilia</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: ,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "./"
+	}
+</script>
+
+<script src="././main.js"></script>
+
+
+
+
+
+<!-- Baidu Analytics -->
+<script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a8f517fee81bd1ee9a017d6f0cbfe789";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+      })();
+</script>
+<!-- End Baidu Analytics -->
+
+
+
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="./tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="./tags/Apache/" style="font-size: 10px;">Apache</a> <a href="./tags/Blog/" style="font-size: 12px;">Blog</a> <a href="./tags/Composer/" style="font-size: 10px;">Composer</a> <a href="./tags/DWZ/" style="font-size: 12px;">DWZ</a> <a href="./tags/FuelPHP/" style="font-size: 14px;">FuelPHP</a> <a href="./tags/HTML/" style="font-size: 18px;">HTML</a> <a href="./tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="./tags/Linux/" style="font-size: 10px;">Linux</a> <a href="./tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="./tags/PHP/" style="font-size: 20px;">PHP</a> <a href="./tags/Tool/" style="font-size: 10px;">Tool</a> <a href="./tags/UCenter/" style="font-size: 10px;">UCenter</a> <a href="./tags/Weapp/" style="font-size: 10px;">Weapp</a> <a href="./tags/WebSocket/" style="font-size: 14px;">WebSocket</a> <a href="./tags/Wechat/" style="font-size: 16px;">Wechat</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://limaolong.cn/">green</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://wanghuanming.com/">huanming</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://sukai.me/">kaiyao</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://maywanting.wang/">may</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://mikecoder.cn/">mike</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zalezone.cn/">zale</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Just a beginner.&lt;br /&gt;&lt;a href=&#39;https://about.iat.net.cn&#39; target=&#39;_blank&#39;&gt;profile&lt;/a&gt;</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

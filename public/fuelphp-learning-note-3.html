@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>FuelPHP框架学习笔记（三）——增删改查 | iat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="准备工作：接着前面两篇article的示例，在Controller里新建一个myquery的action，Model里新建一个myquery的function，View里接收Controller调用Model返回的结果并打印出来。">
+<meta name="keywords" content="PHP,FuelPHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FuelPHP框架学习笔记（三）——增删改查">
+<meta property="og:url" content="https://iat.net.cn/fuelphp-learning-note-3.html">
+<meta property="og:site_name" content="iat">
+<meta property="og:description" content="准备工作：接着前面两篇article的示例，在Controller里新建一个myquery的action，Model里新建一个myquery的function，View里接收Controller调用Model返回的结果并打印出来。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-20T09:01:36.640Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FuelPHP框架学习笔记（三）——增删改查">
+<meta name="twitter:description" content="准备工作：接着前面两篇article的示例，在Controller里新建一个myquery的action，Model里新建一个myquery的function，View里接收Controller调用Model返回的结果并打印出来。">
+  
+    <link rel="alternative" href="/atom.xml" title="iat" type="application/atom+xml">
+  
+  
+  <script src="./style.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="./avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">iat</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+	        
+				<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+	        
+				<li><a href="https://about.iat.net.cn">关于我</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">Archive</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">Tags</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">Links</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">About</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+		        
+					<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">iat</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="./avatar.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">iat</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+		        
+					<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+		        
+					<li><a href="https://about.iat.net.cn">关于我</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-fuelphp-learning-note-3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      FuelPHP框架学习笔记（三）——增删改查
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>准备工作：接着前面两篇article的示例，在Controller里新建一个myquery的action，Model里新建一个myquery的function，View里接收Controller调用Model返回的结果并打印出来。</p>
+<a id="more"></a>
+
+<h4 id="select语句"><a href="#select语句" class="headerlink" title="select语句"></a>select语句</h4><p>直接在query()方法里传入sql语句并执行</p>
+<p><code>$result = DB::query(’select * from articles;’)-&gt;execute();</code></p>
+<p>这时候如果return $result;给Controller，会发现页面上抛出了一个异常<em>Database results are read-only</em>。这是为什么呢？在model里将需要返回的$result打印出来可以发现，结果是一个对象，而在controller里需要赋值给一个数组，这时候就需要执行as_array()。</p>
+<p><code>$result = DB::query(’select * from articles;’)-&gt;execute()-&gt;as_array();</code></p>
+<p>此时返回$result后在view里打印出来就没有问题了。</p>
+<h5 id="从articles表里select所有信息"><a href="#从articles表里select所有信息" class="headerlink" title="从articles表里select所有信息"></a>从articles表里select所有信息</h5><p><code>$result = DB::select()-&gt;from(’articles’)-&gt;execute();</code></p>
+<h5 id="select指定column"><a href="#select指定column" class="headerlink" title="select指定column"></a>select指定column</h5><p><code>$result = DB::select(’title’, ’body’)-&gt;from(’articles’)-&gt;execute();</code></p>
+<h5 id="select指定column并取别名"><a href="#select指定column并取别名" class="headerlink" title="select指定column并取别名"></a>select指定column并取别名</h5><p><code>$result = DB::select(array(’title’, ’title_2’), ’body’)-&gt;from(’articles’)-&gt;execute();</code></p>
+<h5 id="指定where等于条件"><a href="#指定where等于条件" class="headerlink" title="指定where等于条件"></a>指定where等于条件</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$result = DB::select()-&gt;from(’articles’)-&gt;where(’id’, 1)-&gt;execute();</span><br><span class="line">$result = DB::select()-&gt;from(’articles’)-&gt;where(’id’, ’=’, 1)-&gt;execute();</span><br></pre></td></tr></table></figure>
+
+<h5 id="where不等于条件"><a href="#where不等于条件" class="headerlink" title="where不等于条件"></a>where不等于条件</h5><p><code>$result = DB::select()-&gt;from(’articles’)-&gt;where(’id’, ’!=’, 1)-&gt;execute();</code></p>
+<h5 id="where-in某一范围"><a href="#where-in某一范围" class="headerlink" title="where in某一范围"></a>where in某一范围</h5><p><code>$result = DB::select()-&gt;from(’articles’)-&gt;where(’id’, ’in’, array(1, 2))-&gt;execute();</code></p>
+<h5 id="between某一范围"><a href="#between某一范围" class="headerlink" title="between某一范围"></a>between某一范围</h5><p><code>$result = DB::select()-&gt;from(’articles’)-&gt;where(’id’, ’between’, array(1, 2))-&gt;execute();</code></p>
+<h5 id="模糊匹配"><a href="#模糊匹配" class="headerlink" title="模糊匹配"></a>模糊匹配</h5><p><code>$result = DB::select()-&gt;from(’articles’)-&gt;where(’title’, ’like’, ’%iat%’)-&gt;execute();</code></p>
+<h5 id="按某一字段排序"><a href="#按某一字段排序" class="headerlink" title="按某一字段排序"></a>按某一字段排序</h5><p><code>$result = DB::select()-&gt;from(’articles’)-&gt;order_by(’id’,’asc’)-&gt;execute();</code></p>
+<h5 id="多个字段排序"><a href="#多个字段排序" class="headerlink" title="多个字段排序"></a>多个字段排序</h5><p><code>$result = DB::select()-&gt;from(’articles’)-&gt;order_by(’id’,’asc’)-&gt;order_by(’title’, ’desc’)-&gt;execute();</code></p>
+<h5 id="限定取出的条数"><a href="#限定取出的条数" class="headerlink" title="限定取出的条数"></a>限定取出的条数</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$result = DB::select()-&gt;from(’articles’)-&gt;limit(1)-&gt;execute();</span><br><span class="line">$result = DB::select()-&gt;from(’articles’)-&gt;limit(10)-&gt;offset(2)-&gt;execute();</span><br></pre></td></tr></table></figure>
+
+<h4 id="update语句"><a href="#update语句" class="headerlink" title="update语句"></a>update语句</h4><p>跟基本的SQL语句一样，update返回的是受影响的条数，根据返回值得结果判断是否更新成功。</p>
+<h5 id="修改某一字段的值"><a href="#修改某一字段的值" class="headerlink" title="修改某一字段的值"></a>修改某一字段的值</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$result = DB::update(’articles’)-&gt;value(&quot;title&quot;, &quot;iatboy&quot;)-&gt;where(’id’, ’=’, ’1’)-&gt;execute();</span><br></pre></td></tr></table></figure>
+
+<h5 id="修改多个字段的值"><a href="#修改多个字段的值" class="headerlink" title="修改多个字段的值"></a>修改多个字段的值</h5><p><code>$result = DB::update(’articles’)-&gt;set(array(’title’ =&gt; ’iatboy’, ’body’ =&gt; ’iatboy body’))-&gt;where(’id’, ’=’, ’1’)-&gt;execute();</code></p>
+<h4 id="insert语句"><a href="#insert语句" class="headerlink" title="insert语句"></a>insert语句</h4><p>insert语句返回的是数组，包含插入的id以及受影响的条数 set的方式插入</p>
+<p><code>$result = DB::insert(’articles’)-&gt;set(array(’title’ =&gt; ’iat001’, ’body’ =&gt; ’body001’))-&gt;execute();</code></p>
+<h5 id="指定column值得方式插入"><a href="#指定column值得方式插入" class="headerlink" title="指定column值得方式插入"></a>指定column值得方式插入</h5><p><code>$result = DB::insert(’articles’)-&gt;columns(array(’title’, ’body’))-&gt;values(array(’iat002’, ’body002’))-&gt;execute();</code></p>
+<p>delete语句 delete语句返回的是受影响的条数</p>
+<p><code>$result = DB::delete(’articles’)-&gt;where(’id’, ’=’, ’1’)-&gt;execute();</code></p>
+<h4 id="join语句"><a href="#join语句" class="headerlink" title="join语句"></a>join语句</h4><p>对应的有left join和right join</p>
+<p><code>$result = DB::select()-&gt;from(’articles’)-&gt;join(’comments’,’right outer’)-&gt;on(’articles.id’, ’=’, ’comments.id’)-&gt;execute();</code></p>
+<h4 id="绑定参数语句"><a href="#绑定参数语句" class="headerlink" title="绑定参数语句"></a>绑定参数语句</h4><p>绑定参数及预处理可以在一定程度上减少SQL注入的风险，实际上也是通过转义进行过滤的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$title = ’iat001’;</span><br><span class="line">$result = DB::query(&quot;SELECT * FROM articles WHERE title = :title&quot;)-&gt;bind(’title’, $title)-&gt;execute();</span><br></pre></td></tr></table></figure>
+
+<p>如下的方式绑定变量是不正确的。</p>
+<p><code>$result = DB::query(&quot;SELECT * FROM articles WHERE title = :title&quot;)-&gt;bind(’title’, ’iat001’)-&gt;execute();</code></p>
+<p>直接赋值的话需要用到param</p>
+<p><code>$result = DB::query(&quot;SELECT * FROM articles WHERE title = :title&quot;)-&gt;param(’title’, ’iat001’)-&gt;execute();</code></p>
+<p>绑定多个参数</p>
+<p><code>$result = DB::query(&quot;SELECT * FROM articles WHERE title = :title AND body = :body&quot;)-&gt;parameters(array(’title’ =&gt; $title, ’body’ =&gt; ’body001’))-&gt;execute();</code></p>
+<h4 id="数据缓存"><a href="#数据缓存" class="headerlink" title="数据缓存"></a>数据缓存</h4><p>使用数据缓存有利于减轻数据库服务器压力，加快响应时间，当然对于经常变动的值不建议使用数据缓存。cache()函数可传递三个参数，缓存时间、保存文件、是否缓存空值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$result = DB::query(&quot;SELECT * FROM articles&quot;)-&gt;cached(3600)-&gt;execute();</span><br><span class="line">$result = DB::query(&quot;SELECT * FROM articles&quot;)-&gt;cached(3600, &quot;articles&quot;, false)-&gt;execute();</span><br></pre></td></tr></table></figure>
+
+<p>采用delete方法可以删除某一具体缓存，delete_all方法可以删除某一目录下的所有缓存。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Cache::delete(&quot;articles&quot;);</span><br><span class="line">Cache::delete_all(&quot;db&quot;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h4><p>事务的ACID特性在数据库的安全性方面起到了很大的作用，FuelPHP中事务的使用如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">    DB::start_transaction();</span><br><span class="line">    $result = DB::insert(’articles’)-&gt;set(array(’title’ =&gt; ’iat001’, ’body’ =&gt; ’body001’))-&gt;execute();</span><br><span class="line">    DB::commit_transaction();</span><br><span class="line">&#125; catch(Exception $e) &#123;</span><br><span class="line">    DB::rollback_transaction();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>至此，FuelPHP基本的增删改查结束。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="./fuelphp-learning-note-3.html" class="archive-article-date">
+  	<time datetime="2014-07-21T04:12:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-07-21</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="./tags/FuelPHP/">FuelPHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="./tags/PHP/">PHP</a></li></ul>
+	</div>
+
+<!--
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="./categories/Study/">Study</a>
+	</div>
+
+
+-->
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="./ubuntu-fedora-windows-set-multiple-websites.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          ubuntu/fedora/windows下Apache多站点配置
+        
+      </div>
+    </a>
+  
+  
+    <a href="./fuelphp-learning-note-2.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">FuelPHP框架学习笔记（二）——详解MVC</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2013-2019 iat
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/yaoshanliang/hexo-theme-yilia" target="_blank">Yilia</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: ,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "./"
+	}
+</script>
+
+<script src="././main.js"></script>
+
+
+
+
+
+<!-- Baidu Analytics -->
+<script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a8f517fee81bd1ee9a017d6f0cbfe789";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+      })();
+</script>
+<!-- End Baidu Analytics -->
+
+
+
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="./tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="./tags/Apache/" style="font-size: 10px;">Apache</a> <a href="./tags/Blog/" style="font-size: 12px;">Blog</a> <a href="./tags/Composer/" style="font-size: 10px;">Composer</a> <a href="./tags/DWZ/" style="font-size: 12px;">DWZ</a> <a href="./tags/FuelPHP/" style="font-size: 14px;">FuelPHP</a> <a href="./tags/HTML/" style="font-size: 18px;">HTML</a> <a href="./tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="./tags/Linux/" style="font-size: 10px;">Linux</a> <a href="./tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="./tags/PHP/" style="font-size: 20px;">PHP</a> <a href="./tags/Tool/" style="font-size: 10px;">Tool</a> <a href="./tags/UCenter/" style="font-size: 10px;">UCenter</a> <a href="./tags/Weapp/" style="font-size: 10px;">Weapp</a> <a href="./tags/WebSocket/" style="font-size: 14px;">WebSocket</a> <a href="./tags/Wechat/" style="font-size: 16px;">Wechat</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://limaolong.cn/">green</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://wanghuanming.com/">huanming</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://sukai.me/">kaiyao</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://maywanting.wang/">may</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://mikecoder.cn/">mike</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zalezone.cn/">zale</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Just a beginner.&lt;br /&gt;&lt;a href=&#39;https://about.iat.net.cn&#39; target=&#39;_blank&#39;&gt;profile&lt;/a&gt;</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

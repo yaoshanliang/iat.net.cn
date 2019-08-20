@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>浏览器的那些事儿（一） | iat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="浏览器的兼容性真是个很头疼的问题，之前自己的代码都是在Chrome浏览器下测试的，真正要公开的时候需要应对各种类型、各种版本的浏览器。Chrome的页面简洁，没有传统菜单栏及繁多的工具按钮。基于Webkit内核开发，打开网页速度快，用户体验很好。Google开发的“V8引擎”技术，支持多线程，让Javascript脚本执行效率得到提高。还有支持多标签浏览，一个页面的崩溃不会导致其它标签页面的关闭。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浏览器的那些事儿（一）">
+<meta property="og:url" content="https://iat.net.cn/something-about-browser.html">
+<meta property="og:site_name" content="iat">
+<meta property="og:description" content="浏览器的兼容性真是个很头疼的问题，之前自己的代码都是在Chrome浏览器下测试的，真正要公开的时候需要应对各种类型、各种版本的浏览器。Chrome的页面简洁，没有传统菜单栏及繁多的工具按钮。基于Webkit内核开发，打开网页速度快，用户体验很好。Google开发的“V8引擎”技术，支持多线程，让Javascript脚本执行效率得到提高。还有支持多标签浏览，一个页面的崩溃不会导致其它标签页面的关闭。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://iat.net.cn/images/browser_1.jpg">
+<meta property="og:updated_time" content="2019-08-20T09:01:36.643Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浏览器的那些事儿（一）">
+<meta name="twitter:description" content="浏览器的兼容性真是个很头疼的问题，之前自己的代码都是在Chrome浏览器下测试的，真正要公开的时候需要应对各种类型、各种版本的浏览器。Chrome的页面简洁，没有传统菜单栏及繁多的工具按钮。基于Webkit内核开发，打开网页速度快，用户体验很好。Google开发的“V8引擎”技术，支持多线程，让Javascript脚本执行效率得到提高。还有支持多标签浏览，一个页面的崩溃不会导致其它标签页面的关闭。">
+<meta name="twitter:image" content="https://iat.net.cn/images/browser_1.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="iat" type="application/atom+xml">
+  
+  
+  <script src="./style.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="./avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">iat</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+	        
+				<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+	        
+				<li><a href="https://about.iat.net.cn">关于我</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">Archive</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">Tags</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">Links</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">About</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+		        
+					<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">iat</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="./avatar.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">iat</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+		        
+					<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+		        
+					<li><a href="https://about.iat.net.cn">关于我</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-something-about-browser" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      浏览器的那些事儿（一）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>浏览器的兼容性真是个很头疼的问题，之前自己的代码都是在Chrome浏览器下测试的，真正要公开的时候需要应对各种类型、各种版本的浏览器。Chrome的页面简洁，没有传统菜单栏及繁多的工具按钮。基于Webkit内核开发，打开网页速度快，用户体验很好。Google开发的“V8引擎”技术，支持多线程，让Javascript脚本执行效率得到提高。还有支持多标签浏览，一个页面的崩溃不会导致其它标签页面的关闭。</p>
+<a id="more"></a>
+
+<p>经过测试，主流浏览器Firefox也是可行的。IE访问时，应用中的地图没有显示，按F12查看源代码时发现js请求是失败的，也就是没有执行到那个功能。但点击“禁用”菜单发现脚本并没有被禁用，那为什么没有请求成功呢？</p>
+<p>之前没用过IE的开发者工具，菜单栏最后的“浏览器模式”和“文档模式”引起了我的注意。百度了一下知道，在IE8、IE9、IE10中，为了解决兼容性的问题，引入了“浏览器模式”和“文档模式”两个概念。</p>
+<p><img src="/images/browser_1.jpg" alt></p>
+<p>“浏览器模式”的主要作用是为了兼容较早版本的IE，它会向浏览器发出userAgent，表示哪个版本的浏览器发出请求，以此来为某个特定的IE版本设计的代码正确执行。“文档模式”的主要作用是影响浏览器显示网页HTML的方式，在接到返回的HTML文件后，决定以哪个IE版本的文档模式解析该页面，不同的文档模式对应不同的排版引擎，不同的js引擎。</p>
+<p>默认情况下IE10的浏览器模式为IE10，文档模式则是由当前页面的<code>&lt;head&gt;&lt;/head&gt;</code>标签里的meta属性决定的，如下是设置成IE9的文档模式。</p>
+<p><code>&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=9&quot; &gt; &lt;/meta&gt;</code></p>
+<p>想要尝试不同IE下的测试效果时，只需切换浏览器模式，选择不同的Internet Explorer选项，文档模式也会做出相应的改变。注意到“文档模式”中有一个选项是“Quirks”即“怪异模式”，怪异模式意味着一个相对新的浏览器模拟许多在就浏览器中存在的bug，目标是使页面显示出我们想要的效果，这对前台代码的调试是很有帮助的。但怪异模式故意违反了CSS和HTML的规范，并不适合作为默认的文档模式。</p>
+<p>经过多次尝试，发现我的博客刚载入时的文档模式是“IE 9 标准”，IE是10 的浏览器模式也就是“IE 10”，这时应用界面的地图是不显示的。将“浏览器模式”调低，测试IE 10,9,8,7，文档模式做出相应变化（自动的），都是不会显示。当把“文档模式”调低，修改浏览器模式（手动的），此时只有当“文档模式”和“浏览器模式”都为7时才会正确执行显示地图的javascript代码。而将“文档模式”设置为“Quirks”时，无论哪种浏览器模式都会正确显示了。</p>
+<p>这样带来的问题就是当访客的浏览器为IE9或者更低版本时，应用中的部分功能是不能成功执行的。所以就想到通过增加判断浏览器的代码，当不符合要求时给出提示信息。当然这些代码主要是针对以IE为核心的浏览器的，比如“搜狗”、“360”、“QQ”等。</p>
+<p>判断代码如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--[if lte IE 9]&gt;</span><br><span class="line">    &lt;div id=&quot;ie9-warning&quot; &gt;小 i 温馨提示：检测到您正在使用 Internet Explorer，可能有些效果差异以及功能无法展示。建议您使用以下浏览器</span><br><span class="line">        &lt;a href=&quot;http://www.google.com/chrome/?hl=zh-CN&quot;&gt;Chrome&lt;/a&gt; /</span><br><span class="line">        &lt;a href=&quot;http://www.mozillaonline.com/&quot;&gt;Firefox&lt;/a&gt; /</span><br><span class="line">        &lt;a href=&quot;http://www.apple.com.cn/safari/&quot;&gt;Safari&lt;/a&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">        function position_fixed(el, eltop, elleft)</span><br><span class="line">        &#123;</span><br><span class="line">            if(!window.XMLHttpRequest)</span><br><span class="line">                window.onscroll = function()</span><br><span class="line">                &#123;</span><br><span class="line">                    el.style.top = (document.documentElement.scrollTop + eltop)+&quot;px&quot;;</span><br><span class="line">                    el.style.left = (document.documentElement.scrollLeft + elleft)+&quot;px&quot;;</span><br><span class="line">                &#125;</span><br><span class="line">            else</span><br><span class="line">                el.style.position = &quot;fixed&quot;;</span><br><span class="line">            &#125;</span><br><span class="line">            position_fixed(document.getElementById(&quot;ie9-warning&quot;),0, 0);</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;![endif]--&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line">    #ie9-warning</span><br><span class="line">    &#123;</span><br><span class="line">        background:rgb(255,255,225);</span><br><span class="line">        position:absolute;</span><br><span class="line">        top:0;</span><br><span class="line">        left:0;</span><br><span class="line">        font-size:12px;</span><br><span class="line">        color:#333;</span><br><span class="line">        width:97%;</span><br><span class="line">        padding: 2px 15px 2px 23px;</span><br><span class="line">        text-align:center;</span><br><span class="line">    &#125;</span><br><span class="line">    #ie9-warning a</span><br><span class="line">    &#123;</span><br><span class="line">        text-decoration:none;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<p>注意到开始<code>&lt;!–[if lte IE 9]&gt;</code> ，lte就是Less than or equal to的简写，也就是小于或等于的意思。其它的还有lt，是Less than的简写，也就是小于的意思。gte，就是Greater than or equal to的简写，也就是大于或等于的意思。gt，就是Greater than的简写，也就是大于的意思。</p>
+<p>!，就是不等于的意思，跟javascript里的不等于判断符相同。最后有个<code>&lt;![endif]–&gt;</code> ，也就是说如果条件成立的话执行中间的那段代码。</p>
+<hr>
+<blockquote>
+<p>参考资料</p>
+</blockquote>
+<p><a href="https://www.imququ.com/post/browser-mode-and-document-mode-in-ie.html" target="_blank" rel="noopener">https://www.imququ.com/post/browser-mode-and-document-mode-in-ie.html</a></p>
+<p><a href="http://blog.sina.com.cn/s/blog_5b7c070d010193nk.html" target="_blank" rel="noopener">http://blog.sina.com.cn/s/blog_5b7c070d010193nk.html</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="./something-about-browser.html" class="archive-article-date">
+  	<time datetime="2013-12-31T04:12:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2013-12-31</time>
+</a>
+      
+<!--
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="./categories/Study/">Study</a>
+	</div>
+
+
+-->
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="./combine-wechat-and-qrcode.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          如果将”微信”与”二维码签到”结合起来
+        
+      </div>
+    </a>
+  
+  
+    <a href="./qq-map.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">“扫出”的腾讯地图</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2013-2019 iat
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/yaoshanliang/hexo-theme-yilia" target="_blank">Yilia</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: ,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "./"
+	}
+</script>
+
+<script src="././main.js"></script>
+
+
+
+
+
+<!-- Baidu Analytics -->
+<script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a8f517fee81bd1ee9a017d6f0cbfe789";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+      })();
+</script>
+<!-- End Baidu Analytics -->
+
+
+
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="./tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="./tags/Apache/" style="font-size: 10px;">Apache</a> <a href="./tags/Blog/" style="font-size: 12px;">Blog</a> <a href="./tags/Composer/" style="font-size: 10px;">Composer</a> <a href="./tags/DWZ/" style="font-size: 12px;">DWZ</a> <a href="./tags/FuelPHP/" style="font-size: 14px;">FuelPHP</a> <a href="./tags/HTML/" style="font-size: 18px;">HTML</a> <a href="./tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="./tags/Linux/" style="font-size: 10px;">Linux</a> <a href="./tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="./tags/PHP/" style="font-size: 20px;">PHP</a> <a href="./tags/Tool/" style="font-size: 10px;">Tool</a> <a href="./tags/UCenter/" style="font-size: 10px;">UCenter</a> <a href="./tags/Weapp/" style="font-size: 10px;">Weapp</a> <a href="./tags/WebSocket/" style="font-size: 14px;">WebSocket</a> <a href="./tags/Wechat/" style="font-size: 16px;">Wechat</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://limaolong.cn/">green</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://wanghuanming.com/">huanming</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://sukai.me/">kaiyao</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://maywanting.wang/">may</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://mikecoder.cn/">mike</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zalezone.cn/">zale</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Just a beginner.&lt;br /&gt;&lt;a href=&#39;https://about.iat.net.cn&#39; target=&#39;_blank&#39;&gt;profile&lt;/a&gt;</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

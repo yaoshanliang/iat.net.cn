@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>DWZ与EaglePHP结合的三级联动 | iat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="之前没考虑到一个细节，同一个项目不同批次的拥有的项目类别不一样。这是在周五辅导员要求我们部门办“大学生创新创业训练计划”2012年的结题答辩和2013年的中期检查时候发现的，2012年的“大创”拥有国家级、省级、校级三个项目类型，而2013年的“大创”改为了重点、一般、指导和校级。这就让我为难了，之前有考虑到万一哪个项目需要增加一个项目类型的情况，所以没有把项目类型在代码里给写死，只要在数据库中对">
+<meta name="keywords" content="PHP,DWZ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DWZ与EaglePHP结合的三级联动">
+<meta property="og:url" content="https://iat.net.cn/three-linkage-between-dwz-and-eaglephp.html">
+<meta property="og:site_name" content="iat">
+<meta property="og:description" content="之前没考虑到一个细节，同一个项目不同批次的拥有的项目类别不一样。这是在周五辅导员要求我们部门办“大学生创新创业训练计划”2012年的结题答辩和2013年的中期检查时候发现的，2012年的“大创”拥有国家级、省级、校级三个项目类型，而2013年的“大创”改为了重点、一般、指导和校级。这就让我为难了，之前有考虑到万一哪个项目需要增加一个项目类型的情况，所以没有把项目类型在代码里给写死，只要在数据库中对">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://iat.net.cn/images/psp-addmyproject.jpg">
+<meta property="og:image" content="https://iat.net.cn/images/psp-add-CXCY-2013.jpg">
+<meta property="og:image" content="https://iat.net.cn/images/psp-add-CXCY-2013-type.jpg">
+<meta property="og:updated_time" content="2019-08-20T09:01:36.643Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DWZ与EaglePHP结合的三级联动">
+<meta name="twitter:description" content="之前没考虑到一个细节，同一个项目不同批次的拥有的项目类别不一样。这是在周五辅导员要求我们部门办“大学生创新创业训练计划”2012年的结题答辩和2013年的中期检查时候发现的，2012年的“大创”拥有国家级、省级、校级三个项目类型，而2013年的“大创”改为了重点、一般、指导和校级。这就让我为难了，之前有考虑到万一哪个项目需要增加一个项目类型的情况，所以没有把项目类型在代码里给写死，只要在数据库中对">
+<meta name="twitter:image" content="https://iat.net.cn/images/psp-addmyproject.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="iat" type="application/atom+xml">
+  
+  
+  <script src="./style.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="./avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">iat</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+	        
+				<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+	        
+				<li><a href="https://about.iat.net.cn">关于我</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">Archive</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">Tags</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">Links</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">About</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+		        
+					<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">iat</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="./avatar.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">iat</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+		        
+					<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+		        
+					<li><a href="https://about.iat.net.cn">关于我</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-three-linkage-between-dwz-and-eaglephp" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      DWZ与EaglePHP结合的三级联动
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前没考虑到一个细节，同一个项目不同批次的拥有的项目类别不一样。这是在周五辅导员要求我们部门办“大学生创新创业训练计划”2012年的结题答辩和2013年的中期检查时候发现的，2012年的“大创”拥有国家级、省级、校级三个项目类型，而2013年的“大创”改为了重点、一般、指导和校级。这就让我为难了，之前有考虑到万一哪个项目需要增加一个项目类型的情况，所以没有把项目类型在代码里给写死，只要在数据库中对应的项目里加上一个项目类型就行了。可现在没那么简单，如果全部改为重点、一般、指导和校级，那之前年份的就搜索不到了。经过一番思想斗争，决定还是从数据库入手。</p>
+<a id="more"></a>
+
+<ul>
+<li><p>方案一：在数据库表明项目代号的数据表中增加一列“当前年份”和一列“项目批次”，这样不同批次的项目可以拥有不同的项目类型，通过判断当前的年份确定项目的批次，然后通过该批次获得对应的项目类型。</p>
+</li>
+<li><p>方案二：在上述数据表中增加一列“项目批次”，这样不同批次的可以拥有不同的项目类型，但不会自动判断当前的项目批次。</p>
+</li>
+</ul>
+<p>第一种方案看似数据库冗余点，但用户不需要选择批次。第二种方案用户操作多一个选择项目批次的必要，但这也可以解决万一年份与批次不是一一对应关系的问题，比如有的项目不是每年都举行或者有的项目一年举行多次等等。</p>
+<p>最终还是决定采用第二种方案了，这就不是之前的“二级联动,根据项目大类确定项目拥有的类型，而是“三级联动”,根据项目大类确定项目批次，再根据前两者确定项目拥有的类型。</p>
+<p>在DWZ中有个三级联动的事例，即w_combox.html文件，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;select class=&quot;combox&quot; name=&quot;province&quot; ref=&quot;w_combox_city&quot; refUrl=&quot;demo/combox/city_&#123;value&#125;.html&quot;&gt;</span><br><span class="line">    &lt;option value=&quot;all&quot;&gt;所有省市&lt;/option&gt;</span><br><span class="line">    &lt;option value=&quot;bj&quot;&gt;北京&lt;/option&gt;</span><br><span class="line">    &lt;option value=&quot;sh&quot;&gt;上海&lt;/option&gt;</span><br><span class="line">&lt;/select&gt;</span><br><span class="line">&lt;select class=&quot;combox&quot; name=&quot;city&quot; id=&quot;w_combox_city&quot; ref=&quot;w_combox_area&quot; refUrl=&quot;demo/combox/area_&#123;value&#125;.html&quot;&gt;</span><br><span class="line">    &lt;option value=&quot;all&quot;&gt;所有城市&lt;/option&gt;</span><br><span class="line">&lt;/select&gt;</span><br><span class="line">&lt;select class=&quot;combox&quot; name=&quot;area&quot; id=&quot;w_combox_area&quot;&gt;</span><br><span class="line">    &lt;option value=&quot;all&quot;&gt;所有区县&lt;/option&gt;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在<code>&lt;select&gt;&lt;/select&gt;</code>中ref为DWZ新增的属性，指向的是当前combox值改变引起联动的下一级combox，ref用下一级combox的id属性来赋值，refUrl为变动时指向的链接。与EaglePHP框架结合的过程中，需要将refUrl改为对应的控制器。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;dl&gt;</span><br><span class="line">    &lt;dt&gt;项目大类：&lt;/dt&gt;</span><br><span class="line">    &lt;dd&gt;</span><br><span class="line">        &lt;select name=&quot;PID&quot; class=&quot;combox required&quot; ref = &quot;TIME&quot; refUrl = &quot;&#123;&#123;$smarty.const.__URL__&amp;a=getprojecttime&amp;project_name=&#123;value&#125;|url&#125;&#125;&quot;&gt;</span><br><span class="line">        &lt;option value=&quot;&quot;&gt;--请选择--&lt;/option&gt;</span><br><span class="line">            &#123;&#123;html_options options=$project_name selected=$smarty.post.PID&#125;&#125;</span><br><span class="line">    &lt;/select&gt;</span><br><span class="line">    &lt;/dd&gt;</span><br><span class="line">&lt;/dl&gt;</span><br><span class="line">&lt;dl&gt;</span><br><span class="line">    &lt;dt&gt;项目批次：&lt;/dt&gt;</span><br><span class="line">    &lt;dd&gt;</span><br><span class="line">        &lt;select name=&quot;TIME&quot; id = &quot;TIME&quot; class=&quot;combox required&quot; ref = &quot;type&quot; refUrl = &quot;&#123;&#123;$smarty.const.__URL__&amp;a=getprojecttype&amp;project_name_TIME=&#123;value&#125;|url&#125;&#125;&quot;&gt;</span><br><span class="line">        &lt;option value=&quot;&quot;&gt;--请选择--&lt;/option&gt;</span><br><span class="line">    &lt;/select&gt;</span><br><span class="line">    &lt;/dd&gt;</span><br><span class="line">&lt;/dl&gt;</span><br><span class="line">&lt;dl&gt;</span><br><span class="line">    &lt;dt&gt;申报类型：&lt;/dt&gt;</span><br><span class="line">    &lt;dd&gt;</span><br><span class="line">        &lt;select name=&quot;type&quot; id = &quot;type&quot; class=&quot;combox&quot;&gt;</span><br><span class="line">        &lt;option value=&quot;&quot;&gt;--请选择--&lt;/option&gt;</span><br><span class="line">        &lt;/select&gt;</span><br><span class="line">    &lt;/dd&gt;</span><br><span class="line">&lt;/dl&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在选择第一个“项目大类”时，直接选择传递的项目大类名称，当项目大类的名称选定后，通过refUrl请求获取下个“项目批次”的下拉json数据，选定“项目批次”后同样的级联“项目类型”。但这边出现了一个问题：项目批次选定后只能传递当前下拉框的批次数值，前面的项目大类数值不能返回controller中了。也就是说当前<code>&lt;select&gt;&lt;/select&gt;</code>中通过refUrl传递参数只是当前select的值，上一个<code>&lt;select&gt;&lt;select/&gt;</code>的值无法传出去。这也就让我为难了，百般苦想之后想到通过项目批次+项目大类的形式，也就是选择项目批次的时候传递的是“项目大类+项目批次”的字符串，这样级联项目类型的时候通过解析字符串就能获得项目大类和项目批次了，从而确定该批次的项目拥有的项目类型。</p>
+<p>最终的成果如下图所示<br><img src="/images/psp-addmyproject.jpg" alt="图片"></p>
+<p>当我选定“大学生创新创业训练计划”的项目大类后，通过级联，给出的项目批次有2012年和2013年。<br><img src="/images/psp-add-CXCY-2013.jpg" alt="图片"></p>
+<p>当我选定2013年后，通过级联，给出的申报类型为“一般项目“、“指导项目”、“校级项目”和“重点项目”。<br><img src="/images/psp-add-CXCY-2013-type.jpg" alt="图片"></p>
+<p>这样，写入数据库的信息在搜索时就会根据这些信息来区别了。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="./three-linkage-between-dwz-and-eaglephp.html" class="archive-article-date">
+  	<time datetime="2014-05-19T04:12:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-05-19</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="./tags/DWZ/">DWZ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="./tags/PHP/">PHP</a></li></ul>
+	</div>
+
+<!--
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="./categories/Project/">Project</a>
+	</div>
+
+
+-->
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="./fetion-send-weather-report.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          飞信发送天气预报的设计与实现
+        
+      </div>
+    </a>
+  
+  
+    <a href="./dynamically-add-a-line-in-dwz.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">DWZ中动态添加一行</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2013-2019 iat
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/yaoshanliang/hexo-theme-yilia" target="_blank">Yilia</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: ,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "./"
+	}
+</script>
+
+<script src="././main.js"></script>
+
+
+
+
+
+<!-- Baidu Analytics -->
+<script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a8f517fee81bd1ee9a017d6f0cbfe789";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+      })();
+</script>
+<!-- End Baidu Analytics -->
+
+
+
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="./tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="./tags/Apache/" style="font-size: 10px;">Apache</a> <a href="./tags/Blog/" style="font-size: 12px;">Blog</a> <a href="./tags/Composer/" style="font-size: 10px;">Composer</a> <a href="./tags/DWZ/" style="font-size: 12px;">DWZ</a> <a href="./tags/FuelPHP/" style="font-size: 14px;">FuelPHP</a> <a href="./tags/HTML/" style="font-size: 18px;">HTML</a> <a href="./tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="./tags/Linux/" style="font-size: 10px;">Linux</a> <a href="./tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="./tags/PHP/" style="font-size: 20px;">PHP</a> <a href="./tags/Tool/" style="font-size: 10px;">Tool</a> <a href="./tags/UCenter/" style="font-size: 10px;">UCenter</a> <a href="./tags/Weapp/" style="font-size: 10px;">Weapp</a> <a href="./tags/WebSocket/" style="font-size: 14px;">WebSocket</a> <a href="./tags/Wechat/" style="font-size: 16px;">Wechat</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://limaolong.cn/">green</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://wanghuanming.com/">huanming</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://sukai.me/">kaiyao</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://maywanting.wang/">may</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://mikecoder.cn/">mike</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zalezone.cn/">zale</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Just a beginner.&lt;br /&gt;&lt;a href=&#39;https://about.iat.net.cn&#39; target=&#39;_blank&#39;&gt;profile&lt;/a&gt;</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

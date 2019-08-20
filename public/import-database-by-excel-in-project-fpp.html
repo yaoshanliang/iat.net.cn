@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>防攀爬系统——EXCEL导入数据库 | iat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近一直在改fpp，这是学长们之前做的“防攀爬系统”，现在需要修改一些BUG以及增加一些功能。现将一些经验记录一下，提醒自己在之后的项目中不要去犯类似的错误。">
+<meta name="keywords" content="PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="防攀爬系统——EXCEL导入数据库">
+<meta property="og:url" content="https://iat.net.cn/import-database-by-excel-in-project-fpp.html">
+<meta property="og:site_name" content="iat">
+<meta property="og:description" content="最近一直在改fpp，这是学长们之前做的“防攀爬系统”，现在需要修改一些BUG以及增加一些功能。现将一些经验记录一下，提醒自己在之后的项目中不要去犯类似的错误。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://iat.net.cn/images/fpp_1.jpg">
+<meta property="og:image" content="https://iat.net.cn/images/fpp_8.jpg">
+<meta property="og:image" content="https://iat.net.cn/images/fpp_2.jpg">
+<meta property="og:image" content="https://iat.net.cn/images/fpp_3.jpg">
+<meta property="og:image" content="https://iat.net.cn/images/fpp_5.jpg">
+<meta property="og:image" content="https://iat.net.cn/images/fpp_6.jpg">
+<meta property="og:image" content="https://iat.net.cn/images/fpp_9.jpg">
+<meta property="og:image" content="https://iat.net.cn/images/fpp_10.jpg">
+<meta property="og:image" content="https://iat.net.cn/images/fpp_11.jpg">
+<meta property="og:updated_time" content="2019-08-20T09:01:36.640Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="防攀爬系统——EXCEL导入数据库">
+<meta name="twitter:description" content="最近一直在改fpp，这是学长们之前做的“防攀爬系统”，现在需要修改一些BUG以及增加一些功能。现将一些经验记录一下，提醒自己在之后的项目中不要去犯类似的错误。">
+<meta name="twitter:image" content="https://iat.net.cn/images/fpp_1.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="iat" type="application/atom+xml">
+  
+  
+  <script src="./style.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="./avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">iat</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+	        
+				<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+	        
+				<li><a href="https://about.iat.net.cn">关于我</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">Archive</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">Tags</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">Links</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">About</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+		        
+					<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">iat</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="./avatar.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">iat</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+		        
+					<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+		        
+					<li><a href="https://about.iat.net.cn">关于我</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-import-database-by-excel-in-project-fpp" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      防攀爬系统——EXCEL导入数据库
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近一直在改fpp，这是学长们之前做的“防攀爬系统”，现在需要修改一些BUG以及增加一些功能。现将一些经验记录一下，提醒自己在之后的项目中不要去犯类似的错误。</p>
+<a id="more"></a>
+
+<p>首先是添加模块的问题，没看到已经投入使用的服务器上的代码，便一股脑地从本地的代码找原因，甚至还找到了服务器上代码和数据库的访问权限上。后来实在走投无路了，想到服务器上的代码会不会和实验室SVN上的不一样。果真如此，投入使用的服务器上并不是最新的代码。其实造成添加不了的原因就是231这一行代码，在填写表单信息点击提交按钮后，需要插入到数据库中，else里的语句就是执行插入操作的，但刚进去就return 1;了，实际上并没执行下面的语句。那为什么web端还提示“新增成功”呢？这就又是因为这个return 1了，MVC里交互时自定义1是成功的意思，正确的办法是把return 1;放在else语句结束的地方。</p>
+<p><img src="/images/fpp_1.jpg" alt></p>
+<p>其次就是添加描述的问题了，添加的页面里有描述的栏目，但表单传值时没有传到后台，如图在node_model文件里第133行缺少</p>
+<p><img src="/images/fpp_8.jpg" alt><br><img src="/images/fpp_2.jpg" alt></p>
+<p>修改时没有加入修改描述的栏目，修改edit_node.php页面如下部分<br><img src="/images/fpp_3.jpg" alt><br><img src="/images/fpp_5.jpg" alt></p>
+<p>还有node_mode里的get_node()函数</p>
+<p>完成之后，修改描述会提示“没有做任何修改”的错误，找到原因发现node_model如下页面，这一判断语句显然是有问题的，如果3G号码没有改变就认为没有做任何修改了，没考虑描述、心跳、自检时间等的修改，return语句去掉即可</p>
+<p><img src="/images/fpp_6.jpg" alt></p>
+<p>到此，描述的增加、修改问题成功解决。</p>
+<p>为减少一个个添加模块所带来的不必要麻烦，需要添加一个从EXCEL表导入数据库的功能。这一模块主要有两个大的方面，一个是上传EXCEL文件，另一个是读取EXCEL写入数据库。先考虑的是后面一个，因为这一功能之前还没有学习过，上传文件在“学生科研项目管理平台”上已经得到了应用。网上提供读取EXCEL的类库还是挺多的，PHPExcel是用得比较多的类库了，也扩展出许多功能。不过还是从网上找了个excel_read2.php的类库，首先需要新建一个Spreadsheet_Excel_Reader对象，接下来是读取EXCEL数据的一个编码方式，在这边又纠结了好久。因为数据库的编码已经统一设置成了UTF-8，而MS的EXCEL编码是CP936（之前还以为是GBK的，实际通过mb_detect_encoding()函数输出后发现是CP936格式的，百度之后发现GBK和CP936是有很大相关性的，微软的CP936通常等同为GBK，但实际上GBK比CP936多出95个字，详细介绍见<a href="http://zh.wikipedia.org/wiki/GBK" target="_blank" rel="noopener">http://zh.wikipedia.org/wiki/GBK</a>），当我已UTF-8的格式将EXCEL表显示出来时是奇怪字符的，GBK则会是正确的。</p>
+<p>获取表头信息，通过比较与数据库中的字段，相同的时候再插入，这也是为了防止不按模版格式随便导入EXCEL的情况。j接下来的就是mysql_connect()连接数据库，mysql_select_db()选择数据库和mysql_query()设置编码的格式。</p>
+<p>刚开始时每读取一行就insert数据库一遍，测试了几遍300个数据，花费的时间惊呆了，几乎都是18s多。</p>
+<p><img src="/images/fpp_9.jpg" alt></p>
+<p>这也是因为这不是仅仅的插入数据，而是需要先从EXCEL表中读取出来，然后才执行插入语句。之后选择将EXCEL表的数据一次性读取出来，拼接成一句insert语句，测了几遍后时间都在200ms左右，</p>
+<p><img src="/images/fpp_10.jpg" alt></p>
+<p>这明显提高了很多很多。测了一遍单一的300条insert语句，时间也是要2s左右的，这也给自己一个启示，以后在插入大量数据的时候，不要用循环插入法，而是一条语句插入所有记录。</p>
+<p><img src="/images/fpp_11.jpg" alt></p>
+<p>附上读取EXCEL并写入数据库的源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">*读取excel文件并写入数据库</span><br><span class="line">*/</span><br><span class="line">public function read_excel($filename)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    require_once ’/application/libraries/PHPExcel/excel_read2.php’;</span><br><span class="line">    $data = new Spreadsheet_Excel_Reader();</span><br><span class="line">    $data-&gt;setOutputEncoding(’gbk’);</span><br><span class="line">    $data-&gt;read(&quot;./application/upload/node_excel/&quot;.$filename);</span><br><span class="line"></span><br><span class="line">    //获取表头</span><br><span class="line">    $name_title = $data-&gt;sheets[0][’cells’][1][1];</span><br><span class="line">    $SIM_title = $data-&gt;sheets[0][’cells’][1][2];</span><br><span class="line">    $desc_title = $data-&gt;sheets[0][’cells’][1][3];</span><br><span class="line">    $heart_title = $data-&gt;sheets[0][’cells’][1][4];</span><br><span class="line">    $IP_title = $data-&gt;sheets[0][’cells’][1][5];</span><br><span class="line">    $port_title = $data-&gt;sheets[0][’cells’][1][6];</span><br><span class="line"></span><br><span class="line">    //判断表头信息是否为模版里的表头，不是的话返回提示</span><br><span class="line">    if(!($name_title == &quot;模块名称&quot; &amp;&amp; $SIM_title == &quot;3G号码&quot; &amp;&amp; $desc_title == &quot;模块描述&quot; &amp;&amp; $heart_title == &quot;心跳间隔&quot; &amp;&amp; $IP_title == &quot;服务器IP地址&quot; &amp;&amp; $port_title == &quot;服务器port&quot;))</span><br><span class="line">    &#123;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    $con = mysql_connect(&quot;localhost&quot;,&quot;UID&quot;,&quot;PWD&quot;) or die(&quot;mysql_connect failed&quot;);</span><br><span class="line">    mysql_select_db(’fpp’) or die(&quot;mysql_select_db failed&quot;);</span><br><span class="line">    mysql_query(&quot;set names ’gbk’&quot;);//输出中文</span><br><span class="line"></span><br><span class="line">    //具体信息</span><br><span class="line">    $sql = &quot;&quot;;</span><br><span class="line">    for ($i = 2; $i &lt;= $data-&gt;sheets[0][’numRows’]; $i++)</span><br><span class="line">    &#123;</span><br><span class="line">        $sql .= &quot;(’&quot;.</span><br><span class="line">        $data-&gt;sheets[0][’cells’][$i][1].&quot;’,’&quot;.</span><br><span class="line">        $data-&gt;sheets[0][’cells’][$i][2].&quot;’,’&quot;.</span><br><span class="line">        $data-&gt;sheets[0][’cells’][$i][3].&quot;’,’&quot;.</span><br><span class="line">        $data-&gt;sheets[0][’cells’][$i][4].&quot;’,’&quot;.</span><br><span class="line">        $data-&gt;sheets[0][’cells’][$i][5].&quot;’,’&quot;.</span><br><span class="line">        $data-&gt;sheets[0][’cells’][$i][6].&quot;’),&quot;;</span><br><span class="line"></span><br><span class="line">        /*$sql = &quot;INSERT INTO fpp_node(name,`desc`, ip) VALUES(’&quot;.</span><br><span class="line">        $data-&gt;sheets[0][’cells’][$i][1].&quot;’,’&quot;.</span><br><span class="line">        $data-&gt;sheets[0][’cells’][$i][2].&quot;’,’&quot;.</span><br><span class="line">        $data-&gt;sheets[0][’cells’][$i][3].&quot;’)&quot;;</span><br><span class="line"></span><br><span class="line">        $sql = &quot;INSERT INTO fpp_node(name,`desc`, ip) VALUES(’1’, ’2’, ’3’)&quot;;</span><br><span class="line">        if(mysql_query($sql,$con) == false)</span><br><span class="line">        return 0;</span><br><span class="line">        */</span><br><span class="line">    &#125;</span><br><span class="line">    $sql = substr($sql,0,strlen($sql)-1);//去除最后一个逗号</span><br><span class="line"></span><br><span class="line">    $sql = &quot;insert into fpp_node(`name`, `SIMnumb`, `desc`, `heart_beat_interval`, `ip`, `server_port`) VALUES &quot;.$sql;</span><br><span class="line">    if(mysql_query($sql,$con) == false)</span><br><span class="line">    &#123;</span><br><span class="line">        mysql_close($con);</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上传文件部分</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">*上传文件</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">public function upload_excel()</span><br><span class="line">&#123;</span><br><span class="line">    if(($_FILES[’file’] !=&quot;&quot;))</span><br><span class="line">    &#123;</span><br><span class="line">        $tmp_filename = time().&quot;.xls&quot;;</span><br><span class="line">        if($_FILES[&quot;file&quot;][&quot;error&quot;] == 1)</span><br><span class="line">        &#123;</span><br><span class="line">            return &quot;-1&quot;;//出错</span><br><span class="line">        &#125;</span><br><span class="line">        elseif($_FILES[&quot;file&quot;][&quot;error&quot;] == 7)</span><br><span class="line">        &#123;</span><br><span class="line">            return &quot;-7&quot;;//文件写入失败</span><br><span class="line">        &#125;</span><br><span class="line">        elseif($_FILES[&quot;file&quot;][&quot;type&quot;] != &quot;application/kset&quot;)</span><br><span class="line">        &#123;</span><br><span class="line"></span><br><span class="line">            return 2;//文件类型不符</span><br><span class="line">        &#125;</span><br><span class="line">        elseif ($_FILES[&quot;file&quot;][&quot;size&quot;] &gt; 1024*1024)</span><br><span class="line">        &#123;</span><br><span class="line">            return 3;//文件过大</span><br><span class="line">        &#125;</span><br><span class="line">        elseif(file_exists(&quot;application/upload/node_excel/&quot; . $tmp_filename))</span><br><span class="line">        &#123;</span><br><span class="line">            return 4;//文件已存在</span><br><span class="line">        &#125;</span><br><span class="line">        elseif(is_uploaded_file($_FILES[’file’][’tmp_name’]))</span><br><span class="line">        &#123;</span><br><span class="line">            $address = &quot;application/upload/node_excel/&quot;.$tmp_filename;//文件的保存目录</span><br><span class="line">            move_uploaded_file($_FILES[&quot;file&quot;][&quot;tmp_name&quot;], $address);</span><br><span class="line">            if($this-&gt;read_excel($tmp_filename) == -1)</span><br><span class="line">            &#123;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125;</span><br><span class="line">            return 1;//成功</span><br><span class="line">        &#125;</span><br><span class="line">        else</span><br><span class="line">        &#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        return 0;//未选择文件</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下载模版部分则相对比较简单</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">*下载模版</span><br><span class="line">*/</span><br><span class="line">public function download_excel()</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    $filename = &quot;./application/data/node/fpp.xls&quot;;</span><br><span class="line">    $out_filename = &quot;fpp.xls&quot;;</span><br><span class="line">    if(!file_exists($filename))</span><br><span class="line">    &#123;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        @header(’Accept-Ranges: bytes’);</span><br><span class="line">        @header(’Accept-Length: ’ . filesize($filename));</span><br><span class="line">        @header(’Content-Transfer-Encoding: binary’);</span><br><span class="line">        @header(’Content-type: application/octet-stream’);</span><br><span class="line">        @header(’Content-Disposition: attachment; filename=’ . $out_filename);</span><br><span class="line">        @header(’Content-Type: application/octet-stream; name=’ . $out_filename);</span><br><span class="line"></span><br><span class="line">        $file = @fopen($filename, &quot;r&quot;);</span><br><span class="line">        echo  @fread($file, @filesize($filename));</span><br><span class="line"></span><br><span class="line">        @fclose($file);</span><br><span class="line">        exit();</span><br><span class="line">    &#125;</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="./import-database-by-excel-in-project-fpp.html" class="archive-article-date">
+  	<time datetime="2014-03-22T04:12:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-03-22</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="./tags/PHP/">PHP</a></li></ul>
+	</div>
+
+<!--
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="./categories/Project/">Project</a>
+	</div>
+
+
+-->
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="./import-database-by-excel-in-project-fpp-modified-version.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          防攀爬系统——EXCEL导入数据库修改版
+        
+      </div>
+    </a>
+  
+  
+    <a href="./prohibit-access-to-websites-file-directory-in-apache-server.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Apache服务器禁止访问网站文件目录的方法</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2013-2019 iat
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/yaoshanliang/hexo-theme-yilia" target="_blank">Yilia</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: ,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "./"
+	}
+</script>
+
+<script src="././main.js"></script>
+
+
+
+
+
+<!-- Baidu Analytics -->
+<script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a8f517fee81bd1ee9a017d6f0cbfe789";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+      })();
+</script>
+<!-- End Baidu Analytics -->
+
+
+
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="./tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="./tags/Apache/" style="font-size: 10px;">Apache</a> <a href="./tags/Blog/" style="font-size: 12px;">Blog</a> <a href="./tags/Composer/" style="font-size: 10px;">Composer</a> <a href="./tags/DWZ/" style="font-size: 12px;">DWZ</a> <a href="./tags/FuelPHP/" style="font-size: 14px;">FuelPHP</a> <a href="./tags/HTML/" style="font-size: 18px;">HTML</a> <a href="./tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="./tags/Linux/" style="font-size: 10px;">Linux</a> <a href="./tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="./tags/PHP/" style="font-size: 20px;">PHP</a> <a href="./tags/Tool/" style="font-size: 10px;">Tool</a> <a href="./tags/UCenter/" style="font-size: 10px;">UCenter</a> <a href="./tags/Weapp/" style="font-size: 10px;">Weapp</a> <a href="./tags/WebSocket/" style="font-size: 14px;">WebSocket</a> <a href="./tags/Wechat/" style="font-size: 16px;">Wechat</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://limaolong.cn/">green</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://wanghuanming.com/">huanming</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://sukai.me/">kaiyao</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://maywanting.wang/">may</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://mikecoder.cn/">mike</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zalezone.cn/">zale</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Just a beginner.&lt;br /&gt;&lt;a href=&#39;https://about.iat.net.cn&#39; target=&#39;_blank&#39;&gt;profile&lt;/a&gt;</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

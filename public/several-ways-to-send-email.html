@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>PHP发送邮件的几种方法总结 | iat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="第一种方式采用PHP中的mail()函数，在发送之前需要对php.ini进行配置。找到[mail function]去掉SMTP前的分号，改为自己的采用SMTP服务器，还有下面的smtp_port,sendemail_from,sendmail_path等mail_php.ini还有需要修改的就是xampp/sendmail/sendmail.ini,[sendmail]修改smtp_server">
+<meta name="keywords" content="PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP发送邮件的几种方法总结">
+<meta property="og:url" content="https://iat.net.cn/several-ways-to-send-email.html">
+<meta property="og:site_name" content="iat">
+<meta property="og:description" content="第一种方式采用PHP中的mail()函数，在发送之前需要对php.ini进行配置。找到[mail function]去掉SMTP前的分号，改为自己的采用SMTP服务器，还有下面的smtp_port,sendemail_from,sendmail_path等mail_php.ini还有需要修改的就是xampp/sendmail/sendmail.ini,[sendmail]修改smtp_server">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://iat.net.cn/images/mail-php-ini.jpg">
+<meta property="og:image" content="https://iat.net.cn/images/mail-sendmail.jpg">
+<meta property="og:image" content="https://iat.net.cn/images/mail-telnet-open.jpg">
+<meta property="og:image" content="https://iat.net.cn/images/mail-telnet-helo.jpg">
+<meta property="og:image" content="https://iat.net.cn/images/mail-telnet-send.jpg">
+<meta property="og:image" content="https://iat.net.cn/images/mail-socket.png">
+<meta property="og:updated_time" content="2019-08-20T09:01:36.642Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP发送邮件的几种方法总结">
+<meta name="twitter:description" content="第一种方式采用PHP中的mail()函数，在发送之前需要对php.ini进行配置。找到[mail function]去掉SMTP前的分号，改为自己的采用SMTP服务器，还有下面的smtp_port,sendemail_from,sendmail_path等mail_php.ini还有需要修改的就是xampp/sendmail/sendmail.ini,[sendmail]修改smtp_server">
+<meta name="twitter:image" content="https://iat.net.cn/images/mail-php-ini.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="iat" type="application/atom+xml">
+  
+  
+  <script src="./style.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="./avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">iat</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+	        
+				<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+	        
+				<li><a href="https://about.iat.net.cn">关于我</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">Archive</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">Tags</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">Links</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">About</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+		        
+					<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">iat</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="./avatar.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">iat</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+		        
+					<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+		        
+					<li><a href="https://about.iat.net.cn">关于我</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-several-ways-to-send-email" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      PHP发送邮件的几种方法总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>第一种方式采用PHP中的mail()函数，在发送之前需要对php.ini进行配置。找到[mail function]去掉SMTP前的分号，改为自己的采用SMTP服务器，还有下面的smtp_port,sendemail_from,sendmail_path等mail_php.ini还有需要修改的就是xampp/sendmail/sendmail.ini,[sendmail]修改smtp_server,smtp_port，将error_logfile和debug_logfile打开，auth_username填写自己在该邮箱上的账号即可，下面的auth_password密码。修改完后重启apache服务器</p>
+<a id="more"></a>
+
+<p><img src="/images/mail-php-ini.jpg" alt></p>
+<p>还有需要修改的就是xampp/sendmail/sendmail.ini,[sendmail]修改smtp_server,smtp_port，将error_logfile和debug_logfile打开，auth_username填写自己在该邮箱上的账号即可，下面的auth_password密码。修改完后重启apache服务器</p>
+<p><img src="/images/mail-sendmail.jpg" alt></p>
+<p>用最简单的mail()函数发送，第一个参数为收件人的地址，第二个为主题，第三个为正文，当然mail()还有两个可选的参数，规定附加的标题和额外的参数。</p>
+<p><code>mail(&quot;iat.net.cn@gmail.com&quot;, &quot;Hello&quot;, &quot;world&quot;);</code></p>
+<p>这就是最简单的一行代码发邮件的例子了，当然这也是很不友好的，有没有连上服务器，有没有发送成功都不知道。</p>
+<p>第二种方式采用CMD命令行发送，首先需要开启telnet服务，该服务在windows下是默认关闭的，具体开启的方式如下：“控制面板”?&gt;“程序”?&gt;“打开或关闭windows功能”，然后勾选里面的“telnet服务器”和“telnet客户端”，确认即可。接下来再CMD里输入telent就可以进入服务了。</p>
+<p>在使用telent发送邮件之前先介绍一下SMTP协议下的连接发送过程：</p>
+<p>（1）建立TCP连接</p>
+<p>（2）客户端发送HELO或EHLO命令以标识发件人自己的身份</p>
+<p>（3）使用AUTH命令登陆SMTP服务器，输入自己的用户名和密码（这里的用户名和密码是通过base64加密的，可以先用base64_encode()函数加密后将字符串复制过来）</p>
+<p>（4）客户端发送RCPT命令，标识该电子邮件的收件方，可以用多个RCPT行，服务器以OK作为响应，表示收件方可以接收</p>
+<p>（5）协商结束后，使用DATA命令发送</p>
+<p>（6）以“.”表示结束，结束此次发送用QUIT命令</p>
+<p>在具体的CMD下应该怎样使用呢？首先telnet到smtp.163.com上，加上端口号25，应为默认的是23会连不上。<br><img src="/images/mail-telnet-open.jpg" alt><br>接下来会打开一个新的窗口<br><img src="/images/mail-telnet-helo.jpg" alt><br>HELO命令与服务器打个招呼，服务器返回250就代表它也回你招呼了。AUTH login后输入自己的用户名，这里的用户名是base64加密后的，服务器返回334后输入自己的密码，密码也是base64加密的(图片中没有显示)，密码验证成功会返回235的Authentication successful。telnet_send接下来就是输入发送方的邮箱和接收方和的邮箱，都是250 MAIL OK后输入DATA命令，以下的就是邮件的内容了，按”.”号退出发送。上述命令并不一定会一次性成功，我试了好多遍，同样的命令上一次不对这一次就对了，服务器可能会返回错误响应，可以多次重复尝试。<br><img src="/images/mail-telnet-send.jpg" alt></p>
+<p>第三种方式采用SOCKET发送邮件，主要用到的是fsockopen()函数，该函数的好处是把Socket绑定到一个流上，然后使用各种操作流的函数操作这个Socket连接。这是个算比较完善的类了，出错了会进行提示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class smtp_mail</span><br><span class="line">&#123;</span><br><span class="line">    private $host;</span><br><span class="line">    private $port;</span><br><span class="line">    private $username;</span><br><span class="line">    private $password;</span><br><span class="line">    private $debug = false;</span><br><span class="line">    private $sock;</span><br><span class="line">    private $mail_format = 0;</span><br><span class="line"></span><br><span class="line">    function smtp_mail($host, $port = 25, $username, $password, $mail_format = 1, $debug = 1)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;host = $host;</span><br><span class="line">        $this-&gt;port = $port;</span><br><span class="line">        $this-&gt;username = base64_encode($username);</span><br><span class="line">        $this-&gt;password = base64_encode($password);</span><br><span class="line">        $this-&gt;mail_format = $mail_format;</span><br><span class="line">        $this-&gt;debug = $debug;</span><br><span class="line"></span><br><span class="line">        //连接到SMTP服务器</span><br><span class="line">        $this-&gt;sock = fsockopen($this-&gt;host, $this-&gt;port,  $errno,  $errstr, 10);</span><br><span class="line">        if(!$this-&gt;sock)</span><br><span class="line">            exit(&quot;Error number: $errno, Error message: $errstr&quot;);</span><br><span class="line">        $response = fgets($this-&gt;sock);//获取服务器信息</span><br><span class="line">        if(strstr($response, &quot;220&quot;) === false)</span><br><span class="line">            exit(&quot;server error: $response&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //显示debug</span><br><span class="line">    private function show_debug($message)</span><br><span class="line">    &#123;</span><br><span class="line">        if($this-&gt;debug)</span><br><span class="line">            echo &quot;&lt;p&gt;Debug: $message&lt;/p&gt;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //把命令发送到服务器执行，取得服务器消息</span><br><span class="line">    private function do_command($cmd, $return_code)</span><br><span class="line">    &#123;</span><br><span class="line">        fwrite($this-&gt;sock, $cmd);</span><br><span class="line">        $response = fgets($this-&gt;sock);</span><br><span class="line">        echo &quot;$response&quot;;</span><br><span class="line">        if(strstr($response, &quot;$return_code&quot;) === false)</span><br><span class="line">        &#123;</span><br><span class="line">            $this-&gt;show_debug($response);</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //验证邮箱地址</span><br><span class="line">    private function is_email($email)</span><br><span class="line">    &#123;</span><br><span class="line">        $pattern = &quot;/^[^_][\w]*@[\w.]+[\w]*[^_]$/&quot;;</span><br><span class="line">        if(preg_match($pattern, $email, $matches))</span><br><span class="line">            return true;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //具体的send_mail</span><br><span class="line">    public function send_mail($from, $to, $subject, $body)</span><br><span class="line">    &#123;</span><br><span class="line">        if((!$this-&gt;is_email($from)) || (!$this-&gt;is_email($to)))</span><br><span class="line">        &#123;</span><br><span class="line">            $this-&gt;show_debug(&quot;Please enter vaild email&quot;);</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        if(empty($subject) || empty($body))</span><br><span class="line">        &#123;</span><br><span class="line">            $this-&gt;show_debug(&quot;Please enter subject/body&quot;);</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        $detail = &quot;From: $from&quot;.&quot;\r\n&quot;;</span><br><span class="line">                $detail .= &quot;To: $to&quot;.&quot;\r\n&quot;;</span><br><span class="line">                $detail .= &quot;Subject: $subject&quot;.&quot;\r\n&quot;;</span><br><span class="line">                if($this-&gt;mail_format == 1)</span><br><span class="line">                    $detail .= &quot;Content-Type: text/html;\r\n&quot;;</span><br><span class="line">                else</span><br><span class="line">                    $detail .= &quot;Content-Type: text/plain;\r\n&quot;;</span><br><span class="line">                $detail .= &quot;charset = UTF-8\r\n\r\n&quot;;</span><br><span class="line">                $detail .= $body;</span><br><span class="line"></span><br><span class="line">                $this-&gt;do_command(&quot;HELO smtp.163.com\r\n&quot;, 250);</span><br><span class="line">                $this-&gt;do_command(&quot;AUTH LOGIN\r\n&quot;, 334);</span><br><span class="line">                $this-&gt;do_command($this-&gt;username . &quot;\r\n&quot;, 334);</span><br><span class="line">                $this-&gt;do_command($this-&gt;password . &quot;\r\n&quot;, 235);</span><br><span class="line">                $this-&gt;do_command(&quot;MAIL FROM: &lt;&quot; . $from .&quot;&gt;\r\n&quot;, 250);</span><br><span class="line">                $this-&gt;do_command(&quot;RCPT TO: &lt;&quot; . $to .&quot;&gt;\r\n&quot;, 250);</span><br><span class="line">                $this-&gt;do_command(&quot;DATA\r\n&quot;, 354);</span><br><span class="line">                $this-&gt;do_command($detail . &quot;\r\n.\r\n&quot;, 250);</span><br><span class="line">                $this-&gt;do_command(&quot;QUIT\r\n&quot;, 221);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试代码如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">    include(&quot;smtp_mail.class.php&quot;);</span><br><span class="line">    $host = &quot;smtp.163.com&quot;;</span><br><span class="line">    $port = 25;</span><br><span class="line">    $username = &quot;iatboy@163.com&quot;;</span><br><span class="line">    $password = &quot;**********&quot;;</span><br><span class="line">        $from = &quot;iatboy@163.com&quot;;</span><br><span class="line">        $to = &quot;iat.net.cn@gmail.com&quot;;</span><br><span class="line">    $subject = &quot;Hello&quot;;</span><br><span class="line">    $content = &quot;World&quot;;</span><br><span class="line">    $mail = new smtp_mail($host, $port, $username, $password);</span><br><span class="line">    $mail-&gt;send_mail($from, $to, $subject, $content);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>测试的结果</p>
+<p><img src="/images/mail-socket.png" alt></p>
+<p>第四种方式采用开源的PHPMailer类，该类在<a href="http://sourceforge.net/projects/phpmailer/files/" target="_blank" rel="noopener">http://sourceforge.net/projects/phpmailer/files/</a>可以下载到，其中的功能是非常全面的，包括制定多个收件人，抄送地址，暗送地址和回复地址，支持多种邮件编码格式，支持SMTP验证，支持在邮件中嵌入图片，可在任何平台上运行等。</p>
+<p>需要调用的是class.smtp.php类，参考网上的测试代码如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">    require(&quot;class.phpmailer.php&quot;); //下载的文件必须放在该文件所在目录</span><br><span class="line">    $mail = new PHPMailer(); //建立邮件发送类</span><br><span class="line">    $address =&quot;iatboy@163.com&quot;;</span><br><span class="line">    $mail-&gt;IsSMTP(); // 使用SMTP方式发送</span><br><span class="line">    $mail-&gt;Host = &quot;smtp.163.com&quot;; // 您的企业邮局域名</span><br><span class="line">    $mail-&gt;SMTPAuth = true; // 启用SMTP验证功能</span><br><span class="line">    $mail-&gt;Username = &quot;iatboy@163.com&quot;; // 邮局用户名(请填写完整的email地址)</span><br><span class="line">    $mail-&gt;Password = &quot;*********&quot;; // 邮局密码</span><br><span class="line">    $mail-&gt;Port=25;</span><br><span class="line">    $mail-&gt;From = &quot;iatboy@163.com&quot;; //邮件发送者email地址</span><br><span class="line">    $mail-&gt;FromName = &quot;liuyoubin&quot;;</span><br><span class="line">    $mail-&gt;AddAddress(&quot;$address&quot;, &quot;a&quot;);//收件人地址，可以替换成任何想要接收邮件的email信箱,格式是AddAddress(&quot;收件人email&quot;,&quot;收件人姓名&quot;)</span><br><span class="line">    //$mail-&gt;AddReplyTo(&quot;&quot;, &quot;&quot;);</span><br><span class="line"></span><br><span class="line">    //$mail-&gt;AddAttachment(&quot;/var/tmp/file.tar.gz&quot;); // 添加附件</span><br><span class="line">    //$mail-&gt;IsHTML(true); // set email format to HTML //是否使用HTML格式</span><br><span class="line"></span><br><span class="line">    $mail-&gt;Subject = &quot;PHPMailer测试邮件&quot;; //邮件标题</span><br><span class="line">    $mail-&gt;Body = &quot;Hello,这是测试邮件&quot;; //邮件内容</span><br><span class="line">    $mail-&gt;AltBody = &quot;This is the body in plain text for non-HTML mail clients&quot;; //附加信息，可以省略</span><br><span class="line"></span><br><span class="line">    if(!$mail-&gt;Send())</span><br><span class="line">    &#123;</span><br><span class="line">        echo &quot;邮件发送失败. &lt;p&gt;&quot;;</span><br><span class="line">        echo &quot;错误原因: &quot; . $mail-&gt;ErrorInfo;</span><br><span class="line">        exit;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    echo &quot;邮件发送成功&quot;;</span><br></pre></td></tr></table></figure>
+
+<p>PHP发送邮件还有其它的方法，之后补充。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="./several-ways-to-send-email.html" class="archive-article-date">
+  	<time datetime="2014-04-15T04:12:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-04-15</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="./tags/PHP/">PHP</a></li></ul>
+	</div>
+
+<!--
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="./categories/Study/">Study</a>
+	</div>
+
+
+-->
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="./dynamically-add-a-line-in-dwz.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          DWZ中动态添加一行
+        
+      </div>
+    </a>
+  
+  
+    <a href="./15-kinds-of-magic-methods-and-8-kinds-of-variables.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">PHP中的15种魔术方法与8种魔术变量</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2013-2019 iat
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/yaoshanliang/hexo-theme-yilia" target="_blank">Yilia</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: ,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "./"
+	}
+</script>
+
+<script src="././main.js"></script>
+
+
+
+
+
+<!-- Baidu Analytics -->
+<script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a8f517fee81bd1ee9a017d6f0cbfe789";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+      })();
+</script>
+<!-- End Baidu Analytics -->
+
+
+
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="./tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="./tags/Apache/" style="font-size: 10px;">Apache</a> <a href="./tags/Blog/" style="font-size: 12px;">Blog</a> <a href="./tags/Composer/" style="font-size: 10px;">Composer</a> <a href="./tags/DWZ/" style="font-size: 12px;">DWZ</a> <a href="./tags/FuelPHP/" style="font-size: 14px;">FuelPHP</a> <a href="./tags/HTML/" style="font-size: 18px;">HTML</a> <a href="./tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="./tags/Linux/" style="font-size: 10px;">Linux</a> <a href="./tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="./tags/PHP/" style="font-size: 20px;">PHP</a> <a href="./tags/Tool/" style="font-size: 10px;">Tool</a> <a href="./tags/UCenter/" style="font-size: 10px;">UCenter</a> <a href="./tags/Weapp/" style="font-size: 10px;">Weapp</a> <a href="./tags/WebSocket/" style="font-size: 14px;">WebSocket</a> <a href="./tags/Wechat/" style="font-size: 16px;">Wechat</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://limaolong.cn/">green</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://wanghuanming.com/">huanming</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://sukai.me/">kaiyao</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://maywanting.wang/">may</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://mikecoder.cn/">mike</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zalezone.cn/">zale</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Just a beginner.&lt;br /&gt;&lt;a href=&#39;https://about.iat.net.cn&#39; target=&#39;_blank&#39;&gt;profile&lt;/a&gt;</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

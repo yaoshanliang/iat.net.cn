@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Ajax（一）——javascript实现 | iat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Ajax技术已经广泛运用到如今的web开发中，它将一部分服务器承担的工作转移到客户端，减轻服务器的压力，无刷新更新页面的方式提高了用户体验，并且通过调用XML等外部数据进一步促进了页面显示和数据的分离。下文将从Ajax入手，总结javascript中的一些基础知识。">
+<meta name="keywords" content="JavaScript,Ajax">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ajax（一）——javascript实现">
+<meta property="og:url" content="https://iat.net.cn/ajax-javascript.html">
+<meta property="og:site_name" content="iat">
+<meta property="og:description" content="Ajax技术已经广泛运用到如今的web开发中，它将一部分服务器承担的工作转移到客户端，减轻服务器的压力，无刷新更新页面的方式提高了用户体验，并且通过调用XML等外部数据进一步促进了页面显示和数据的分离。下文将从Ajax入手，总结javascript中的一些基础知识。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-20T09:01:36.636Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ajax（一）——javascript实现">
+<meta name="twitter:description" content="Ajax技术已经广泛运用到如今的web开发中，它将一部分服务器承担的工作转移到客户端，减轻服务器的压力，无刷新更新页面的方式提高了用户体验，并且通过调用XML等外部数据进一步促进了页面显示和数据的分离。下文将从Ajax入手，总结javascript中的一些基础知识。">
+  
+    <link rel="alternative" href="/atom.xml" title="iat" type="application/atom+xml">
+  
+  
+  <script src="./style.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="./avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">iat</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+	        
+				<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+	        
+				<li><a href="https://about.iat.net.cn">关于我</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">Archive</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">Tags</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">Links</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">About</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+		        
+					<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">iat</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="./avatar.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">iat</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+		        
+					<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+		        
+					<li><a href="https://about.iat.net.cn">关于我</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-ajax-javascript" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Ajax（一）——javascript实现
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Ajax技术已经广泛运用到如今的web开发中，它将一部分服务器承担的工作转移到客户端，减轻服务器的压力，无刷新更新页面的方式提高了用户体验，并且通过调用XML等外部数据进一步促进了页面显示和数据的分离。下文将从Ajax入手，总结javascript中的一些基础知识。</p>
+<a id="more"></a>
+
+<h4 id="Ajax的基本原理"><a href="#Ajax的基本原理" class="headerlink" title="Ajax的基本原理"></a>Ajax的基本原理</h4><p>在浏览器和服务器之间加了一个中间层——<strong>Ajax引擎</strong>，使用户操作与服务器响应异步化。并不是所有的用户请求都提交给服务器，一些数据验证交由Ajax引擎处理，需要从服务器获取数据时再由Ajax引擎向服务器提出请求。</p>
+<p><strong>XMLHttpRequest</strong>是Ajax最核心的概念，在使用XMLHttpRequest对象发送请求和处理响应之前，首先应该初始化Ajax对象。由于XMLHttpRequest不是W3C标准，所以不同浏览器中初始化该对象的方法是不同的。主要分为两大类：</p>
+<h5 id="IE浏览器"><a href="#IE浏览器" class="headerlink" title="IE浏览器"></a>IE浏览器</h5><p>IE中使用ActiveXObject对象，而针对IE的不同版本又有不同实例化的方法，这篇文章里讲的很详细了，戳<a href="http://blogs.msdn.com/b/xmlteam/archive/2006/10/23/using-the-right-version-of-msxml-in-internet-explorer.aspx" target="_blank" rel="noopener">Using the right version of MSXML in Internet Explorer</a>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var xmlhttprequest = new ActiveXObject(&quot;Msxml2.XMLHTTP.3.0&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>或</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var xmlhttprequest = new ActiveXObject(&quot;Msxml2.XMLHTTP.6.0&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>或</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var xmlhttprequest = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="非IE浏览器"><a href="#非IE浏览器" class="headerlink" title="非IE浏览器"></a>非IE浏览器</h5><p>包括Chrome、Firefox等</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var xmlhttprequest = new XMLHttpRequest();</span><br></pre></td></tr></table></figure>
+
+<h4 id="XMLHttpRequest对象的常用属性"><a href="#XMLHttpRequest对象的常用属性" class="headerlink" title="XMLHttpRequest对象的常用属性"></a>XMLHttpRequest对象的常用属性</h4><h5 id="1、指定状态改变时触发事件的处理函数：onreadystatechange"><a href="#1、指定状态改变时触发事件的处理函数：onreadystatechange" class="headerlink" title="1、指定状态改变时触发事件的处理函数：onreadystatechange"></a>1、指定状态改变时触发事件的处理函数：onreadystatechange</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">xmlhttprequest.onreadystatechange = onReadyStateChange;</span><br><span class="line">function onReadyStateChange() &#123;</span><br><span class="line">    //do something</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过上面的代码实现当指定状态改变时触发的onReadyStateChange函数，可能已经注意到onReadyStateChange后面没有括号，那么</p>
+<blockquote>
+<p>element.onclick = funcName; 与 element.onclick = funcName();的区别是什么呢？</p>
+</blockquote>
+<p>以点击事件为例，后者为调用方式，当点击操作产生的时候，该函数会立刻执行，有返回值的话会将函数的返回值返回给onclick；前者为引用方式，只是传递了函数体所在的地址，在需要的时候才会执行指向的函数体。</p>
+<h5 id="2、获取请求状态属性："><a href="#2、获取请求状态属性：" class="headerlink" title="2、获取请求状态属性："></a>2、获取请求状态属性：</h5><table>
+<thead>
+<tr>
+<th>readystate值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>未初始化（已经创建一个XMLHttpRequest对象，还未调用open方法）</td>
+</tr>
+<tr>
+<td>1</td>
+<td>正在加载（已经调用open()方法，已经准备好把一个请求发送到服务器）</td>
+</tr>
+<tr>
+<td>2</td>
+<td>已加载（已经通过send()方法把一个请求发送到服务器端，但是还没有收到一个响应）</td>
+</tr>
+<tr>
+<td>3</td>
+<td>交互中（已经接收到HTTP响应头部信息，但是消息体部分还没有完全接收结束）</td>
+</tr>
+<tr>
+<td>4</td>
+<td>完成（接收到全部数据）</td>
+</tr>
+</tbody></table>
+<p>在实际应用中，该属性经常用于判断请求状态，当请求状态为4，即请求完成了，再根据服务器端返回的状态码来判断请求时候成功。</p>
+<h5 id="3、获取服务器返回HTTP状态属性：status"><a href="#3、获取服务器返回HTTP状态属性：status" class="headerlink" title="3、获取服务器返回HTTP状态属性：status"></a>3、获取服务器返回HTTP状态属性：status</h5><p>这里列出的只是部分常用的HTTP状态码，全部的请参考<a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html" target="_blank" rel="noopener">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html</a></p>
+<ul>
+<li>1xx：信息</li>
+<li>2xx：成功</li>
+<li>3xx：重定向</li>
+<li>4xx：客户端错误</li>
+<li>5xx：服务器端错误</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>标志</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td>OK</td>
+<td>请求成功</td>
+</tr>
+<tr>
+<td>204</td>
+<td>No Content</td>
+<td>服务器成功处理了请求，但没有返回任何内容</td>
+</tr>
+<tr>
+<td>301</td>
+<td>Moved Permanently</td>
+<td>所请求页面已转移至新地址</td>
+</tr>
+<tr>
+<td>302</td>
+<td>Moved Temporarily</td>
+<td>所请求页面临时转到了新的地址</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Bad Request</td>
+<td>服务器不理解请求</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden</td>
+<td>页面禁止访问</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found</td>
+<td>服务器找不到所请求的页面</td>
+</tr>
+<tr>
+<td>408</td>
+<td>Request Timeout</td>
+<td>请求所用时间超出服务器等待时间</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error</td>
+<td>服务器遇到异常情况</td>
+</tr>
+<tr>
+<td>504</td>
+<td>Gateway Timeout</td>
+<td>网关超时</td>
+</tr>
+</tbody></table>
+<p>结合2、3点可以判断请求是否成功，从而执行返回数据等操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if(xmlhttprequest.readyState == 4) &#123;</span><br><span class="line">    alert(xmlhttprequest.status == 200 ? &quot;请求成功&quot; : &quot;请求失败&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="4、获取服务器返回响应文本的属性：responseText"><a href="#4、获取服务器返回响应文本的属性：responseText" class="headerlink" title="4、获取服务器返回响应文本的属性：responseText"></a>4、获取服务器返回响应文本的属性：responseText</h5><p>通常采用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var content = xmlhttprequest.responseText;</span><br></pre></td></tr></table></figure>
+
+<p>的形式获取服务器端返回的文本（字符串），将返回的信息当成字符串使用。</p>
+<p>如果返回的是XML，则通过responseXML属性获得，即</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var content = xmlhttprequest.responseXML;</span><br></pre></td></tr></table></figure>
+
+<h4 id="XMLHttpRequest对象的常用方法"><a href="#XMLHttpRequest对象的常用方法" class="headerlink" title="XMLHttpRequest对象的常用方法"></a>XMLHttpRequest对象的常用方法</h4><h5 id="1、创建请求：open"><a href="#1、创建请求：open" class="headerlink" title="1、创建请求：open"></a>1、创建请求：open</h5><p>open方法用于设置请求的url、请求方法以及其它参数信息</p>
+<p><code>open(method, url [,async, username, password])</code></p>
+<ul>
+<li>method：请求HTTP的方法，通常为GET、POST</li>
+<li>url：请求地址</li>
+<li>async：可选参数，用于指定请求方式，默认异步true；如果设为同步false，后续对send()的调用将阻塞，直到响应完全接收。</li>
+<li>username和password同样为可选参数，为url所需的授权提供认证。</li>
+</ul>
+<h5 id="2、设置HTTP请求头：setRequestHeader"><a href="#2、设置HTTP请求头：setRequestHeader" class="headerlink" title="2、设置HTTP请求头：setRequestHeader"></a>2、设置HTTP请求头：setRequestHeader</h5><p><code>setRequestHeader(header, value)</code></p>
+<ul>
+<li>header：设置头部的名称</li>
+<li>value：指定头部的值</li>
+</ul>
+<p>setRequestHeader() 方法指定了一个 HTTP 请求的头部，用在open()之后，send()之前。例如，使用POST的方法时候，需要设置Content-Type请求头的值 为”application/x-www-form-urlencode”</p>
+<p><code>setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencode&quot;);</code></p>
+<h5 id="3、发送请求：send"><a href="#3、发送请求：send" class="headerlink" title="3、发送请求：send"></a>3、发送请求：send</h5><p><code>send(content)</code></p>
+<p>如果请求的方法为POST，则content为post的数据；请求方法为GET的话，content则设置为null</p>
+<h5 id="4、返回HTTP头信息：getResponseHeader与getResponseHeaders"><a href="#4、返回HTTP头信息：getResponseHeader与getResponseHeaders" class="headerlink" title="4、返回HTTP头信息：getResponseHeader与getResponseHeaders"></a>4、返回HTTP头信息：getResponseHeader与getResponseHeaders</h5><p><code>getResponseHeader(header)</code></p>
+<ul>
+<li>header：用于指定HTTP头，可以为Server、Content-Type、Date等。</li>
+<li>getResponseHeaders()</li>
+</ul>
+<p>以字符串的形式返回完整的HTTP头信息，包括Server、Content-Type、Date、Content-Length。</p>
+<h4 id="Ajax示例"><a href="#Ajax示例" class="headerlink" title="Ajax示例"></a>Ajax示例</h4><p>HTML页面中有一个文本框，失去焦点的时候执行testAjax()方法，传入两个参数，一个是请求的url，另一个是请求的method。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;form name=&quot;form&quot; method=&quot;post&quot; action=&quot;&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;name&quot; value=&quot;&quot; onblur=&quot;testAjax(&apos;ajax.html&apos;,&apos;GET&apos;);&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;submit&quot; onclick=&quot;return check();&quot;&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+
+<p>check函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function check() &#123;</span><br><span class="line">    //do some check</span><br><span class="line">    return CHECK通过 ? true : false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>onclick = “check();” 与 onclick = “return check();”的区别？</p>
+</blockquote>
+<p>javascript在事件中调用函数时用return返回值实际上是对<code>window.event.returnvalue</code>进行设置，而该值决定了当前操作时候继续，true继续，false中断；不用return返回值时则会默认地继续执行操作。</p>
+<p>testAjax方法如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">function testAjax(url, method, content) &#123;</span><br><span class="line">    var xmlhttprequest = getXmlHttpRequestObject();//实例XMLHttpRequest对象</span><br><span class="line">    xmlhttprequest.onreadystatechange = onReadyStateChange;//状态改变触发函数</span><br><span class="line">    xmlhttprequest.open(method, url, true);</span><br><span class="line">    //POST方法时候需要设置Content-Type</span><br><span class="line">    if (method == &quot;POST&quot;) &#123;</span><br><span class="line">        xmlhttprequest.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencode&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    xmlhttprequest.send(content);</span><br><span class="line"></span><br><span class="line">    function getXmlHttpRequestObject() &#123;</span><br><span class="line">        var xmlhttprequest = null;</span><br><span class="line">        //非IE</span><br><span class="line">        if(window.XMLHttpRequest) &#123;</span><br><span class="line">            xmlhttprequest = new XMLHttpRequest();</span><br><span class="line">        &#125; else if(window.ActiveXObject) &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                xmlhttprequest = new ActiveXObject(&quot;Msml2.XMLHTTP.3.0&quot;);</span><br><span class="line">            &#125; catch(e) &#123;</span><br><span class="line">                try &#123;</span><br><span class="line">                    xmlhttprequest = new ActiveXObject(&quot;Msml2.XMLHTTP.6.0&quot;);</span><br><span class="line">                &#125; catch(e) &#123;</span><br><span class="line">                    try &#123;</span><br><span class="line">                        xmlhttprequest = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);</span><br><span class="line">                    &#125; catch(e) &#123;</span><br><span class="line">                        return;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return xmlhttprequest;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function onReadyStateChange() &#123;</span><br><span class="line">        //请求已发送，并且请求成功</span><br><span class="line">        if (xmlhttprequest.readyState == 4 &amp;&amp; xmlhttprequest.status == 200) &#123;</span><br><span class="line">            alert(xmlhttprequest.responseText);//请求结果</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>function funcName(){} 、 function(){}; 、 (function(){})() 的区别？</p>
+</blockquote>
+<p>第一个是比较常见的定义javascript函数的方法，二三是javascript中的匿名函数。<br><code>event = function(){};</code>这种方式常用于定义一个DOM元素事件处理函数，不会设置具体函数的名字，而是让它的对应事件引用匿名函数。<br><code>(function(){})()</code>，小括号把表达式组合分块，并且每一块都有一个返回值，也就是表达式中小括号的返回值。当用小括号把匿名函数括起来的时候，实际上小括号返回的是一个匿名函数的Function对象，就如同有名字的函数取得它的引用位置了。所以，此时在后面再加上一对小括号是参数列表，就会实现普通函数的调用形式。</p>
+<blockquote>
+<p>javscript中这样设置参数默认值可以吗？ function funcName(a = 0){alert(a);}</p>
+</blockquote>
+<p>在Firefox下正常，Chrome下控制台里可以看到<em>Uncaught SyntaxError: Unexpected token =</em><br>也就是说上述设置默认参数的方式不是兼容的，如果需要设置默认参数应该怎么做呢？例如，设置默认的访问方式为POST<br><code>var method = arguments[1] ? arguments[1] : &quot;POST&quot;;</code><br>javascript中预设arguments存储参数的数组，函数的所有参数都将按顺序保存在数组中，下标从0开始，所以method为arguments[1]。<br><code>var method = method || &quot;POST&quot;;</code><br>与第一种类似，是一种javascript支持的人更加简洁的方式。<br><code>var method = (typeof method !== &#39;undefined&#39;) ? method : &quot;POST&quot;;</code><br>当调用未传值时，method是undefined的，所以采用先判断类型，再执行三元操作符。</p>
+<hr>
+<blockquote>
+<p>参考资料</p>
+</blockquote>
+<ul>
+<li><a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html" target="_blank" rel="noopener">W3C标准</a></li>
+<li><a href="https://blogs.msdn.microsoft.com/xmlteam/2006/10/23/using-the-right-version-of-msxml-in-internet-explorer/" target="_blank" rel="noopener">MSXML标准</a></li>
+<li><a href="http://stackoverflow.com/questions/15886272/what-is-the-difference-between-a-function-call-and-function-reference" target="_blank" rel="noopener">javascript函数调用与引用</a></li>
+<li><a href="http://blog.csdn.net/zsf8701/article/details/7825491" target="_blank" rel="noopener">javascript匿名函数</a></li>
+<li><a href="http://stackoverflow.com/questions/894860/set-a-default-parameter-value-for-a-javascript-function" target="_blank" rel="noopener">jvascript函数参数默认值</a></li>
+<li>《JavaScript入门经典》机械工业出版社</li>
+</ul>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="./ajax-javascript.html" class="archive-article-date">
+  	<time datetime="2014-11-09T04:12:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-11-09</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="./tags/Ajax/">Ajax</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="./tags/JavaScript/">JavaScript</a></li></ul>
+	</div>
+
+<!--
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="./categories/Study/">Study</a>
+	</div>
+
+
+-->
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="./ajax-jquery.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Ajax（二）——jQuery实现
+        
+      </div>
+    </a>
+  
+  
+    <a href="./double-equals-and-triple-equals-in-php.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">PHP中的两个等号与三个等号</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2013-2019 iat
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/yaoshanliang/hexo-theme-yilia" target="_blank">Yilia</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: ,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "./"
+	}
+</script>
+
+<script src="././main.js"></script>
+
+
+
+
+
+<!-- Baidu Analytics -->
+<script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a8f517fee81bd1ee9a017d6f0cbfe789";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+      })();
+</script>
+<!-- End Baidu Analytics -->
+
+
+
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="./tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="./tags/Apache/" style="font-size: 10px;">Apache</a> <a href="./tags/Blog/" style="font-size: 12px;">Blog</a> <a href="./tags/Composer/" style="font-size: 10px;">Composer</a> <a href="./tags/DWZ/" style="font-size: 12px;">DWZ</a> <a href="./tags/FuelPHP/" style="font-size: 14px;">FuelPHP</a> <a href="./tags/HTML/" style="font-size: 18px;">HTML</a> <a href="./tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="./tags/Linux/" style="font-size: 10px;">Linux</a> <a href="./tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="./tags/PHP/" style="font-size: 20px;">PHP</a> <a href="./tags/Tool/" style="font-size: 10px;">Tool</a> <a href="./tags/UCenter/" style="font-size: 10px;">UCenter</a> <a href="./tags/Weapp/" style="font-size: 10px;">Weapp</a> <a href="./tags/WebSocket/" style="font-size: 14px;">WebSocket</a> <a href="./tags/Wechat/" style="font-size: 16px;">Wechat</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://limaolong.cn/">green</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://wanghuanming.com/">huanming</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://sukai.me/">kaiyao</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://maywanting.wang/">may</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://mikecoder.cn/">mike</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zalezone.cn/">zale</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Just a beginner.&lt;br /&gt;&lt;a href=&#39;https://about.iat.net.cn&#39; target=&#39;_blank&#39;&gt;profile&lt;/a&gt;</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

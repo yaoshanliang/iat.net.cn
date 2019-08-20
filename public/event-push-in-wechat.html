@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>微信开发日记——事件的推送 | iat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这样一来一个简单的收发消息就可以实现了，呃，不！这只是简单中的收发文本消息，对于图片、语音、视频、地理位置、链接等通过类似的方法，注意XML中的数据就行了。值得一提的是图文消息，也就是我们通常看到的腾讯新闻推送的类型，&amp;lt;ArticleCount&amp;gt;指的是图文消息个数，限制为10条以内，有多少个下面的&amp;lt;item&amp;gt;就需要有多少，&amp;lt;item&amp;gt;&amp;lt;/item&amp;gt;里">
+<meta name="keywords" content="Wechat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信开发日记——事件的推送">
+<meta property="og:url" content="https://iat.net.cn/event-push-in-wechat.html">
+<meta property="og:site_name" content="iat">
+<meta property="og:description" content="这样一来一个简单的收发消息就可以实现了，呃，不！这只是简单中的收发文本消息，对于图片、语音、视频、地理位置、链接等通过类似的方法，注意XML中的数据就行了。值得一提的是图文消息，也就是我们通常看到的腾讯新闻推送的类型，&amp;lt;ArticleCount&amp;gt;指的是图文消息个数，限制为10条以内，有多少个下面的&amp;lt;item&amp;gt;就需要有多少，&amp;lt;item&amp;gt;&amp;lt;/item&amp;gt;里">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://iat.net.cn/images/weixin_1.jpg">
+<meta property="og:image" content="https://iat.net.cn/images/weixin2.jpg">
+<meta property="og:updated_time" content="2019-08-20T09:01:36.639Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微信开发日记——事件的推送">
+<meta name="twitter:description" content="这样一来一个简单的收发消息就可以实现了，呃，不！这只是简单中的收发文本消息，对于图片、语音、视频、地理位置、链接等通过类似的方法，注意XML中的数据就行了。值得一提的是图文消息，也就是我们通常看到的腾讯新闻推送的类型，&amp;lt;ArticleCount&amp;gt;指的是图文消息个数，限制为10条以内，有多少个下面的&amp;lt;item&amp;gt;就需要有多少，&amp;lt;item&amp;gt;&amp;lt;/item&amp;gt;里">
+<meta name="twitter:image" content="https://iat.net.cn/images/weixin_1.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="iat" type="application/atom+xml">
+  
+  
+  <script src="./style.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="./avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">iat</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+	        
+				<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+	        
+				<li><a href="https://about.iat.net.cn">关于我</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">Archive</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">Tags</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">Links</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">About</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+		        
+					<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">iat</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="./avatar.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">iat</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+		        
+					<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+		        
+					<li><a href="https://about.iat.net.cn">关于我</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-event-push-in-wechat" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      微信开发日记——事件的推送
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这样一来一个简单的收发消息就可以实现了，呃，不！这只是简单中的收发文本消息，对于图片、语音、视频、地理位置、链接等通过类似的方法，注意XML中的数据就行了。值得一提的是图文消息，也就是我们通常看到的腾讯新闻推送的类型，<code>&lt;ArticleCount&gt;</code>指的是图文消息个数，限制为10条以内，有多少个下面的<code>&lt;item&gt;</code>就需要有多少，<code>&lt;item&gt;&lt;/item&gt;</code>里包含<code>&lt;Title&gt;</code>图文消息的标题，<code>&lt;Description&gt;</code>图文消息描述，<code>&lt;PicUrl&gt;</code> 图片链接，<code>&lt;Url&gt;</code> 点击图文消息跳转链接。</p>
+<a id="more"></a>
+
+<p>除了收发普通消息外，高级一点的就是事件的推送了，这里面就包含关注/取消关注事件、扫面二维码事件、上报地理位置事件以及自定义菜单事件。这一环节了遇到了不少困难，开始时没注意自己的权限，只有下面几个。</p>
+<p><img src="/images/weixin_1.jpg" alt></p>
+<p>而自己只是一个普通QQ号申请的公众账号，并不是什么企业拥有营业资格证等可以申请服务号，或者花钱申请认证从而获得更高的权限。唉，正当绝望无法走下去时，眼前出现了“申请测试账号”的字眼。测试账号拥有所有权限，但只是试用的，不能更改测试账号的名称，也就只能先这样用着了。</p>
+<p><img src="/images/weixin2.jpg" alt></p>
+<p>要实现这些功能就不得不提一个非常重要的ACCESS_TOKEN了，它是公众号的全局唯一票据，有效期只有7200秒，所以过一段时间就要重新获取。之所以不是每次调用函数都去获取，是因为它有着每天的次数限制，2000次。其它一些接口也是有次数限制的，只要是为了防止公众号的程序错误而引发微信服务器负载异常，当超过限制时服务器就会返回“api freq out of limit”的错误消息了。这里，我将获取ACCESS_TOKEN的过程封装成如下函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">private function getACCESS_TOKEN()//获取access_taken</span><br><span class="line">&#123;</span><br><span class="line">        $APPID = &quot;wxecb85db4b8db71f5&quot;;</span><br><span class="line">        $APPSECRECT = &quot;ac96cc1c4b3016adba5251ea54e86fde&quot;;</span><br><span class="line"></span><br><span class="line">        $url = &quot;https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid=&quot;.$APPID.&quot;&amp;secret=&quot;.$APPSECRECT;</span><br><span class="line">        $responseArray = $this-&gt;getRequest($url);</span><br><span class="line">        $ACCESS_TOKEN = $responseArray[’access_token’];</span><br><span class="line">        return $ACCESS_TOKEN;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当用户初次扫描二维码关注时，事件类型为subscribe，这时可以返回给用户一个文本消息，也就是通常的欢迎信息。取消关注时事件类型为unsubscribe，呃，这时就不要返回什么消息好了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">private function receiveEvent($object)</span><br><span class="line">&#123;</span><br><span class="line">    $contentStr = &quot;&quot;;</span><br><span class="line">    switch ($object-&gt;Event)</span><br><span class="line">    &#123;</span><br><span class="line">        case &quot;subscribe&quot;:</span><br><span class="line">            $contentStr = &quot;欢迎关注如果明天过后小i为您服务！&quot;;</span><br><span class="line">            break;</span><br><span class="line">        case &quot;unsubscribe&quot;:</span><br><span class="line">            $contentStr = &quot;&quot;;</span><br><span class="line">            break;</span><br><span class="line">        case &quot;CLICK&quot;:</span><br><span class="line">            switch ($object-&gt;EventKey)</span><br><span class="line">            &#123;</span><br><span class="line">                default:</span><br><span class="line">                    $contentStr = &quot;你点击了菜单: &quot;.$object-&gt;EventKey;</span><br><span class="line">                    break;</span><br><span class="line">            &#125;</span><br><span class="line">            break;</span><br><span class="line">        default:</span><br><span class="line">            $contentStr = &quot;receive a new event: &quot;.$object-&gt;Event;</span><br><span class="line">            break;</span><br><span class="line">    &#125;</span><br><span class="line">    $resultStr = $this-&gt;transmitText($object, $contentStr);</span><br><span class="line">    return $resultStr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="./event-push-in-wechat.html" class="archive-article-date">
+  	<time datetime="2014-02-11T04:12:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-02-11</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="./tags/Wechat/">Wechat</a></li></ul>
+	</div>
+
+<!--
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="./categories/Study/">Study</a>
+	</div>
+
+
+-->
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="./custom-menu-in-wechat.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          微信开发日记——自定义菜单
+        
+      </div>
+    </a>
+  
+  
+    <a href="./send-and-receieve-messages-in-wechat.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">微信开发日记——消息的收发</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2013-2019 iat
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/yaoshanliang/hexo-theme-yilia" target="_blank">Yilia</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: ,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "./"
+	}
+</script>
+
+<script src="././main.js"></script>
+
+
+
+
+
+<!-- Baidu Analytics -->
+<script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a8f517fee81bd1ee9a017d6f0cbfe789";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+      })();
+</script>
+<!-- End Baidu Analytics -->
+
+
+
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="./tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="./tags/Apache/" style="font-size: 10px;">Apache</a> <a href="./tags/Blog/" style="font-size: 12px;">Blog</a> <a href="./tags/Composer/" style="font-size: 10px;">Composer</a> <a href="./tags/DWZ/" style="font-size: 12px;">DWZ</a> <a href="./tags/FuelPHP/" style="font-size: 14px;">FuelPHP</a> <a href="./tags/HTML/" style="font-size: 18px;">HTML</a> <a href="./tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="./tags/Linux/" style="font-size: 10px;">Linux</a> <a href="./tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="./tags/PHP/" style="font-size: 20px;">PHP</a> <a href="./tags/Tool/" style="font-size: 10px;">Tool</a> <a href="./tags/UCenter/" style="font-size: 10px;">UCenter</a> <a href="./tags/Weapp/" style="font-size: 10px;">Weapp</a> <a href="./tags/WebSocket/" style="font-size: 14px;">WebSocket</a> <a href="./tags/Wechat/" style="font-size: 16px;">Wechat</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://limaolong.cn/">green</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://wanghuanming.com/">huanming</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://sukai.me/">kaiyao</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://maywanting.wang/">may</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://mikecoder.cn/">mike</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zalezone.cn/">zale</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Just a beginner.&lt;br /&gt;&lt;a href=&#39;https://about.iat.net.cn&#39; target=&#39;_blank&#39;&gt;profile&lt;/a&gt;</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

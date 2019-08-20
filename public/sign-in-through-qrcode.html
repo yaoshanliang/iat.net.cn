@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>二维码签到 | iat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="飞信的那一块终于搞定了，难的不是Fetion API的调用，而是页面展示时的后台交互。原始的想法是填写好基本的信息后点击发送按钮，执行Ajax，并将最终成败的结果显示在页面上，不去刷新页面。">
+<meta name="keywords" content="PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二维码签到">
+<meta property="og:url" content="https://iat.net.cn/sign-in-through-qrcode.html">
+<meta property="og:site_name" content="iat">
+<meta property="og:description" content="飞信的那一块终于搞定了，难的不是Fetion API的调用，而是页面展示时的后台交互。原始的想法是填写好基本的信息后点击发送按钮，执行Ajax，并将最终成败的结果显示在页面上，不去刷新页面。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-20T09:01:36.642Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="二维码签到">
+<meta name="twitter:description" content="飞信的那一块终于搞定了，难的不是Fetion API的调用，而是页面展示时的后台交互。原始的想法是填写好基本的信息后点击发送按钮，执行Ajax，并将最终成败的结果显示在页面上，不去刷新页面。">
+  
+    <link rel="alternative" href="/atom.xml" title="iat" type="application/atom+xml">
+  
+  
+  <script src="./style.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="./avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">iat</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+	        
+				<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+	        
+				<li><a href="https://about.iat.net.cn">关于我</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">Archive</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">Tags</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">Links</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">About</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+		        
+					<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">iat</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="./avatar.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">iat</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+		        
+					<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+		        
+					<li><a href="https://about.iat.net.cn">关于我</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-sign-in-through-qrcode" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      二维码签到
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>飞信的那一块终于搞定了，难的不是Fetion API的调用，而是页面展示时的后台交互。原始的想法是填写好基本的信息后点击发送按钮，执行Ajax，并将最终成败的结果显示在页面上，不去刷新页面。</p>
+<a id="more"></a>
+
+<p>基本信息的填写用的是<code>&lt;form&gt;</code>表单，action是最头疼的一个属性，点击submit按钮会跳转到action所指向的页面。action本是提交表单请求处理的模块部分，考虑用onsubmit = 某一函数来代替，但没有action的结果是刷新了当前的页面，并不能满足不去刷新的要求。</p>
+<p>苦恼之时，想到了html的<code>&lt;iframe&gt;</code>标签，那会创建包含另外一个文档的内联框架，设置其style的display为none，name是<form>里target所指向的名称，原理就是让表单提交，刷新页是iframe，巧妙地躲避了原来页面的刷新。</form></p>
+<p><code>&lt;form&gt;</code>表单页面本身就是通过点击send_to_myself请求到的页面，而action还需要请求另外的一个页面，也就是具体发送消息的模块页面，这个页面被请求后直接执行了，并没有返回什么结果，这也就无法判断输入的密码与配置文件里的密码是否一致，不能在前台页面上给出具体执行的结果。</p>
+<p>send_to_myself是给我自己使用的，password需要与配置文件里的一致才会执行发送命令。user_to_user可以给所有飞信用户使用，输入自己的手机号，飞信密码，接收者的手机号，以及具体的信息内容。调用的PHPFetion类库不会判断用户的密码是否正确，用户是否是飞信用户，也不会判断接收者是否是用户的好友，答案为“否”的结果就是消息不能发出去。</p>
+<p>这一部分的功能经过了多次的测试，自己给自己发送消息，平均会经过1.2s到达手机，200多字是没有问题的，字数太多会发不出去的。也测试过成功给自己的飞信好友发消息，当然用户不用担心密码泄露，因为那些<code>&lt;form&gt;</code>信息我没写入文件或者数据库，所以用户可以放心使用了。</p>
+<p>QRcode即二维码，是一种二维记录信息的图片，可以记录网址，手机号码，短信，名片等等。扫描记录网网址的二维码可以直接通过浏览器打开网站，手机号码的则可以直接转到拨号页面，短息的同样如此，直接点击发送按钮就行了，方便而又快捷。QR码是方形的，大小从21<em>21到177*177，每次递增四个像素点，每个配置被称为一个等级，长和宽越大，存储的信息越多。等级为1的QR码长宽为21个像素，最多存储25个字符；等级为2的QR码长宽为25个像素，最多存储47个字符；每增加一个等级，长宽增加4个像素，即（V-1）</em> 4 + 21。</p>
+<p>自己网站的二维码已经在QRcode-&gt;my_QRcode里展示了，想和上面的fetion一样，让用户自己创建自己的二维码。具体将在create_your_QRcode部分展示，可以实现扫描后直接给某人发短信，生成自己的名片等等。</p>
+<p>想到二维码的功能如此强大，何不将它在其它地方发挥出来，比如扫描二维码签到。想到可以在会议活动的现场直接扫描二维码完成签到的过程，避免了繁琐的人工忙碌，而且可以通过后台的数据库统计，分析出还有哪些人没有到。</p>
+<p>去百度了一下，果然这种想法已经得到了应用，“二维码签到”已经成功在众多大型会议上使用。目前头脑里有两种想法，一种是每个人在参会之前获得自己的二维码，会场上工作人员用扫描仪器扫描，录入数据库，对比得出具体的到场情况。另一种是会场生成一张二维码，参会人员自己通过手机扫描改二维码，从而登记入场。前者可能前期会比较繁琐，根据每个参会人员的信息生成不同的二维码，通过彩信的形式发给参会人员，到场时参会人员只要打开彩信就行了。通过手机一个个发送彩信的话明显不太现实，需要web端能够批量处理。后者的话，重要的是每个参会人员扫描的处理，怎样获取扫描者的信息？扫描了那张二维码获取手机号？如果可以的话，就能根据手机号对比出姓名等信息。两种方式各有优劣吧，还要再考虑考虑。</p>
+<p>后者还可以应用到投票中，自己之前有想过怎样通过编辑选手的号码，发送到某一个平台上进行投票，类似于电视综艺节目里的为你喜爱的选手投票吧。如果将二维码运用到投票中的话，观众只需扫描自己喜欢的选手二维码就可进行投票。除此之外，扫描二维码签到还可以代替上课点名，老师上课前直接将该堂课的二维码展示在屏幕上，学生扫一扫就行了，再增加一个强制关闭手机应用，只剩电话短信基本功能，就像“我要早睡”软件里的一样，一堂课的时间到了之后再开启，这样的话就不用担心学生上课玩手机不认真听讲了。既解决了签到问题，又能让学生专心听讲，真是不错的想法。二维码的应用还有很多吧，扫一扫就能下软件，扫一扫就能知道附近有什么好吃的，有什么好玩的地方。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="./sign-in-through-qrcode.html" class="archive-article-date">
+  	<time datetime="2013-12-16T04:12:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2013-12-16</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="./tags/PHP/">PHP</a></li></ul>
+	</div>
+
+<!--
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="./categories/Study/">Study</a>
+	</div>
+
+
+-->
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="./qq-map.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          “扫出”的腾讯地图
+        
+      </div>
+    </a>
+  
+  
+    <a href="./birthday-of-my-blog.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">博客V1.0出生记</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2013-2019 iat
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/yaoshanliang/hexo-theme-yilia" target="_blank">Yilia</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: ,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "./"
+	}
+</script>
+
+<script src="././main.js"></script>
+
+
+
+
+
+<!-- Baidu Analytics -->
+<script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a8f517fee81bd1ee9a017d6f0cbfe789";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+      })();
+</script>
+<!-- End Baidu Analytics -->
+
+
+
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="./tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="./tags/Apache/" style="font-size: 10px;">Apache</a> <a href="./tags/Blog/" style="font-size: 12px;">Blog</a> <a href="./tags/Composer/" style="font-size: 10px;">Composer</a> <a href="./tags/DWZ/" style="font-size: 12px;">DWZ</a> <a href="./tags/FuelPHP/" style="font-size: 14px;">FuelPHP</a> <a href="./tags/HTML/" style="font-size: 18px;">HTML</a> <a href="./tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="./tags/Linux/" style="font-size: 10px;">Linux</a> <a href="./tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="./tags/PHP/" style="font-size: 20px;">PHP</a> <a href="./tags/Tool/" style="font-size: 10px;">Tool</a> <a href="./tags/UCenter/" style="font-size: 10px;">UCenter</a> <a href="./tags/Weapp/" style="font-size: 10px;">Weapp</a> <a href="./tags/WebSocket/" style="font-size: 14px;">WebSocket</a> <a href="./tags/Wechat/" style="font-size: 16px;">Wechat</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://limaolong.cn/">green</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://wanghuanming.com/">huanming</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://sukai.me/">kaiyao</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://maywanting.wang/">may</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://mikecoder.cn/">mike</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zalezone.cn/">zale</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Just a beginner.&lt;br /&gt;&lt;a href=&#39;https://about.iat.net.cn&#39; target=&#39;_blank&#39;&gt;profile&lt;/a&gt;</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>用户中心-第三方日志 | iat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="背景“日志系统”在项目开发、运维中扮演着非常重要的角色，完善的日志记录可以方便问题的追溯、系统的监控、行为的分析等等。“用户中心”要做的不仅是自身的日志记录，还要对各个子系统进行日志的上传，这样子系统就不需要再去编写日志模块，所有日志都打入用户中心也有利于资源的统一管理监控。">
+<meta name="keywords" content="PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用户中心-第三方日志">
+<meta property="og:url" content="https://iat.net.cn/ucenter-userlog.html">
+<meta property="og:site_name" content="iat">
+<meta property="og:description" content="背景“日志系统”在项目开发、运维中扮演着非常重要的角色，完善的日志记录可以方便问题的追溯、系统的监控、行为的分析等等。“用户中心”要做的不仅是自身的日志记录，还要对各个子系统进行日志的上传，这样子系统就不需要再去编写日志模块，所有日志都打入用户中心也有利于资源的统一管理监控。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://iat.net.cn/images/ucenter-userlog-list.png">
+<meta property="og:image" content="https://iat.net.cn/images/ucenter-userlog-details.png">
+<meta property="og:updated_time" content="2019-08-20T09:01:36.644Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用户中心-第三方日志">
+<meta name="twitter:description" content="背景“日志系统”在项目开发、运维中扮演着非常重要的角色，完善的日志记录可以方便问题的追溯、系统的监控、行为的分析等等。“用户中心”要做的不仅是自身的日志记录，还要对各个子系统进行日志的上传，这样子系统就不需要再去编写日志模块，所有日志都打入用户中心也有利于资源的统一管理监控。">
+<meta name="twitter:image" content="https://iat.net.cn/images/ucenter-userlog-list.png">
+  
+    <link rel="alternative" href="/atom.xml" title="iat" type="application/atom+xml">
+  
+  
+  <script src="./style.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="./avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">iat</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+	        
+				<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+	        
+				<li><a href="https://about.iat.net.cn">关于我</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">Archive</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">Tags</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">Links</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">About</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+		        
+					<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">iat</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="./avatar.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">iat</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+		        
+					<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+		        
+					<li><a href="https://about.iat.net.cn">关于我</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-ucenter-userlog" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      用户中心-第三方日志
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>“日志系统”在项目开发、运维中扮演着非常重要的角色，完善的日志记录可以方便问题的追溯、系统的监控、行为的分析等等。“用户中心”要做的不仅是自身的日志记录，还要对各个子系统进行日志的上传，这样子系统就不需要再去编写日志模块，所有日志都打入用户中心也有利于资源的统一管理监控。</p>
+<a id="more"></a>
+
+<h4 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h4><p>日志需要记录的字段信息很多，正如前一篇所描述的<code>user_id</code>用户ID, <code>title</code>操作行为, <code>data</code>操作数据, <code>ip</code>来源IP, <code>created_at</code>操作时间，<code>type</code>操作类型，<code>sql</code>操作语句等等。而且有的日志需要依赖具体的业务，这样做一个通用的日志系统考虑的方面就更多了。</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>bigint</td>
+<td>日志ID</td>
+</tr>
+<tr>
+<td>app_id</td>
+<td>int</td>
+<td>应用ID</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>int</td>
+<td>用户ID</td>
+</tr>
+<tr>
+<td>request_method</td>
+<td>varchar</td>
+<td>请求方式</td>
+</tr>
+<tr>
+<td>request_url</td>
+<td>varchar</td>
+<td>请求地址</td>
+</tr>
+<tr>
+<td>request_params</td>
+<td>text</td>
+<td>请求参数</td>
+</tr>
+<tr>
+<td>response_code</td>
+<td>int</td>
+<td>返回码</td>
+</tr>
+<tr>
+<td>response_message</td>
+<td>varchar</td>
+<td>返回消息</td>
+</tr>
+<tr>
+<td>response_data</td>
+<td>text</td>
+<td>返回数据</td>
+</tr>
+<tr>
+<td>user_ip</td>
+<td>varchar</td>
+<td>用户IP</td>
+</tr>
+<tr>
+<td>user_client</td>
+<td>varchar</td>
+<td>用户客户端类型</td>
+</tr>
+<tr>
+<td>user_agent</td>
+<td>varchar</td>
+<td>user agent</td>
+</tr>
+<tr>
+<td>server_ip</td>
+<td>varchar</td>
+<td>服务器IP</td>
+</tr>
+<tr>
+<td>request_at</td>
+<td>double</td>
+<td>请求时间</td>
+</tr>
+<tr>
+<td>pushed_at</td>
+<td>double</td>
+<td>响应时间</td>
+</tr>
+<tr>
+<td>poped_at</td>
+<td>double</td>
+<td>发送给用户中心时间</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>double</td>
+<td>用户中心写库时间</td>
+</tr>
+<tr>
+<td>request_time</td>
+<td>timestamp</td>
+<td>请求时间</td>
+</tr>
+</tbody></table>
+<ul>
+<li>1、<code>request_method</code>、<code>request_url</code>、<code>request_params</code>、<code>response_code</code>、<code>response_message</code>、<code>response_data</code>为请求和返回的一些信息；</li>
+<li>2、<code>user_id</code>、<code>user_ip</code>、<code>user_client</code>、<code>user_agent</code>为用户的一些信息；</li>
+<li>3、<code>request_at</code>、<code>pushed_at</code>、<code>poped_at</code>、<code>created_at</code>为时间节点信息：<ul>
+<li><code>request_at</code>、<code>pushed_at</code>之间的差值为服务器从接收到返回之间的处理时间，如果时间较长的话则需要分析对应的代码逻辑、执行效率；</li>
+<li><code>pushed_at</code>、<code>poped_at</code>之间的差值为日志队列里的等待时间，如果时间较长表明队列中的任务较多，并不影响业务；</li>
+<li><code>poped_at</code>、<code>created_at</code>之间的差值为“用户中心”写入日志的时间，如果时间较长则表明“用户中心”处理过慢；</li>
+</ul>
+</li>
+</ul>
+<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><h5 id="api"><a href="#api" class="headerlink" title="api"></a>api</h5><p>发送给“用户中心”需要携带access_token，通过创建应用时的client_id、client_secret获取。具体api参见开放平台<a href="http://iat.net.cn/ucenter-open/api.html#api-8-81">8.1 记录日志</a></p>
+<h5 id="显示"><a href="#显示" class="headerlink" title="显示"></a>显示</h5><p><img src="/images/ucenter-userlog-list.png" alt><br>字段较多，列表只显示部分，点击“详细”查看全部<br><img src="/images/ucenter-userlog-details.png" alt></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="./ucenter-userlog.html" class="archive-article-date">
+  	<time datetime="2016-09-26T04:12:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-09-26</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="./tags/PHP/">PHP</a></li></ul>
+	</div>
+
+<!--
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="./categories/Project/">Project</a>
+	</div>
+
+
+-->
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="./weapp.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          小程序
+        
+      </div>
+    </a>
+  
+  
+    <a href="./composer-package.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Composer Package --userlog</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2013-2019 iat
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/yaoshanliang/hexo-theme-yilia" target="_blank">Yilia</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: ,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "./"
+	}
+</script>
+
+<script src="././main.js"></script>
+
+
+
+
+
+<!-- Baidu Analytics -->
+<script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a8f517fee81bd1ee9a017d6f0cbfe789";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+      })();
+</script>
+<!-- End Baidu Analytics -->
+
+
+
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="./tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="./tags/Apache/" style="font-size: 10px;">Apache</a> <a href="./tags/Blog/" style="font-size: 12px;">Blog</a> <a href="./tags/Composer/" style="font-size: 10px;">Composer</a> <a href="./tags/DWZ/" style="font-size: 12px;">DWZ</a> <a href="./tags/FuelPHP/" style="font-size: 14px;">FuelPHP</a> <a href="./tags/HTML/" style="font-size: 18px;">HTML</a> <a href="./tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="./tags/Linux/" style="font-size: 10px;">Linux</a> <a href="./tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="./tags/PHP/" style="font-size: 20px;">PHP</a> <a href="./tags/Tool/" style="font-size: 10px;">Tool</a> <a href="./tags/UCenter/" style="font-size: 10px;">UCenter</a> <a href="./tags/Weapp/" style="font-size: 10px;">Weapp</a> <a href="./tags/WebSocket/" style="font-size: 14px;">WebSocket</a> <a href="./tags/Wechat/" style="font-size: 16px;">Wechat</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://limaolong.cn/">green</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://wanghuanming.com/">huanming</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://sukai.me/">kaiyao</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://maywanting.wang/">may</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://mikecoder.cn/">mike</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zalezone.cn/">zale</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Just a beginner.&lt;br /&gt;&lt;a href=&#39;https://about.iat.net.cn&#39; target=&#39;_blank&#39;&gt;profile&lt;/a&gt;</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

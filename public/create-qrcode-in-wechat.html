@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>微信开发日记——生成带参数二维码 | iat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="接下来一个非常重要的就是生成带参数的二维码了，当用户还没关注公众账号时，用户会自动发送关注事件给公众账号。如果用户已经关注公众账号，则自动进入会话。创建二维码主要是两个关键的步骤，创建二维码ticket和换取二维码。创建二维码ticket是post请求，有临时二维码和永久二维码两种情况，临时url：https://api.weixin.qq.com/cgi-bin/qrcode/create?ac">
+<meta name="keywords" content="Wechat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信开发日记——生成带参数二维码">
+<meta property="og:url" content="https://iat.net.cn/create-qrcode-in-wechat.html">
+<meta property="og:site_name" content="iat">
+<meta property="og:description" content="接下来一个非常重要的就是生成带参数的二维码了，当用户还没关注公众账号时，用户会自动发送关注事件给公众账号。如果用户已经关注公众账号，则自动进入会话。创建二维码主要是两个关键的步骤，创建二维码ticket和换取二维码。创建二维码ticket是post请求，有临时二维码和永久二维码两种情况，临时url：https://api.weixin.qq.com/cgi-bin/qrcode/create?ac">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-20T09:01:36.638Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微信开发日记——生成带参数二维码">
+<meta name="twitter:description" content="接下来一个非常重要的就是生成带参数的二维码了，当用户还没关注公众账号时，用户会自动发送关注事件给公众账号。如果用户已经关注公众账号，则自动进入会话。创建二维码主要是两个关键的步骤，创建二维码ticket和换取二维码。创建二维码ticket是post请求，有临时二维码和永久二维码两种情况，临时url：https://api.weixin.qq.com/cgi-bin/qrcode/create?ac">
+  
+    <link rel="alternative" href="/atom.xml" title="iat" type="application/atom+xml">
+  
+  
+  <script src="./style.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="./avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">iat</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+	        
+				<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+	        
+				<li><a href="https://about.iat.net.cn">关于我</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">Archive</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">Tags</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">Links</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">About</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+		        
+					<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">iat</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="./avatar.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">iat</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+		        
+					<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+		        
+					<li><a href="https://about.iat.net.cn">关于我</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-create-qrcode-in-wechat" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      微信开发日记——生成带参数二维码
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>接下来一个非常重要的就是生成带参数的二维码了，当用户还没关注公众账号时，用户会自动发送关注事件给公众账号。如果用户已经关注公众账号，则自动进入会话。创建二维码主要是两个关键的步骤，创建二维码ticket和换取二维码。创建二维码ticket是post请求，有临时二维码和永久二维码两种情况，临时url：<a href="https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=TOKEN" target="_blank" rel="noopener">https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=TOKEN</a>，永久url：<a href="https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=TOKEN" target="_blank" rel="noopener">https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=TOKEN</a>而且post过去的是JSON数据，正确的JSON返回ticket，凭借这个“ticket”票去换取二维码图片。换取的url为GET请求，正确返回一张图片，包含图片的大小、类型、创建时间等。这图片在网页端可以直接显示。但如果返回给用户的话，直接返回是不正确的。因为这是图片，需要转换成图片的格式与用户交流。因为图片不是本地的，直接发送获取不到，这就需要先上传到服务器，上传图片包含类型以及media，上传多媒体文件也有大小限制，但一张二维码还是没有问题的。创建二维码函数如下</p>
+<a id="more"></a>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">private function createQRcode()</span><br><span class="line">&#123;</span><br><span class="line">        $ACCESS_TOKEN = $this-&gt;getACCESS_TOKEN();</span><br><span class="line">        $url = &quot;https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=&quot;.$ACCESS_TOKEN;</span><br><span class="line">        $postStr = ’&#123;&quot;action_name&quot;: &quot;QR_LIMIT_SCENE&quot;, &quot;action_info&quot;: &#123;&quot;scene&quot;: &#123;&quot;scene_id&quot;: 123&#125;&#125;&#125;’;</span><br><span class="line">        $responseArray = $this-&gt;postRequest($url, $postStr);</span><br><span class="line">        $ticket = $responseArray[’ticket’];</span><br><span class="line">        $url = &quot;https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=&quot;.$ticket;</span><br><span class="line">        return $url;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>整合一下，当用户发送一个消息给公众账号时，responseMsg()函数判断消息的类型<code>$RX_TYPE = trim($postObj-&gt;MsgType);</code>从而进入不同的函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">switch ($RX_TYPE)</span><br><span class="line">&#123;</span><br><span class="line">    case &quot;text&quot;:</span><br><span class="line">        $resultStr = $this-&gt;receiveText($postObj);</span><br><span class="line">     break;</span><br><span class="line"></span><br><span class="line">    case &quot;event&quot;:</span><br><span class="line">        $resultStr = $this-&gt;receiveEvent($postObj);</span><br><span class="line">    break;</span><br><span class="line"></span><br><span class="line">    case &quot;image&quot;:</span><br><span class="line">        $resultStr = $this-&gt;receiveImage($postObj);</span><br><span class="line">    break;</span><br><span class="line"></span><br><span class="line">    case &quot;location&quot;:</span><br><span class="line">        $resultStr = $this-&gt;receiveLocation($postObj);</span><br><span class="line">    break;</span><br><span class="line"></span><br><span class="line">    case &quot;voice&quot;:</span><br><span class="line">        $resultStr = $this-&gt;receiveVoice($postObj);</span><br><span class="line">    break;</span><br><span class="line"></span><br><span class="line">    case &quot;video&quot;:</span><br><span class="line">        $resultStr = $this-&gt;receiveVideo($postObj);</span><br><span class="line">    break;</span><br><span class="line"></span><br><span class="line">    case &quot;link&quot;:</span><br><span class="line">        $resultStr = $this-&gt;receiveLink($postObj);</span><br><span class="line">    break;</span><br><span class="line"></span><br><span class="line">    default:</span><br><span class="line">        $resultStr = &quot;unknow msg type: &quot;.$RX_TYPE;</span><br><span class="line">    break;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">echo $resultStr;</span><br></pre></td></tr></table></figure>
+
+<p>当接受文本时根据不同的关键字再执行不同的功能，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">private function receiveText($object)</span><br><span class="line">&#123;</span><br><span class="line">        $keyword = trim($object-&gt;Content);</span><br><span class="line">        if($keyword == &quot;菜单&quot; || $keyword == &quot;0&quot; || $keyword == 0)</span><br><span class="line">        &#123;</span><br><span class="line">            $contentStr = $this-&gt;responseMenu($object);</span><br><span class="line">        &#125;</span><br><span class="line">        ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>事件类型同样的，通过一个个函数进去，从而实现想要的结果。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="./create-qrcode-in-wechat.html" class="archive-article-date">
+  	<time datetime="2014-02-14T04:12:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-02-14</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="./tags/Wechat/">Wechat</a></li></ul>
+	</div>
+
+<!--
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="./categories/Study/">Study</a>
+	</div>
+
+
+-->
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="./prohibit-access-to-websites-file-directory-in-apache-server.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Apache服务器禁止访问网站文件目录的方法
+        
+      </div>
+    </a>
+  
+  
+    <a href="./custom-menu-in-wechat.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">微信开发日记——自定义菜单</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2013-2019 iat
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/yaoshanliang/hexo-theme-yilia" target="_blank">Yilia</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: ,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "./"
+	}
+</script>
+
+<script src="././main.js"></script>
+
+
+
+
+
+<!-- Baidu Analytics -->
+<script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a8f517fee81bd1ee9a017d6f0cbfe789";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+      })();
+</script>
+<!-- End Baidu Analytics -->
+
+
+
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="./tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="./tags/Apache/" style="font-size: 10px;">Apache</a> <a href="./tags/Blog/" style="font-size: 12px;">Blog</a> <a href="./tags/Composer/" style="font-size: 10px;">Composer</a> <a href="./tags/DWZ/" style="font-size: 12px;">DWZ</a> <a href="./tags/FuelPHP/" style="font-size: 14px;">FuelPHP</a> <a href="./tags/HTML/" style="font-size: 18px;">HTML</a> <a href="./tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="./tags/Linux/" style="font-size: 10px;">Linux</a> <a href="./tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="./tags/PHP/" style="font-size: 20px;">PHP</a> <a href="./tags/Tool/" style="font-size: 10px;">Tool</a> <a href="./tags/UCenter/" style="font-size: 10px;">UCenter</a> <a href="./tags/Weapp/" style="font-size: 10px;">Weapp</a> <a href="./tags/WebSocket/" style="font-size: 14px;">WebSocket</a> <a href="./tags/Wechat/" style="font-size: 16px;">Wechat</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://limaolong.cn/">green</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://wanghuanming.com/">huanming</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://sukai.me/">kaiyao</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://maywanting.wang/">may</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://mikecoder.cn/">mike</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zalezone.cn/">zale</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Just a beginner.&lt;br /&gt;&lt;a href=&#39;https://about.iat.net.cn&#39; target=&#39;_blank&#39;&gt;profile&lt;/a&gt;</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

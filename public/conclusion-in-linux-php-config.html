@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Linux下PHP配置方面的总结 | iat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="LAMP——Linux,Apache,Mysql,PHP构成一个强大、高性能的web应用平台，被誉为“黄金组合“。近期想把自己的项目全部迁移到Linux下，现总结下配置过程中遇到的一些问题及解决的办法。">
+<meta name="keywords" content="PHP,Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux下PHP配置方面的总结">
+<meta property="og:url" content="https://iat.net.cn/conclusion-in-linux-php-config.html">
+<meta property="og:site_name" content="iat">
+<meta property="og:description" content="LAMP——Linux,Apache,Mysql,PHP构成一个强大、高性能的web应用平台，被誉为“黄金组合“。近期想把自己的项目全部迁移到Linux下，现总结下配置过程中遇到的一些问题及解决的办法。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-20T09:01:36.638Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux下PHP配置方面的总结">
+<meta name="twitter:description" content="LAMP——Linux,Apache,Mysql,PHP构成一个强大、高性能的web应用平台，被誉为“黄金组合“。近期想把自己的项目全部迁移到Linux下，现总结下配置过程中遇到的一些问题及解决的办法。">
+  
+    <link rel="alternative" href="/atom.xml" title="iat" type="application/atom+xml">
+  
+  
+  <script src="./style.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="./avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">iat</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+	        
+				<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+	        
+				<li><a href="https://about.iat.net.cn">关于我</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">Archive</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">Tags</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">Links</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">About</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+		        
+					<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">iat</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="./avatar.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">iat</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+		        
+					<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+		        
+					<li><a href="https://about.iat.net.cn">关于我</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-conclusion-in-linux-php-config" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Linux下PHP配置方面的总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>LAMP——Linux,Apache,Mysql,PHP构成一个强大、高性能的web应用平台，被誉为“黄金组合“。近期想把自己的项目全部迁移到Linux下，现总结下配置过程中遇到的一些问题及解决的办法。</p>
+<a id="more"></a>
+
+<h4 id="一、开启服务器后即使代码错误网页也不报错"><a href="#一、开启服务器后即使代码错误网页也不报错" class="headerlink" title="一、开启服务器后即使代码错误网页也不报错"></a>一、开启服务器后即使代码错误网页也不报错</h4><p>这是因为linux下安装PHP时，配置文件php.ini中有的error是默认off的，这也是为了在真正给用户使用时不暴露内部服务器信息而考虑的。在自己开发调试时将这些error打开就行了，PHP5.5.10中在第478行display_errors = On;第489行display_startup_errors = On;其它的根据自己的需要打开，真正投入使用的服务器上是需要关闭的。</p>
+<h4 id="二、Permission-denied-无法链接远程数据库"><a href="#二、Permission-denied-无法链接远程数据库" class="headerlink" title="二、Permission denied 无法链接远程数据库"></a>二、Permission denied 无法链接远程数据库</h4><p>代码转移至Linux下后，还需要链接之前服务器上的数据库，但却报了一个Permission denied的错误，查阅资料后发现是因为没有将远程链接的设置打开，用如下命令可将问题解决</p>
+<p><code>setsebool -P httpd_can_network_connect 1</code></p>
+<h4 id="三、svn的安装与使用"><a href="#三、svn的安装与使用" class="headerlink" title="三、svn的安装与使用"></a>三、svn的安装与使用</h4><p>fedora下安装svn用<code>sudo yum install subversion</code>，</p>
+<p><code>checkout:svn co http://192.168.135.8/sl</code>,后面的是服务器下的svn目录，co是checkout的简写，用checkout也是可以的。这时候需要输入自己的用户名和密码，成功后就能checkout到本地了。</p>
+<p>commit:用命令svn commit将代码提交到服务器上，成功后会提示更新后的版本号。</p>
+<p>update:用命令svn update可更新本地的代码。这些都是一些常用的，其它的根据svn help吧。</p>
+<h4 id="四、MariaDB与Mysql"><a href="#四、MariaDB与Mysql" class="headerlink" title="四、MariaDB与Mysql"></a>四、MariaDB与Mysql</h4><p>MariaDB数据库是Mysql数据库的一个分支，fedora在19中以MariaDB取代Mysql，具体说明在维基百科<a href="http://zh.wikipedia.org/wiki/MariaDB" target="_blank" rel="noopener">http://zh.wikipedia.org/wiki/MariaDB</a>里有。这边主要说的是数据库的配置方面，初始时root用户的密码是空的，需要用如下命令进行设置mysqladmin -u root -p,回车后再回车一下（因为root的密码为空，直接回车就行了），然后输入新密码以及确认密码就行了。</p>
+<h4 id="五、fedora下安装sublime"><a href="#五、fedora下安装sublime" class="headerlink" title="五、fedora下安装sublime"></a>五、fedora下安装sublime</h4><p>sublime被誉为神编辑器，在windows已经用的习惯了，在linux下也安装一个作为项目的常用编辑器。在官网<a href="http://www.sublimetext.com/2" target="_blank" rel="noopener">http://www.sublimetext.com/2</a>上下载对应位数Linux的安装包，解压后move到opt文件夹下，并命名为sublime，接下来需要设置在terminal中能够打开。sudo vim sublime命令新建，将如下的代码复制进去</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">export SUBLIME_HOME=&quot;/opt/Sublime&quot;</span><br><span class="line">$SUBLIME_HOME/sublime_text $*</span><br></pre></td></tr></table></figure>
+
+<p>保存后修改权限及路径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod 555 sublime</span><br><span class="line">sudo mv sublime /usr/bin/sublime</span><br></pre></td></tr></table></figure>
+
+<p>这样的话在终端中用sublime命令就可以直接打开sublime了。</p>
+<h4 id="六、vim配置"><a href="#六、vim配置" class="headerlink" title="六、vim配置"></a>六、vim配置</h4><p>让vim一直显示行号,fedora中vim的配置文件在/etc目录中，文件名为vimrc。增加一行set nu!就行了，保存后退出，再次打开时就会发现显示行号了。</p>
+<h4 id="七、mb-convert-encoding的问题"><a href="#七、mb-convert-encoding的问题" class="headerlink" title="七、mb_convert_encoding的问题"></a>七、mb_convert_encoding的问题</h4><p>windows下通过php.ini开启mbstring函数库，即去掉extension=php_mbstring.dll前面的分号。linux下需要安装php-mbstring库文件：sudo yum install php-mbstring，之后修改php,ini，在里面加上一句</p>
+<p><code>extension=mbstring.so</code></p>
+<p>保存后重启httpd服务,service httpd restart</p>
+<h4 id="八、fedora不允许文件写入"><a href="#八、fedora不允许文件写入" class="headerlink" title="八、fedora不允许文件写入"></a>八、fedora不允许文件写入</h4><p>这个问题纠结了好久，整个项目的权限都已经改为777了，但还是报错权限不够的错误。开始时还以为apache的配置设置为不允许写入的，后来发现并不是的，而且新版本的safe_mode已经被取消了，后来发现在一篇文章里<a href="http://bbs.sjtu.edu.cn/bbstcon?board=GNULinux&reid=1304076814" target="_blank" rel="noopener">http://bbs.sjtu.edu.cn/bbstcon?board=GNULinux&amp;reid=1304076814</a>提到了selinux一词，百度了一下（百度百科SELinux）发现selinux是美国国家安全局开发的强制访问控制系统，fedora下默认安装。找到selinux的安装路径，修改其配置文件config</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># This file controls the state of SELinux on the system.</span><br><span class="line"># SELINUX= can take one of these three values:</span><br><span class="line"># enforcing - SELinux security policy is enforced.</span><br><span class="line"># permissive - SELinux prints warnings instead of enforcing.</span><br><span class="line"># disabled - SELinux is fully disabled.</span><br><span class="line">SELINUX=enforcing</span><br><span class="line">#SELINUX=disabled</span><br><span class="line"># SELINUXTYPE= type of policy in use. Possible values are:</span><br><span class="line"># targeted - Only targeted network daemons are protected.</span><br><span class="line"># strict - Full SELinux protection.</span><br><span class="line">SELINUXTYPE=targeted</span><br></pre></td></tr></table></figure>
+
+<p>将SELINUX=enforcing改为SELINUX=disabled，之后reboot。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="./conclusion-in-linux-php-config.html" class="archive-article-date">
+  	<time datetime="2014-03-29T04:12:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-03-29</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="./tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="./tags/PHP/">PHP</a></li></ul>
+	</div>
+
+<!--
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="./categories/Study/">Study</a>
+	</div>
+
+
+-->
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="./15-kinds-of-magic-methods-and-8-kinds-of-variables.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          PHP中的15种魔术方法与8种魔术变量
+        
+      </div>
+    </a>
+  
+  
+    <a href="./import-database-by-excel-in-project-fpp-modified-version.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">防攀爬系统——EXCEL导入数据库修改版</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2013-2019 iat
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/yaoshanliang/hexo-theme-yilia" target="_blank">Yilia</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: ,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "./"
+	}
+</script>
+
+<script src="././main.js"></script>
+
+
+
+
+
+<!-- Baidu Analytics -->
+<script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a8f517fee81bd1ee9a017d6f0cbfe789";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+      })();
+</script>
+<!-- End Baidu Analytics -->
+
+
+
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="./tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="./tags/Apache/" style="font-size: 10px;">Apache</a> <a href="./tags/Blog/" style="font-size: 12px;">Blog</a> <a href="./tags/Composer/" style="font-size: 10px;">Composer</a> <a href="./tags/DWZ/" style="font-size: 12px;">DWZ</a> <a href="./tags/FuelPHP/" style="font-size: 14px;">FuelPHP</a> <a href="./tags/HTML/" style="font-size: 18px;">HTML</a> <a href="./tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="./tags/Linux/" style="font-size: 10px;">Linux</a> <a href="./tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="./tags/PHP/" style="font-size: 20px;">PHP</a> <a href="./tags/Tool/" style="font-size: 10px;">Tool</a> <a href="./tags/UCenter/" style="font-size: 10px;">UCenter</a> <a href="./tags/Weapp/" style="font-size: 10px;">Weapp</a> <a href="./tags/WebSocket/" style="font-size: 14px;">WebSocket</a> <a href="./tags/Wechat/" style="font-size: 16px;">Wechat</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://limaolong.cn/">green</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://wanghuanming.com/">huanming</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://sukai.me/">kaiyao</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://maywanting.wang/">may</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://mikecoder.cn/">mike</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zalezone.cn/">zale</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Just a beginner.&lt;br /&gt;&lt;a href=&#39;https://about.iat.net.cn&#39; target=&#39;_blank&#39;&gt;profile&lt;/a&gt;</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Composer Package --userlog | iat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="源码：Github，Packagist 背景Composer is a tool for dependency management in PHP. It allows you to declare the libraries your project depends on and it will manage (install/update) them for you.–https://getc">
+<meta name="keywords" content="PHP,Composer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Composer Package --userlog">
+<meta property="og:url" content="https://iat.net.cn/composer-package.html">
+<meta property="og:site_name" content="iat">
+<meta property="og:description" content="源码：Github，Packagist 背景Composer is a tool for dependency management in PHP. It allows you to declare the libraries your project depends on and it will manage (install/update) them for you.–https://getc">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-20T09:01:36.637Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Composer Package --userlog">
+<meta name="twitter:description" content="源码：Github，Packagist 背景Composer is a tool for dependency management in PHP. It allows you to declare the libraries your project depends on and it will manage (install/update) them for you.–https://getc">
+  
+    <link rel="alternative" href="/atom.xml" title="iat" type="application/atom+xml">
+  
+  
+  <script src="./style.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="./avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">iat</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+	        
+				<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+	        
+				<li><a href="https://about.iat.net.cn">关于我</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">Archive</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">Tags</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">Links</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">About</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+		        
+					<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">iat</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="./avatar.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">iat</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+		        
+					<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+		        
+					<li><a href="https://about.iat.net.cn">关于我</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-composer-package" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Composer Package --userlog
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>源码：<a href="https://github.com/jlxh/laravel-userlog" target="_blank" rel="noopener">Github</a>，<a href="https://packagist.org/packages/jlxh/laravel-userlog" target="_blank" rel="noopener">Packagist</a></p>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>Composer is a tool for dependency management in PHP. It allows you to declare the libraries your project depends on and it will manage (install/update) them for you.<br>–<a href="https://getcomposer.org" target="_blank" rel="noopener">https://getcomposer.org</a></p>
+<p>Packagist is the main Composer repository. It aggregates public PHP packages installable with Composer.<br>–<a href="https://packagist.org" target="_blank" rel="noopener">https://packagist.org</a></p>
+<p>和“用户中心”的目的一样，独立模块，少写重复的代码。但是“用户中心”适合做上层的“Provider”，服务于多个子系统，对于一些独立的项目(外包)就不太合适了，所以，现在需要将一些重复的模块独立成“Package”。</p>
+<a id="more"></a>
+
+<p>{<br>可能有疑问了，为啥不先写一系列“Package”，然后在“用户中心”里引用这些“Package”呢？<br>１、“用户中心”的粒度是某个具体应用，各功能模块里都会包括一个<code>app_id</code>字段；<br>２、当时没考虑到这些非常独立的项目；<br>}</p>
+<h3 id="技术"><a href="#技术" class="headerlink" title="技术"></a>技术</h3><h5 id="composer-json"><a href="#composer-json" class="headerlink" title="composer.json"></a>composer.json</h5><p>按照<a href="https://packagist.org/" target="_blank" rel="noopener">https://packagist.org</a>上的说明，我们需要新建一个composer.json文件，包含包的名字、描述、所需的依赖等等。</p>
+<p>需要重点注意的是如下几个</p>
+<ul>
+<li>require</li>
+</ul>
+<p>必须的软件包列表，除非这些依赖被满足，否则不会完成安装。</p>
+<ul>
+<li>require-dev (root-only)</li>
+</ul>
+<p>这个列表是为开发或测试等目的，额外列出的依赖。“root 包”的 require-dev 默认是会被安装的。然而 install 或 update 支持使用 –no-dev 参数来跳过 require-dev 字段中列出的包。</p>
+<ul>
+<li>Classmap</li>
+</ul>
+<p>classmap 引用的所有组合，都会在 install/update 过程中生成，并存储到 vendor/composer/autoload_classmap.php 文件中。这个 map 是经过扫描指定目录（同样支持直接精确到文件）中所有的 .php 和 .inc 文件里内置的类而得到的。<br>可以用 classmap 生成支持支持自定义加载的不遵循 PSR-0/4 规范的类库。要配置它指向需要的目录，以便能够准确搜索到类文件。</p>
+<ul>
+<li>PSR-0与PSR-4</li>
+</ul>
+<p>虽然官方已经废弃了psr0，但是composer还是对psr0向下兼容，所以也花时间从composer的加载代码中了解了一下他们的区别，具体如下：</p>
+<p>1.在composer中定义的NS，psr4必须以\结尾否则会抛出异常，psr0则不要求</p>
+<p>2.psr0里面最后一个\之后的类名中，如果有下划线，则会转换成路径分隔符，如Name_Space_Test会转换成Name\Space\Test.php。在psr4中下划线不存在实际意义</p>
+<p>3.psr0有更深的目录结构，比如定义了NS为 Foo\Bar=&gt;vendor\foo\bar\src，<br>use Foo\Bar\Tool\Request调用NS。<br>如果以psr0方式加载，实际的目录为vendor\foo\bar\src\Foo\Bar\Tool\Request.php<br>如果以psr4方式加载，实际目录为vendor\foo\bar\src\Tool\Request.php</p>
+<ul>
+<li>Files</li>
+</ul>
+<p>如果你想要明确的指定，在每次请求时都要载入某些文件，那么你可以使用 ‘files’ autoloading。通常作为函数库的载入方式（而非类库）。</p>
+<h5 id="travis-ci"><a href="#travis-ci" class="headerlink" title="travis-ci"></a>travis-ci</h5><p>Travis CI is a hosted continuous integration and deployment system.<br>–<a href="https://travis-ci.org/" target="_blank" rel="noopener">https://travis-ci.org/</a></p>
+<h5 id="styleci"><a href="#styleci" class="headerlink" title="styleci"></a>styleci</h5><p>StyleCI provides checks for both your open and closed source repos. By analyzing every push or pull request made on your repo, StyleCI ensures that your code is always written against the standards you want it to be.<br>–<a href="https://styleci.io" target="_blank" rel="noopener">https://styleci.io</a><br>styleci提供了两种方式配置仓库里的代码检查，一种是在仓库的根目录下新建一个.styleci.yml文件，另一种是styleci对应的仓库里进行设置，详细的配置见<a href="https://styleci.readme.io/docs/configuration" target="_blank" rel="noopener">configuration</a></p>
+<h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><p>user log 的功能其实很简单，就是记录用户的一些操作，设计时主要包含<code>user_id</code>用户ID, <code>title</code>操作行为, <code>data</code>操作数据, <code>ip</code>来源IP, <code>created_at</code>操作时间；<br>考虑到方便判断操作的类型（增删改查），增加<code>type</code>操作类型；<br>方便追踪SQL，增加<code>sql</code>操作语句；<br>考虑到<code>title</code>, <code>data</code>对后期数据的挖掘不是很方便，比如修改了某一个用户，虽然说<code>title</code>可以填写“修改用户”，<code>data</code>可以填写修改前后的用户信息。但还是需要对<code>title</code>和<code>data</code>里面的数据进行进一步提取才能知道这是用户模块，某某用户。<br>故增加<code>object</code>操作模块，<code>object_id</code>，操作对象ID；<br>考虑到日志不需要实时Request.php写库，并且并发比较高，所以扔给队列处理，增加<code>pushed_at</code>入队时间，<code>poped_at</code>出队时间；<br>还有其它的字段需要依赖于具体的业务，比如接口需要知道是app还是web调用的，可以增加<code>source</code>字段。<br>所以一个日志表的设计大致如下：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>integer</td>
+<td>日志ID</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>integer</td>
+<td>用户ID</td>
+</tr>
+<tr>
+<td>title</td>
+<td>varchar</td>
+<td>操作行为</td>
+</tr>
+<tr>
+<td>type</td>
+<td>char</td>
+<td>操作类型</td>
+</tr>
+<tr>
+<td>object</td>
+<td>varchar</td>
+<td>操作模块</td>
+</tr>
+<tr>
+<td>object_id</td>
+<td>integer</td>
+<td>操作对象ID</td>
+</tr>
+<tr>
+<td>data</td>
+<td>text</td>
+<td>操作数据</td>
+</tr>
+<tr>
+<td>sql</td>
+<td>integer</td>
+<td>日志ID</td>
+</tr>
+<tr>
+<td>ip</td>
+<td>char</td>
+<td>IP</td>
+</tr>
+<tr>
+<td>pushed_at</td>
+<td>timestamp</td>
+<td>入队时间</td>
+</tr>
+<tr>
+<td>poped_at</td>
+<td>timestamp</td>
+<td>出队时间</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>timestamp</td>
+<td>写库时间</td>
+</tr>
+<tr>
+<td>deleted_at</td>
+<td>timestamp</td>
+<td>删除时间</td>
+</tr>
+</tbody></table>
+<p>在composer的package中对数据表的创建可以先创建可以生成migration的文件，然后再创建migration command，这个command的作用是提供一个命令行（例如：<code>php artisan userlog:migration</code>），用于生成migration，再执行<code>php artisan migration</code>即可创建数据表。</p>
+<p>userlog中采用的是队列来记录日志，即新建一个UserLogJob，这个Job的handle中就是将当前日志写入数据表，包含入队和出队的时间。</p>
+<p>一个userlog包就这样完成了，详见<a href="https://github.com/jlxh/laravel-userlog" target="_blank" rel="noopener">laravel-userlog</a>。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="./composer-package.html" class="archive-article-date">
+  	<time datetime="2016-08-08T04:12:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-08-08</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="./tags/Composer/">Composer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="./tags/PHP/">PHP</a></li></ul>
+	</div>
+
+<!--
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="./categories/Project/">Project</a>
+	</div>
+
+
+-->
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="./ucenter-userlog.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          用户中心-第三方日志
+        
+      </div>
+    </a>
+  
+  
+    <a href="./ucenter.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">用户中心</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2013-2019 iat
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/yaoshanliang/hexo-theme-yilia" target="_blank">Yilia</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: ,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "./"
+	}
+</script>
+
+<script src="././main.js"></script>
+
+
+
+
+
+<!-- Baidu Analytics -->
+<script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a8f517fee81bd1ee9a017d6f0cbfe789";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+      })();
+</script>
+<!-- End Baidu Analytics -->
+
+
+
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="./tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="./tags/Apache/" style="font-size: 10px;">Apache</a> <a href="./tags/Blog/" style="font-size: 12px;">Blog</a> <a href="./tags/Composer/" style="font-size: 10px;">Composer</a> <a href="./tags/DWZ/" style="font-size: 12px;">DWZ</a> <a href="./tags/FuelPHP/" style="font-size: 14px;">FuelPHP</a> <a href="./tags/HTML/" style="font-size: 18px;">HTML</a> <a href="./tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="./tags/Linux/" style="font-size: 10px;">Linux</a> <a href="./tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="./tags/PHP/" style="font-size: 20px;">PHP</a> <a href="./tags/Tool/" style="font-size: 10px;">Tool</a> <a href="./tags/UCenter/" style="font-size: 10px;">UCenter</a> <a href="./tags/Weapp/" style="font-size: 10px;">Weapp</a> <a href="./tags/WebSocket/" style="font-size: 14px;">WebSocket</a> <a href="./tags/Wechat/" style="font-size: 16px;">Wechat</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://limaolong.cn/">green</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://wanghuanming.com/">huanming</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://sukai.me/">kaiyao</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://maywanting.wang/">may</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://mikecoder.cn/">mike</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zalezone.cn/">zale</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Just a beginner.&lt;br /&gt;&lt;a href=&#39;https://about.iat.net.cn&#39; target=&#39;_blank&#39;&gt;profile&lt;/a&gt;</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

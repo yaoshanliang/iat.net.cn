@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>JavaScript中的两个等号与三个等号 | iat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前面有一篇提到了PHP中的两个等号与三个等号（http://iat.net.cn/double-equals-and-triple-equals-in-php.html），主要是因为PHP是弱类型语言，不同类型的数据类型也是可以比较的，这时候会强制类型转换，如果不加注意的话，很可能会发生意想不到的结果。同样，javascript也是弱类型的语言，做比较运算的时候也需要清楚对应的转换规则。">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript中的两个等号与三个等号">
+<meta property="og:url" content="https://iat.net.cn/double-equals-and-triple-equals-in-javascript.html">
+<meta property="og:site_name" content="iat">
+<meta property="og:description" content="前面有一篇提到了PHP中的两个等号与三个等号（http://iat.net.cn/double-equals-and-triple-equals-in-php.html），主要是因为PHP是弱类型语言，不同类型的数据类型也是可以比较的，这时候会强制类型转换，如果不加注意的话，很可能会发生意想不到的结果。同样，javascript也是弱类型的语言，做比较运算的时候也需要清楚对应的转换规则。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-20T09:01:36.638Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript中的两个等号与三个等号">
+<meta name="twitter:description" content="前面有一篇提到了PHP中的两个等号与三个等号（http://iat.net.cn/double-equals-and-triple-equals-in-php.html），主要是因为PHP是弱类型语言，不同类型的数据类型也是可以比较的，这时候会强制类型转换，如果不加注意的话，很可能会发生意想不到的结果。同样，javascript也是弱类型的语言，做比较运算的时候也需要清楚对应的转换规则。">
+  
+    <link rel="alternative" href="/atom.xml" title="iat" type="application/atom+xml">
+  
+  
+  <script src="./style.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="./avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">iat</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+	        
+				<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+	        
+				<li><a href="https://about.iat.net.cn">关于我</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">Archive</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">Tags</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">Links</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">About</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+		        
+					<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">iat</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="./avatar.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">iat</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+		        
+					<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+		        
+					<li><a href="https://about.iat.net.cn">关于我</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-double-equals-and-triple-equals-in-javascript" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript中的两个等号与三个等号
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前面有一篇提到了PHP中的两个等号与三个等号（<a href="http://iat.net.cn/double-equals-and-triple-equals-in-php.html">http://iat.net.cn/double-equals-and-triple-equals-in-php.html</a>），主要是因为PHP是弱类型语言，不同类型的数据类型也是可以比较的，这时候会强制类型转换，如果不加注意的话，很可能会发生意想不到的结果。同样，javascript也是弱类型的语言，做比较运算的时候也需要清楚对应的转换规则。</p>
+<a id="more"></a>
+
+<p>区别<code>==</code> <code>===</code>之前，让我们先熟悉一下javascript中的各种数据类型。</p>
+<h4 id="javascript中的数据类型"><a href="#javascript中的数据类型" class="headerlink" title="javascript中的数据类型"></a>javascript中的数据类型</h4><p>javascript中有五种基本数据类型：<strong>Boolean</strong>、<strong>Number</strong>、<strong>String</strong>、<strong>Undefined</strong>、<strong>Null</strong>，另外还有一种复杂数据类型：<strong>Object</strong>。前三种数据类型、复杂数据类型与其它语言中对应的数据类型相似，不再赘述，这里主要区别一下<strong>null</strong>和<strong>undefined</strong>。</p>
+<h5 id="undefined"><a href="#undefined" class="headerlink" title="undefined"></a>undefined</h5><p>undefined类型只有一个值，即undefined。当声明的变量未初始化时，该变量的默认值为undefined。使用如下示例进行检测：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var val;</span><br><span class="line">console.log(typeof(val));//&quot;undefined&quot;</span><br></pre></td></tr></table></figure>
+
+<p>但是，如果对一个为定义的变量进行typeof检测时，也会发现结果是“undefined”，而实际上“变量未初始化”并不等于“变量未定义”，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var val;</span><br><span class="line">console.log(typeof(val));//变量定义未初始化-&gt;undefined</span><br><span class="line">console.log(typeof(val2));//变量为定义-&gt;undefined</span><br></pre></td></tr></table></figure>
+
+<h5 id="null"><a href="#null" class="headerlink" title="null"></a>null</h5><p>null类型也只有一个值，即null。有说法，值undefined实际上是从值null派生来的，所以ECMAScript把他们定义为相等的，即<code>null == undefined</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(null == undefined);//true</span><br></pre></td></tr></table></figure>
+
+<p>尽管两个值相等，但含义却不同，undefined是声明但未初始化的变量的值，null是不存在的对象的值。从逻辑角度看，null值表示一个空对象指针，这也正是null用typeof检测时返回object的原因。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(typeof(null));//&quot;object&quot;</span><br></pre></td></tr></table></figure>
+
+<h4 id="“-”-与-“-”"><a href="#“-”-与-“-”" class="headerlink" title="“==” 与 “===”"></a>“==” 与 “===”</h4><p>先看如下示例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(123 == true)</span><br><span class="line">(&quot;abc&quot; == true)</span><br><span class="line">(null == false)</span><br><span class="line">(undefined == false)</span><br><span class="line">(null == undefined)</span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(123 == true)//false</span><br><span class="line">(&quot;abc&quot; == true)//false</span><br><span class="line">(null == false)//false</span><br><span class="line">(undefined == false)//false</span><br><span class="line">(null == undefined)//true</span><br></pre></td></tr></table></figure>
+
+<p>将boolean、number、string这三种类型进行不同类型的==比较时，其规则是，<strong>总将两边的值转换成数字，再看看转换结果数字是否相等</strong>。所以，true被转换成1，与123数字相比就不等了；“abc”被转换成<strong>NaN</strong>(Not a Number 非数字)与true(1)也就不等了。</p>
+<p>那么，null为什么不等于false呢？null是对象，是空对象，没有任何属性和方法。其实，null是既不等于1也不等于0的，也就是说<code>null == false</code> 和 <code>null == true</code> 返回的都是false。实际上null是强制转换成undefined的，也就是最后一个<code>null == undefined</code>返回的是true。</p>
+<p><code>undefined == false</code> 返回false是不是也是同样的道理呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">console.log(Number(undefined));//NaN</span><br><span class="line">console.log(isNaN(undefined));//true，不是数字</span><br></pre></td></tr></table></figure>
+
+<p>也就是说undefined根本就不是一个数字，当然就不会等于false(0)了。</p>
+<p>另外值得注意的是，我们知道，一般情况下，两个相等的值用==判断总是相等的。但是，javascript中的NaN是个例外，即<code>NaN == NaN</code>是false。那怎么判断一个变量不是数字呢？javascript中提供一个isNaN()函数用于检测是否为NaN，isNaN(NaN)即是true。</p>
+<hr>
+<blockquote>
+<p>参考资料：</p>
+</blockquote>
+<ul>
+<li><p>《改善JavaScript程序的188个建议》建议4：注意JavaScript数据类型的特殊性；建议8：谨慎使用运算符</p>
+</li>
+<li><p>《编写高质量JavaScript代码的68个有效方法》 第3条：当心隐式的强制转换</p>
+</li>
+<li><p><a href="http://blog.csdn.net/xidiandj/article/details/9226353" target="_blank" rel="noopener">JavaScript：undefined!=false之解 及==比较的规则</a></p>
+</li>
+<li><p><a href="http://developer.51cto.com/art/201401/426966.htm" target="_blank" rel="noopener">探索JavaScript中Null和Undefined的坑</a></p>
+</li>
+<li><p><a href="http://stackoverflow.com/questions/27632391/why-javascript-null-false-and-null-true-both-return-false" target="_blank" rel="noopener">why-javascript-null-false-and-null-true-both-return-false</a></p>
+</li>
+<li><p><a href="http://stackoverflow.com/questions/115548/why-is-isnannull-false-in-js" target="_blank" rel="noopener">why-is-isnannull-false-in-js</a></p>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="./double-equals-and-triple-equals-in-javascript.html" class="archive-article-date">
+  	<time datetime="2014-12-24T04:12:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-12-24</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="./tags/JavaScript/">JavaScript</a></li></ul>
+	</div>
+
+<!--
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="./categories/Study/">Study</a>
+	</div>
+
+
+-->
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="./html5.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          HTML5初识
+        
+      </div>
+    </a>
+  
+  
+    <a href="./blog-v2.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">博客V2.0出生记</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2013-2019 iat
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/yaoshanliang/hexo-theme-yilia" target="_blank">Yilia</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: ,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "./"
+	}
+</script>
+
+<script src="././main.js"></script>
+
+
+
+
+
+<!-- Baidu Analytics -->
+<script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a8f517fee81bd1ee9a017d6f0cbfe789";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+      })();
+</script>
+<!-- End Baidu Analytics -->
+
+
+
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="./tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="./tags/Apache/" style="font-size: 10px;">Apache</a> <a href="./tags/Blog/" style="font-size: 12px;">Blog</a> <a href="./tags/Composer/" style="font-size: 10px;">Composer</a> <a href="./tags/DWZ/" style="font-size: 12px;">DWZ</a> <a href="./tags/FuelPHP/" style="font-size: 14px;">FuelPHP</a> <a href="./tags/HTML/" style="font-size: 18px;">HTML</a> <a href="./tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="./tags/Linux/" style="font-size: 10px;">Linux</a> <a href="./tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="./tags/PHP/" style="font-size: 20px;">PHP</a> <a href="./tags/Tool/" style="font-size: 10px;">Tool</a> <a href="./tags/UCenter/" style="font-size: 10px;">UCenter</a> <a href="./tags/Weapp/" style="font-size: 10px;">Weapp</a> <a href="./tags/WebSocket/" style="font-size: 14px;">WebSocket</a> <a href="./tags/Wechat/" style="font-size: 16px;">Wechat</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://limaolong.cn/">green</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://wanghuanming.com/">huanming</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://sukai.me/">kaiyao</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://maywanting.wang/">may</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://mikecoder.cn/">mike</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zalezone.cn/">zale</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Just a beginner.&lt;br /&gt;&lt;a href=&#39;https://about.iat.net.cn&#39; target=&#39;_blank&#39;&gt;profile&lt;/a&gt;</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

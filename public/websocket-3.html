@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>WebSocket(三)——WebSocket协议 | iat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="连接握手每个WebSocket连接都始于一个HTTP请求，该请求包含特殊的首标Upgrade、Sec-WebSocket-Key。服务端响应101代码、Connection、Upgrade、Sec-WebSocket-Accept。">
+<meta name="keywords" content="HTML,WebSocket">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WebSocket(三)——WebSocket协议">
+<meta property="og:url" content="https://iat.net.cn/websocket-3.html">
+<meta property="og:site_name" content="iat">
+<meta property="og:description" content="连接握手每个WebSocket连接都始于一个HTTP请求，该请求包含特殊的首标Upgrade、Sec-WebSocket-Key。服务端响应101代码、Connection、Upgrade、Sec-WebSocket-Accept。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://iat.net.cn/images/websocket-request.png">
+<meta property="og:image" content="https://iat.net.cn/images/websocket-response.png">
+<meta property="og:image" content="https://iat.net.cn/images/websocket-frame.png">
+<meta property="og:updated_time" content="2019-08-20T09:01:36.646Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WebSocket(三)——WebSocket协议">
+<meta name="twitter:description" content="连接握手每个WebSocket连接都始于一个HTTP请求，该请求包含特殊的首标Upgrade、Sec-WebSocket-Key。服务端响应101代码、Connection、Upgrade、Sec-WebSocket-Accept。">
+<meta name="twitter:image" content="https://iat.net.cn/images/websocket-request.png">
+  
+    <link rel="alternative" href="/atom.xml" title="iat" type="application/atom+xml">
+  
+  
+  <script src="./style.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="./avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">iat</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+	        
+				<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+	        
+				<li><a href="https://about.iat.net.cn">关于我</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">Archive</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">Tags</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">Links</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">About</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+		        
+					<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">iat</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="./avatar.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">iat</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+		        
+					<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+		        
+					<li><a href="https://about.iat.net.cn">关于我</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-websocket-3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      WebSocket(三)——WebSocket协议
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="连接握手"><a href="#连接握手" class="headerlink" title="连接握手"></a>连接握手</h4><p>每个WebSocket连接都始于一个HTTP请求，该请求包含特殊的首标<code>Upgrade</code>、<code>Sec-WebSocket-Key</code>。服务端响应<code>101</code>代码、<code>Connection</code>、<code>Upgrade</code>、<code>Sec-WebSocket-Accept</code>。</p>
+<a id="more"></a>
+
+<p><img src="/images/websocket-request.png" alt="图片"><br><img src="/images/websocket-response.png" alt="图片"></p>
+<p>其中<code>Sec-WebSocket-Accept</code>响应首标由<code>Sec-WebSocket-Key</code>请求首标计算而来，包含特殊的响应键值。 这两组键值实际上是为了保护非WebSocket服务器，避免跨协议攻击。握手时要求服务端返回客户端期望收到的键值，如果客户端没有收到或与期望的键值不一致，服务端会返回<em>“Error during WebSocket handshake: Sec-WebSocket-Accept mismatch”</em>，然后客户端会关闭连接。那么Sec-WebSocket-Accept怎么计算得来呢？</p>
+<ul>
+<li>在Sec-WebSocket-Key键值后添加258EAFA5-E914-47DA-95CA-C5AB0DC85B11（GUID，全局唯一标识符)</li>
+<li>SHA1转换</li>
+<li>Base64编码</li>
+</ul>
+<p>这样一来得到Sec-WebSocket-Accept并返回给客户端，客户端检查和期望的一致后，连接建立。 php中采用如下的方式获取</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function calcKey()</span><br><span class="line">    return base64_encode(sha1($key . &apos;258EAFA5-E914-47DA-95CA-C5AB0DC85B11&apos;, true));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>值得注意的是<a href="http://php.net/manual/en/function.sha1.php" target="_blank" rel="noopener">sha1()</a>函数的第二个参数是可选的，默认为false，此时返回值是一个 40 字符长度的十六进制数字。在计算Sec-WebSocket-Accept的时候需要传入true，以 20 字符长度的原始格式返回。</p>
+<h4 id="数据帧"><a href="#数据帧" class="headerlink" title="数据帧"></a>数据帧</h4><p><img src="/images/websocket-frame.png" alt="图片"></p>
+<ul>
+<li><p>FIN:1 bit<br>为1表明这个是消息的最后片段。</p>
+</li>
+<li><p>RSV1, RSV2, RSV3:各1 bit<br>双方协定自定义协议，否则这三位必须是 0。</p>
+</li>
+<li><p>Opcode:4 bits<br>4位指定消息载荷类型的操作码。</p>
+<ul>
+<li>%x0 代表一个继续帧</li>
+<li>%x1 代表一个文本帧</li>
+<li>%x2 代表一个二进制帧</li>
+<li>%x8 代表连接关闭</li>
+<li>%x9 代表 ping</li>
+<li>%xA 代表 pong</li>
+<li>%x3-7和%xB-F 保留用于未来的控制帧</li>
+</ul>
+</li>
+</ul>
+<p>ping和pong能够保持连接打开，为数据流动做好准备。一个 ping 即可以充当一个 keepalive,也可以作为验证远程端点仍可响应的手段。ping和pong可以从连接的任意一端发起，但大部分的ping和pong是由服务器端发起的。当收到一个ping时，接收端必须响应一个pong；一个pong也可以未经请求发送，用于单向的心跳。</p>
+<ul>
+<li><p>Mask:1 bit<br>为1表明“负载数据”是掩码的，掩码键出现在 masking-key,用于解掩码 “负载数据”。从客户端发送到服务端的所有帧有这个位设置为 1。</p>
+</li>
+<li><p>Payload length:7 bits, 7+16 bits, 或7+64 bits<br>“负载数据”的长度,以字节为单位:如果 0-125,这是负载长度。如果 126,之后的两字节解释为一个 16 位的无符号整数是负载长度。如果 127,之后的 8字节解释为一个 64 位的无符号整数(最高有效位必须是 0)是负载长度负载长度是“扩展数据”长度+“应用数据”长度。“扩展数据”长度可能是零,在这种情况下,负载长度是“应用数据”长度。</p>
+</li>
+<li><p>Masking-key:0 或 4 bytes<br>客户端发送到服务端的所有帧通过一个包含在帧中的 32 位值来掩码。掩码键是由客户端随机选择的 32 位值。当准备一个掩码的帧时,客户端必须从允许的 32 位值集合中选择一个新的掩码键。</p>
+</li>
+</ul>
+<p>服务端收到掩码处理后的数据后，解码采用如下的算法。将Payload原始数据的每个字符的顺序下标模4，然后将此原始数据字符与掩码的模4相应位置的字符进行异或操作。这个算法对于加密和解密的操作都是一样的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">function decode($buffer) &#123;</span><br><span class="line">    $len = $masks = $data = $decoded = null;</span><br><span class="line">    $len = ord($buffer[1]) &amp; 127;</span><br><span class="line"></span><br><span class="line">    if ($len === 126) &#123;</span><br><span class="line">        $masks = substr($buffer, 4, 4);</span><br><span class="line">        $data = substr($buffer, 8);</span><br><span class="line">    &#125;</span><br><span class="line">    else if ($len === 127) &#123;</span><br><span class="line">        $masks = substr($buffer, 10, 4);</span><br><span class="line">        $data = substr($buffer, 14);</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        $masks = substr($buffer, 2, 4);</span><br><span class="line">        $data = substr($buffer, 6);</span><br><span class="line">    &#125;</span><br><span class="line">    for ($index = 0; $index &lt; strlen($data); $index++) &#123;</span><br><span class="line">        $decoded .= $data[$index] ^ $masks[$index % 4];</span><br><span class="line">    &#125;</span><br><span class="line">    return $decoded;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Payload data:(x+y) bytes<br>“负载数据”定义为“扩展数据”和“应用数据”。如果没有定义扩展，则没有扩展数据，仅含有应用数据。</li>
+</ul>
+<h4 id="关闭握手"><a href="#关闭握手" class="headerlink" title="关闭握手"></a>关闭握手</h4><p>为了关闭WebSocket连接，一端必须发送一个关闭的控制帧，此时WebSocket 关闭阶段握手已启动, WebSocket 连接处于<strong>CLOSING</strong>状态。当两端都发送了关闭数据帧时，双方都要关闭所有的连接资源，当关闭之后，双方处于<strong>CLOSED</strong>状态。控制帧为一个“状态码”和一个“原因说明”，正常关闭的状态码为1000；如果close控制帧不包含状态码，close状态码被认为是1005;如果WebSocket连接已经关闭且端点没有接收到close状态码（例如可能发生在底层传输连接丢失时），close状态码被认为是1006。</p>
+<hr>
+<blockquote>
+<p>参考文章</p>
+</blockquote>
+<ul>
+<li><a href="http://datatracker.ietf.org/doc/rfc6455/?include_text=1" target="_blank" rel="noopener">The WebSocket Protocol RFC 6455</a></li>
+<li><a href="https://github.com/yaoshanliang/study/blob/master/html5/websocket/doc/rfc6455%E8%AF%91%E6%96%87.pdf" target="_blank" rel="noopener">RFC 6455译文</a></li>
+<li>Websocket协议数据帧传输和关闭连接(<a href="http://www.2cto.com/kf/201403/283799.html" target="_blank" rel="noopener">http://www.2cto.com/kf/201403/283799.html</a>)</li>
+<li>《HTML5 websocket 权威指南》</li>
+</ul>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="./websocket-3.html" class="archive-article-date">
+  	<time datetime="2015-03-02T04:12:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-03-02</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="./tags/HTML/">HTML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="./tags/WebSocket/">WebSocket</a></li></ul>
+	</div>
+
+<!--
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="./categories/Study/">Study</a>
+	</div>
+
+
+-->
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="./websocket-2.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          WebSocket(二)——WebSocket API
+        
+      </div>
+    </a>
+  
+  
+    <a href="./websocket-1.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">WebSocket(一)——WebSocket初识</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2013-2019 iat
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/yaoshanliang/hexo-theme-yilia" target="_blank">Yilia</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: ,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "./"
+	}
+</script>
+
+<script src="././main.js"></script>
+
+
+
+
+
+<!-- Baidu Analytics -->
+<script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a8f517fee81bd1ee9a017d6f0cbfe789";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+      })();
+</script>
+<!-- End Baidu Analytics -->
+
+
+
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="./tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="./tags/Apache/" style="font-size: 10px;">Apache</a> <a href="./tags/Blog/" style="font-size: 12px;">Blog</a> <a href="./tags/Composer/" style="font-size: 10px;">Composer</a> <a href="./tags/DWZ/" style="font-size: 12px;">DWZ</a> <a href="./tags/FuelPHP/" style="font-size: 14px;">FuelPHP</a> <a href="./tags/HTML/" style="font-size: 18px;">HTML</a> <a href="./tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="./tags/Linux/" style="font-size: 10px;">Linux</a> <a href="./tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="./tags/PHP/" style="font-size: 20px;">PHP</a> <a href="./tags/Tool/" style="font-size: 10px;">Tool</a> <a href="./tags/UCenter/" style="font-size: 10px;">UCenter</a> <a href="./tags/Weapp/" style="font-size: 10px;">Weapp</a> <a href="./tags/WebSocket/" style="font-size: 14px;">WebSocket</a> <a href="./tags/Wechat/" style="font-size: 16px;">Wechat</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://limaolong.cn/">green</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://wanghuanming.com/">huanming</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://sukai.me/">kaiyao</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://maywanting.wang/">may</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://mikecoder.cn/">mike</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zalezone.cn/">zale</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Just a beginner.&lt;br /&gt;&lt;a href=&#39;https://about.iat.net.cn&#39; target=&#39;_blank&#39;&gt;profile&lt;/a&gt;</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

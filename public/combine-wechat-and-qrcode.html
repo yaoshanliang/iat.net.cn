@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>如果将”微信”与”二维码签到”结合起来 | iat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="之前的QR_code部分调用的是Google Chart API，后来发现的一个问题就是执行的速度很慢，而且超时的话就显示不出来了。这可不能就这样不稳定的情况下草草了事了，于是想到了离线代码，不需要借用网络资源的情况下将QR_code给显示出来。">
+<meta name="keywords" content="PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如果将”微信”与”二维码签到”结合起来">
+<meta property="og:url" content="https://iat.net.cn/combine-wechat-and-qrcode.html">
+<meta property="og:site_name" content="iat">
+<meta property="og:description" content="之前的QR_code部分调用的是Google Chart API，后来发现的一个问题就是执行的速度很慢，而且超时的话就显示不出来了。这可不能就这样不稳定的情况下草草了事了，于是想到了离线代码，不需要借用网络资源的情况下将QR_code给显示出来。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://iat.net.cn/images/iat_net_cn.jpg">
+<meta property="og:updated_time" content="2019-08-20T09:01:36.637Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如果将”微信”与”二维码签到”结合起来">
+<meta name="twitter:description" content="之前的QR_code部分调用的是Google Chart API，后来发现的一个问题就是执行的速度很慢，而且超时的话就显示不出来了。这可不能就这样不稳定的情况下草草了事了，于是想到了离线代码，不需要借用网络资源的情况下将QR_code给显示出来。">
+<meta name="twitter:image" content="https://iat.net.cn/images/iat_net_cn.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="iat" type="application/atom+xml">
+  
+  
+  <script src="./style.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="./avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">iat</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+	        
+				<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+	        
+				<li><a href="https://about.iat.net.cn">关于我</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">Archive</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">Tags</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">Links</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">About</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+		        
+					<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">iat</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="./avatar.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">iat</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+		        
+					<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+		        
+					<li><a href="https://about.iat.net.cn">关于我</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-combine-wechat-and-qrcode" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      如果将”微信”与”二维码签到”结合起来
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前的QR_code部分调用的是Google Chart API，后来发现的一个问题就是执行的速度很慢，而且超时的话就显示不出来了。这可不能就这样不稳定的情况下草草了事了，于是想到了离线代码，不需要借用网络资源的情况下将QR_code给显示出来。</p>
+<a id="more"></a>
+
+<p>在网上找到一个QR_code开发的离线包，和Google的一样，也是通过传递参数进去生成的。速度很快，基本上是“秒成”，不会出现超时的现象。自己做了些修改，增加调整大小和纠错等级的功能。大小在之前的文章里有介绍过，不仅仅是形式上的变大变小了，而且存储信息容量也会有相应的变化。纠错等级分为四个，“L-级”默认的，可以识别已损失7%的数据；“M-级”可以识别已损失15%的数据；“Q-级”可以识别已损失25%的数据；“H-级”可以识别已损失30%的数据。到这就有个疑问了，是不是纠错等级越高越好呢？因为即使在损失了很多数据的情况下依旧是可以识别的。但事实不是这样的，破损识别是建立在“冗余”的基础上的。如果存储量很大的话，设置高级别的纠错等级，它的冗余量也会相应的增倍。所以，“信息量”“QR_code大小”“纠错等级”是个三角形的关系，只有达到一个很好的平衡后才能获得最佳效果的QR_code。</p>
+<p>离线包同样也可能会带来问题，正如之前尝试地图离线的时候，离线包是别人提供的，毕竟不是官方的，谁都不能保证这个包无BUG。万一存在什么问题，自己再怎么调试也只有纠结了。不过，到目前为止还没发现什么问题，于是也就有了QRcode栏下的QRcode_offline部分。</p>
+<p>之前没怎么用微信，真正让我喜欢上它是因为前面提到过的“扫出的腾讯地图”。自己也搞了一个公众账号玩玩，申请其实很简单的，实名认证头像加个身份证就行了。微信有两个平台，一个是公众平台也就是mp.weixin.qq.com，另一个是开放平台也就是open.weixin.qq.com。前者是在微信的基础上进行开发，是微信包含“自己”的关系，分为“服务号”和“订阅号”，服务号需要公司企业营业执照才能申请的，订阅号有身份证就行了。开放平台则是在自己的网站里包含分享到微信的功能，是“自己”包含微信的关系。具体的功能百度文库里都有介绍，在这也就不赘述了。</p>
+<p>自己的公众账号是iat_net_cn，因为它不支持“.”号，也就用下划线代替了。当然也可以扫描如下的二维码添加</p>
+<p><img src="/images/iat_net_cn.jpg" alt></p>
+<p>目前还没有写代码进行交互，只是利用<a href="http://www.v5kf.com的平台，实现基本的“小黄鸡”功能。不过，自己的真正想法不在于此，微信有自己的“扫一扫”，何不再回到原点？利用其“扫一扫”的功能来实现电子签到。试了一下，专门的二维码扫描软件扫出来直接跳转结果了，微信做了层判断，问是否打开，这是二维码为网页链接的时候。当二维码为手机号时，微信则是显示全部的字符串信息，没有跳转到拨号的界面。" target="_blank" rel="noopener">www.v5kf.com的平台，实现基本的“小黄鸡”功能。不过，自己的真正想法不在于此，微信有自己的“扫一扫”，何不再回到原点？利用其“扫一扫”的功能来实现电子签到。试了一下，专门的二维码扫描软件扫出来直接跳转结果了，微信做了层判断，问是否打开，这是二维码为网页链接的时候。当二维码为手机号时，微信则是显示全部的字符串信息，没有跳转到拨号的界面。</a></p>
+<p>在开发文档里发现微信也提供了生成带参数的二维码功能，如果能够在读取二维码的时候允许执行写入数据库的操作，二维码签到也就迈出了一大步。担心的就是不允许将用户自己的信息透露给编程人员，不能读取写入用户信息的操作。接下来需要好好理顺思路了，好好查查，看这一步能不能行得通。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="./combine-wechat-and-qrcode.html" class="archive-article-date">
+  	<time datetime="2014-01-13T04:12:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-01-13</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="./tags/PHP/">PHP</a></li></ul>
+	</div>
+
+<!--
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="./categories/Study/">Study</a>
+	</div>
+
+
+-->
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="./send-and-receieve-messages-in-wechat.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          微信开发日记——消息的收发
+        
+      </div>
+    </a>
+  
+  
+    <a href="./something-about-browser.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">浏览器的那些事儿（一）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2013-2019 iat
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/yaoshanliang/hexo-theme-yilia" target="_blank">Yilia</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: ,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "./"
+	}
+</script>
+
+<script src="././main.js"></script>
+
+
+
+
+
+<!-- Baidu Analytics -->
+<script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a8f517fee81bd1ee9a017d6f0cbfe789";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+      })();
+</script>
+<!-- End Baidu Analytics -->
+
+
+
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="./tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="./tags/Apache/" style="font-size: 10px;">Apache</a> <a href="./tags/Blog/" style="font-size: 12px;">Blog</a> <a href="./tags/Composer/" style="font-size: 10px;">Composer</a> <a href="./tags/DWZ/" style="font-size: 12px;">DWZ</a> <a href="./tags/FuelPHP/" style="font-size: 14px;">FuelPHP</a> <a href="./tags/HTML/" style="font-size: 18px;">HTML</a> <a href="./tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="./tags/Linux/" style="font-size: 10px;">Linux</a> <a href="./tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="./tags/PHP/" style="font-size: 20px;">PHP</a> <a href="./tags/Tool/" style="font-size: 10px;">Tool</a> <a href="./tags/UCenter/" style="font-size: 10px;">UCenter</a> <a href="./tags/Weapp/" style="font-size: 10px;">Weapp</a> <a href="./tags/WebSocket/" style="font-size: 14px;">WebSocket</a> <a href="./tags/Wechat/" style="font-size: 16px;">Wechat</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://limaolong.cn/">green</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://wanghuanming.com/">huanming</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://sukai.me/">kaiyao</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://maywanting.wang/">may</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://mikecoder.cn/">mike</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zalezone.cn/">zale</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Just a beginner.&lt;br /&gt;&lt;a href=&#39;https://about.iat.net.cn&#39; target=&#39;_blank&#39;&gt;profile&lt;/a&gt;</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

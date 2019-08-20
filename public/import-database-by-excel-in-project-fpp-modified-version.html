@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>防攀爬系统——EXCEL导入数据库修改版 | iat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="应实际系统需求，需要对通过EXCEL导入数据库的信息做“查重”处理，也就是每读取EXCEL表的一行数据与数据库进行一次比对，对重复出现的数据给出提示，只有全部不重复才可插入数据库。还有想到在读取EXCEL之前应该先判断一下是不是按照模版上的表头信息填写的，不是的话也不允许继续下去。">
+<meta name="keywords" content="PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="防攀爬系统——EXCEL导入数据库修改版">
+<meta property="og:url" content="https://iat.net.cn/import-database-by-excel-in-project-fpp-modified-version.html">
+<meta property="og:site_name" content="iat">
+<meta property="og:description" content="应实际系统需求，需要对通过EXCEL导入数据库的信息做“查重”处理，也就是每读取EXCEL表的一行数据与数据库进行一次比对，对重复出现的数据给出提示，只有全部不重复才可插入数据库。还有想到在读取EXCEL之前应该先判断一下是不是按照模版上的表头信息填写的，不是的话也不允许继续下去。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-20T09:01:36.640Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="防攀爬系统——EXCEL导入数据库修改版">
+<meta name="twitter:description" content="应实际系统需求，需要对通过EXCEL导入数据库的信息做“查重”处理，也就是每读取EXCEL表的一行数据与数据库进行一次比对，对重复出现的数据给出提示，只有全部不重复才可插入数据库。还有想到在读取EXCEL之前应该先判断一下是不是按照模版上的表头信息填写的，不是的话也不允许继续下去。">
+  
+    <link rel="alternative" href="/atom.xml" title="iat" type="application/atom+xml">
+  
+  
+  <script src="./style.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="./avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">iat</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+	        
+				<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+	        
+				<li><a href="https://about.iat.net.cn">关于我</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">Archive</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">Tags</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">Links</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">About</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+		        
+					<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">iat</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="./avatar.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">iat</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+		        
+					<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+		        
+					<li><a href="https://about.iat.net.cn">关于我</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-import-database-by-excel-in-project-fpp-modified-version" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      防攀爬系统——EXCEL导入数据库修改版
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>应实际系统需求，需要对通过EXCEL导入数据库的信息做“查重”处理，也就是每读取EXCEL表的一行数据与数据库进行一次比对，对重复出现的数据给出提示，只有全部不重复才可插入数据库。还有想到在读取EXCEL之前应该先判断一下是不是按照模版上的表头信息填写的，不是的话也不允许继续下去。</p>
+<a id="more"></a>
+
+<p>下午也犯了一个错误，本想根据read_excel()函数的返回值来判断是应该提示“导入成功”还是“不是模版”的。结果直接写成了下面的代码，fpp_13接下来的导入数据就在那纠结了，明明数据库中还没有该模块的信息啊，为什么还提示“模块已经存在”了呢？而且给出的是“200”，执行成功的意思。纠结啊，甚至在那把一步步执行的结果给echo出来，还是没有发现问题出在哪里。吃过晚饭，静下心来一步步查看，才发现就是那个if语句出现的问题，在else中又执行了一遍读取写入的过程，难怪不重复的信息也提示已经存在了。“一失足成千古纠结人物啊”，于是下午的两个小时宝贵时间就在“我到底错哪了”中度过了。</p>
+<p>view中upload_excel.php页面是用户在点击“EXCEL批量导入”后显示的，给出了一些提示信息，先下载模版，按要求填写后上传。fpp_14在上传的时候我也做了一个模版信息的匹配，当时有两种想法，一个是直接根据表头的中文判断，但这有一个编码的问题；第二个是在表头之前加一个判断的字段，读取该字段看是否匹配，但这样EXCEL表头显示不太好看了，目前采用的办法是将第一行的验证字段隐藏掉，这样就只显示简单的提示信息了。验证字段不是按照数据表的列名来的，那样的话直接将数据库的列名显示了出来，也是不安全的。</p>
+<p>导入EXCEL的过程中还学习了一下EXCEL的的保护，将表头等提示信息锁定不允许修改。具体的做法是划出范围后“锁定单元格”-&gt;”保护工作表”，设置好密码，这样EXCEL的那些信息就得到一定保障了。</p>
+<p>之前的导入insert相关的语句都是自己写的，没有用CI框架自带的函数，也就是ixuyao自己去连数据库了，这样是很不安全的，因为mysql_connect()函数中将数据库的用户名密码都暴露了出来。今天改用框架的create()函数，但这只是插入一条数据，跟进create()函数后发现内部的insert语句，其中还有一个insert_banch()函数是批量插入的，但其实质上还是用循环实现的，并不是高效的一条insert插入多条数据。</p>
+<p>最后附上新版的导入EXCEL代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">*读取excel文件并写入数据库</span><br><span class="line">*/</span><br><span class="line">public function read_excel($filename)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    require_once ’/application/libraries/PHPExcel/excel_read2.php’;</span><br><span class="line">    $data = new Spreadsheet_Excel_Reader();</span><br><span class="line">    $data-&gt;setOutputEncoding(’gbk’);</span><br><span class="line">    $data-&gt;read(&quot;./application/upload/node_excel/&quot;.$filename);</span><br><span class="line"></span><br><span class="line">    //获取表头</span><br><span class="line">    $name_title = $data-&gt;sheets[0][’cells’][1][1];</span><br><span class="line">    $desc_title = $data-&gt;sheets[0][’cells’][1][2];</span><br><span class="line">    $SIM_title = $data-&gt;sheets[0][’cells’][1][3];</span><br><span class="line"></span><br><span class="line">    //判断表头信息是否为模版里的表头，不是的话返回提示</span><br><span class="line">    if(!($name_title == &quot;fpp_1&quot; &amp;&amp; $desc_title == &quot;fpp_2&quot; &amp;&amp; $SIM_title == &quot;fpp_3&quot;))</span><br><span class="line">    &#123;</span><br><span class="line">        return -2;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //具体信息</span><br><span class="line">    $sql = &quot;&quot;;</span><br><span class="line">    $flag_alert = 0;//只输出一句警告</span><br><span class="line"></span><br><span class="line">    for ($i = 4; $i &lt;= $data-&gt;sheets[0][’numRows’]; $i++)</span><br><span class="line">    &#123;</span><br><span class="line">        //检查重复</span><br><span class="line">        $name_content = $data-&gt;sheets[0][’cells’][$i][1];</span><br><span class="line">        $desc_content = $data-&gt;sheets[0][’cells’][$i][2];</span><br><span class="line">        $SIM_content = $data-&gt;sheets[0][’cells’][$i][3];</span><br><span class="line"></span><br><span class="line">        if($this-&gt;is_exists($this-&gt;tables[0], ’name’, $name_content)==true)</span><br><span class="line">        &#123;</span><br><span class="line">            if($flag_alert == 0)</span><br><span class="line">            &#123;</span><br><span class="line">                echo &quot;部分模块已经存在，请修改后重新导入&quot;.&quot;&lt;/br&gt;&quot;;</span><br><span class="line">            &#125;</span><br><span class="line">            $flag_alert = 1;</span><br><span class="line">            echo &quot;第&quot;.$i.&quot;行&amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp模块名称：&quot;.$name_content.&quot;已存在！&quot;.&quot;&lt;/br&gt;&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        $sql .= &quot;(’&quot;. $name_content.&quot;’,’&quot;. $desc_content.&quot;’,’&quot; . $SIM_content.&quot;’),&quot;;</span><br><span class="line">        $data_db[$i][’name’] = $name_content;</span><br><span class="line">        $data_db[$i][’SIMnumb’] = $SIM_content;</span><br><span class="line"></span><br><span class="line">        //获取EXCEL中中文编码并转为UTF-8</span><br><span class="line">        $encode = mb_detect_encoding($desc_content, array(&quot;ASCII&quot;,’UTF-8’,&quot;GB2312&quot;,’GBK’));</span><br><span class="line">        $data_db[$i][’desc’] = iconv($encode, &quot;UTF-8&quot;, $desc_content);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    if($flag_alert == 1)</span><br><span class="line">    &#123;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">    $sql = substr($sql,0,strlen($sql)-1);//去除最后一个逗号</span><br><span class="line"></span><br><span class="line">    $this-&gt;db-&gt;trans_start();</span><br><span class="line"></span><br><span class="line">    //$this-&gt;db-&gt;insert_batch($this-&gt;tables[0], $data_db);//CI批量插入函数，本质还是循环</span><br><span class="line">    foreach ($data_db as $k)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;create($this-&gt;tables[0], $k);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    $this-&gt;db-&gt;trans_complete();</span><br><span class="line"></span><br><span class="line">    if ($this-&gt;db-&gt;trans_status() === FALSE)</span><br><span class="line">    &#123;</span><br><span class="line">        return $this-&gt;db_error;</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;applog-&gt;msg(’导入成功’);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="./import-database-by-excel-in-project-fpp-modified-version.html" class="archive-article-date">
+  	<time datetime="2014-03-25T04:12:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-03-25</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="./tags/PHP/">PHP</a></li></ul>
+	</div>
+
+<!--
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="./categories/Project/">Project</a>
+	</div>
+
+
+-->
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="./conclusion-in-linux-php-config.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Linux下PHP配置方面的总结
+        
+      </div>
+    </a>
+  
+  
+    <a href="./import-database-by-excel-in-project-fpp.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">防攀爬系统——EXCEL导入数据库</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2013-2019 iat
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/yaoshanliang/hexo-theme-yilia" target="_blank">Yilia</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: ,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "./"
+	}
+</script>
+
+<script src="././main.js"></script>
+
+
+
+
+
+<!-- Baidu Analytics -->
+<script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a8f517fee81bd1ee9a017d6f0cbfe789";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+      })();
+</script>
+<!-- End Baidu Analytics -->
+
+
+
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="./tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="./tags/Apache/" style="font-size: 10px;">Apache</a> <a href="./tags/Blog/" style="font-size: 12px;">Blog</a> <a href="./tags/Composer/" style="font-size: 10px;">Composer</a> <a href="./tags/DWZ/" style="font-size: 12px;">DWZ</a> <a href="./tags/FuelPHP/" style="font-size: 14px;">FuelPHP</a> <a href="./tags/HTML/" style="font-size: 18px;">HTML</a> <a href="./tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="./tags/Linux/" style="font-size: 10px;">Linux</a> <a href="./tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="./tags/PHP/" style="font-size: 20px;">PHP</a> <a href="./tags/Tool/" style="font-size: 10px;">Tool</a> <a href="./tags/UCenter/" style="font-size: 10px;">UCenter</a> <a href="./tags/Weapp/" style="font-size: 10px;">Weapp</a> <a href="./tags/WebSocket/" style="font-size: 14px;">WebSocket</a> <a href="./tags/Wechat/" style="font-size: 16px;">Wechat</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://limaolong.cn/">green</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://wanghuanming.com/">huanming</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://sukai.me/">kaiyao</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://maywanting.wang/">may</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://mikecoder.cn/">mike</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zalezone.cn/">zale</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Just a beginner.&lt;br /&gt;&lt;a href=&#39;https://about.iat.net.cn&#39; target=&#39;_blank&#39;&gt;profile&lt;/a&gt;</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

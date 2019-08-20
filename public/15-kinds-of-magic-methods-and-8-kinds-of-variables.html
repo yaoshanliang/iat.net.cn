@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>PHP中的15种魔术方法与8种魔术变量 | iat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="PHP中的魔术方法是指在特定事件下自动触发的方法，这些方法都有一个共同特征：以“__”两个下划线开始，共15个魔术方法，整理如下">
+<meta name="keywords" content="PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP中的15种魔术方法与8种魔术变量">
+<meta property="og:url" content="https://iat.net.cn/15-kinds-of-magic-methods-and-8-kinds-of-variables.html">
+<meta property="og:site_name" content="iat">
+<meta property="og:description" content="PHP中的魔术方法是指在特定事件下自动触发的方法，这些方法都有一个共同特征：以“__”两个下划线开始，共15个魔术方法，整理如下">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-20T09:01:36.636Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP中的15种魔术方法与8种魔术变量">
+<meta name="twitter:description" content="PHP中的魔术方法是指在特定事件下自动触发的方法，这些方法都有一个共同特征：以“__”两个下划线开始，共15个魔术方法，整理如下">
+  
+    <link rel="alternative" href="/atom.xml" title="iat" type="application/atom+xml">
+  
+  
+  <script src="./style.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="./avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">iat</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+	        
+				<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+	        
+				<li><a href="https://about.iat.net.cn">关于我</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">Archive</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">Tags</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">Links</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">About</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+		        
+					<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">iat</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="./avatar.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">iat</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+		        
+					<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+		        
+					<li><a href="https://about.iat.net.cn">关于我</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-15-kinds-of-magic-methods-and-8-kinds-of-variables" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      PHP中的15种魔术方法与8种魔术变量
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>PHP中的魔术方法是指在特定事件下自动触发的方法，这些方法都有一个共同特征：以“__”两个下划线开始，共15个魔术方法，整理如下</p>
+<a id="more"></a>
+
+<h4 id="1、-construct"><a href="#1、-construct" class="headerlink" title="1、__construct"></a>1、__construct</h4><p>与C++里的构造函数类似，在创建对象的时候被调用，此方法可以初始化一些成员变量，php里可以相应的调用一些文件等。可以使构造函数有一个独一无二的名称，无论其所在的类名是什么，都统一用__construct来初始化</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class iat</span><br><span class="line">&#123;</span><br><span class="line">    private $name;</span><br><span class="line">    private $grade;</span><br><span class="line">    public function __construct($name, $grade)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;name = $name;</span><br><span class="line">        $this-&gt;grade = $grade;</span><br><span class="line">    &#125;</span><br><span class="line">    public function getName()</span><br><span class="line">    &#123;</span><br><span class="line">        return $this-&gt;name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$IAT = new iat(&quot;iat&quot;, &quot;grade_1&quot;);</span><br><span class="line">echo $IAT-&gt;getName();</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、-destruct"><a href="#2、-destruct" class="headerlink" title="2、__destruct"></a>2、__destruct</h4><p>析构方法，在销毁对象前调用这个方法，具体的作用是清除占用内存空间并销毁对象相关资源，下面的示例新建对象时name有值，析构后name未定义</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class iat</span><br><span class="line">&#123;</span><br><span class="line">    private $name;</span><br><span class="line">    private $grade;</span><br><span class="line">    public function __construct($name, $grade)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;name = $name;</span><br><span class="line">        $this-&gt;grade = $grade;</span><br><span class="line">        echo $this-&gt;name;</span><br><span class="line">    &#125;</span><br><span class="line">    public function __destruct()</span><br><span class="line">    &#123;</span><br><span class="line">        unset($this-&gt;name);</span><br><span class="line">        echo $this-&gt;name;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、-get"><a href="#3、-get" class="headerlink" title="3、__get"></a>3、__get</h4><p>当调用一个未定义的属性时访问此方法，下例访问school变量，但由于school未定义，会出现Notice级别的错误，随后调用__get方法，则会看到结果是属性name的值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class iat</span><br><span class="line">&#123;</span><br><span class="line">    private $name;</span><br><span class="line">    public function __construct($name)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;name = $name;</span><br><span class="line">    &#125;</span><br><span class="line">    public function __get($var)</span><br><span class="line">    &#123;</span><br><span class="line">        return $this-&gt;name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$IAT = new iat(&quot;iat&quot;);</span><br><span class="line">echo @$IAT-&gt;$school;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4、-set"><a href="#4、-set" class="headerlink" title="4、__set"></a>4、__set</h4><p>给一个不可访问的属性赋值时调用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class iat</span><br><span class="line">&#123;</span><br><span class="line">    private $name;</span><br><span class="line">    private $grade;</span><br><span class="line">    public function __construct($name, $grade)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;name = $name;</span><br><span class="line">        $this-&gt;grade = $grade;</span><br><span class="line">    &#125;</span><br><span class="line">    public function getGrade()</span><br><span class="line">    &#123;</span><br><span class="line">        return $this-&gt;grade;</span><br><span class="line">    &#125;</span><br><span class="line">    public function __set($grade, $value)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;grade = $value;//赋值</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$IAT = new iat(&quot;iat&quot;, &quot;grade_1&quot;);</span><br><span class="line">$IAT-&gt;grade = &quot;grade_2&quot;;//给不可访问的变量赋值</span><br><span class="line">echo $IAT-&gt;getGrade();//获得赋值后的结果</span><br></pre></td></tr></table></figure>
+
+<h4 id="5、-call"><a href="#5、-call" class="headerlink" title="5、__call"></a>5、__call</h4><p>当调用一个未定义的方法或权限不足时调用此方法，若未定义<strong>__call</strong>方法，调用未定义的方法时会给出不太友好的fata error级别的错误提示。用__call方法可以在调用未定义的方法时捕获异常，方便下一步更好的处理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class iat</span><br><span class="line">&#123;</span><br><span class="line">    private $name;</span><br><span class="line">    private $grade;</span><br><span class="line">    public function __construct($name, $grade)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;name = $name;</span><br><span class="line">        $this-&gt;grade = $grade;</span><br><span class="line">    &#125;</span><br><span class="line">    public function __call($method, $args)</span><br><span class="line">    &#123;</span><br><span class="line">        echo &quot;unknow method &quot; . $method;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$IAT = new iat(&quot;iat&quot;, &quot;grade_1&quot;);</span><br><span class="line">$IAT-&gt;getGrade_2();</span><br></pre></td></tr></table></figure>
+
+<h4 id="6、-sleep"><a href="#6、-sleep" class="headerlink" title="6、__sleep"></a>6、__sleep</h4><p>串行化的时候用，serialize() 检查类中是否有魔术名称<strong>__sleep</strong>的函数。如果这样，该函数将在任何序列化之前运行。它可以清除对象并应该返回一个包含有该对象中应被序列化的所有变量名的数组。使用 __sleep 的目的是关闭对象可能具有的任何数据库连接，提交等待中的数据或进行类似的清除任务。此外，如果有非常大的对象而并不需要完全储存下来时此函数也很有用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class iat</span><br><span class="line">&#123;</span><br><span class="line">    private $name;</span><br><span class="line">    private $grade;</span><br><span class="line">    public function __construct($name, $grade)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;name = $name;</span><br><span class="line">        $this-&gt;grade = $grade;</span><br><span class="line">    &#125;</span><br><span class="line">    public function __sleep()</span><br><span class="line">    &#123;</span><br><span class="line">        echo &quot;sleep&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$IAT = new iat(&quot;iat&quot;, &quot;grade_1&quot;);</span><br><span class="line">$IAT_serialize = serialize($IAT);</span><br></pre></td></tr></table></figure>
+
+<p>不过上述代码会报<em>Notice: serialize() [function.serialize]: __sleep should return an array only containing the names of instance-variables to serialize in</em>的错误。原来<strong>__sleep()</strong>方法调用时一定要返回一个数组，一般都是返回一个关于对象成员变量的数组，上面我们有一个名为name的成员变量，所以我们就在__sleep()方法中返回array(’name’)</p>
+<p>不过这样依旧会报错<em>Notice: serialize() [function.serialize ]: “iat” returned as member variable from __sleep() but does not exist in…</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class iat</span><br><span class="line">&#123;</span><br><span class="line">    private $name;</span><br><span class="line">    private $grade;</span><br><span class="line">    public function __construct($name, $grade)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;name = $name;</span><br><span class="line">        $this-&gt;grade = $grade;</span><br><span class="line">    &#125;</span><br><span class="line">    public function __sleep()</span><br><span class="line">    &#123;</span><br><span class="line">        return array($this-&gt;name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$IAT = new iat(&quot;iat&quot;, &quot;grade_1&quot;);</span><br><span class="line">$IAT_serialize = serialize($IAT);</span><br></pre></td></tr></table></figure>
+
+<p>若直接return array();就不会报错了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class iat</span><br><span class="line">&#123;</span><br><span class="line">    private $name;</span><br><span class="line">    private $grade;</span><br><span class="line">    public function __construct($name, $grade)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;name = $name;</span><br><span class="line">        $this-&gt;grade = $grade;</span><br><span class="line">    &#125;</span><br><span class="line">    public function __sleep()</span><br><span class="line">    &#123;</span><br><span class="line">        return array();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$IAT = new iat(&quot;iat&quot;, &quot;grade_1&quot;);</span><br><span class="line">$IAT_serialize = serialize($IAT);</span><br></pre></td></tr></table></figure>
+
+<p>这又是什么原因呢？看完下面的__wakeup就会知道原因了</p>
+<h4 id="7、-wakeup"><a href="#7、-wakeup" class="headerlink" title="7、__wakeup"></a>7、__wakeup</h4><p>反串行化的时候调用，unserialize() 检查具有魔术名称 __wakeup 的函数的存在。如果存在，此函数可以重建对象可能具有的任何资源。</p>
+<p>使用 __wakeup 的目的是重建在序列化中可能丢失的任何数据库连接以及处理其它重新初始化的任务。还是上面的例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class iat</span><br><span class="line">&#123;</span><br><span class="line">    private $name;</span><br><span class="line">    private $grade;</span><br><span class="line">    public function __construct($name, $grade)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;name = $name;</span><br><span class="line">        $this-&gt;grade = $grade;</span><br><span class="line">    &#125;</span><br><span class="line">    public function __sleep()</span><br><span class="line">    &#123;</span><br><span class="line">        return array();</span><br><span class="line">    &#125;</span><br><span class="line">    public function __wakeup()</span><br><span class="line">    &#123;</span><br><span class="line">        echo &quot;wakeup&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    public function getName()</span><br><span class="line">    &#123;</span><br><span class="line">        return $this-&gt;name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$IAT = new iat(&quot;iat&quot;, &quot;grade_1&quot;);</span><br><span class="line">echo $IAT-&gt;getName();</span><br><span class="line">$IAT_serialize = serialize($IAT);</span><br><span class="line">$IAT_unserialize = unserialize($IAT_serialize);</span><br><span class="line">echo $IAT_unserialize-&gt;getName();</span><br></pre></td></tr></table></figure>
+
+<p>这样的结果只输出一个iat，并不是想象中的两次getName。若将__sleep里return array($this-&gt;name)再看看</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class iat</span><br><span class="line">&#123;</span><br><span class="line">    private $name;</span><br><span class="line">    private $grade;</span><br><span class="line">    public function __construct($name, $grade)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;name = $name;</span><br><span class="line">        $this-&gt;grade = $grade;</span><br><span class="line">    &#125;</span><br><span class="line">    public function __sleep()</span><br><span class="line">    &#123;</span><br><span class="line">        return array(’name’);</span><br><span class="line">    &#125;</span><br><span class="line">    public function __wakeup()</span><br><span class="line">    &#123;</span><br><span class="line">        echo &quot;wakeup&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    public function getName()</span><br><span class="line">    &#123;</span><br><span class="line">        return $this-&gt;name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$IAT = new iat(&quot;iat&quot;, &quot;grade_1&quot;);</span><br><span class="line">echo $IAT-&gt;getName();</span><br><span class="line">$IAT_serialize = serialize($IAT);</span><br><span class="line">$IAT_unserialize = unserialize($IAT_serialize);</span><br><span class="line">echo $IAT_unserialize-&gt;getName();</span><br></pre></td></tr></table></figure>
+
+<p>到这边就显示两次iat了，说明返回这样形式的数组是为了在序列化时保存已经设了值得成员变量的。</p>
+<h4 id="8、-clone"><a href="#8、-clone" class="headerlink" title="8、__clone"></a>8、__clone</h4><p>PHP5中的对象赋值是使用的引用赋值，如果想复制一个对象则需要使用clone方法，在调用此方法是对象会自动调用__clone</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class iat</span><br><span class="line">&#123;</span><br><span class="line">    private $name;</span><br><span class="line">    private $grade;</span><br><span class="line">    public function __construct($name, $grade)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;name = $name;</span><br><span class="line">        $this-&gt;grade = $grade;</span><br><span class="line">    &#125;</span><br><span class="line">    public function getName()</span><br><span class="line">    &#123;</span><br><span class="line">        return $this-&gt;name;</span><br><span class="line">    &#125;</span><br><span class="line">    public function __clone()</span><br><span class="line">    &#123;</span><br><span class="line">        echo &quot;clone&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$IAT = new iat(&quot;iat&quot;, &quot;grade_1&quot;);</span><br><span class="line">echo $IAT-&gt;getName();</span><br><span class="line">$IAT_copy = clone $IAT;</span><br></pre></td></tr></table></figure>
+
+<h4 id="9、-toString"><a href="#9、-toString" class="headerlink" title="9、__toString"></a>9、__toString</h4><p>将一个对象转化成字符串时自动调用，比如使用echo打印对象时。如果类没有实现此方法，则无法通过echo打印对象，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class iat</span><br><span class="line">&#123;</span><br><span class="line">    private $name;</span><br><span class="line">    private $grade;</span><br><span class="line">    public function __construct($name, $grade)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;name = $name;</span><br><span class="line">        $this-&gt;grade = $grade;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$IAT = new iat(&quot;iat&quot;, &quot;grade_1&quot;);</span><br><span class="line">echo $IAT;</span><br></pre></td></tr></table></figure>
+
+<p>否则会显示：<em>Catchable fatal error: Object of class test could not be converted to string in</em>此方法必须返回一个字符串</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class iat</span><br><span class="line">&#123;</span><br><span class="line">    private $name;</span><br><span class="line">    private $grade;</span><br><span class="line">    public function __construct($name, $grade)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;name = $name;</span><br><span class="line">        $this-&gt;grade = $grade;</span><br><span class="line">    &#125;</span><br><span class="line">    public function __toString()</span><br><span class="line">    &#123;</span><br><span class="line">        return &quot;tostring&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$IAT = new iat(&quot;iat&quot;, &quot;grade_1&quot;);</span><br><span class="line">echo $IAT;</span><br></pre></td></tr></table></figure>
+
+<p>在PHP 5.2.0之前，<strong>toString方法只有结合使用echo() 或 print()时 才能生效。PHP 5.2.0之后，则可以在任何字符串环境生效（例如通过printf()，使用%s修饰符），但 不能用于非字符串环境（如使用%d修饰符  ）。从PHP 5.2.0，如果将一个未定义</strong>toString方法的对象 转换为字符串，会报出一个E_RECOVERABLE_ERROR错误。</p>
+<h4 id="10、-autoload"><a href="#10、-autoload" class="headerlink" title="10、__autoload"></a>10、__autoload</h4><p>试图使用尚未被定义的类时自动调用。通过调用此函数，脚本引擎在 PHP 出错失败前有了最后一个机会加载所需的类。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function __autoload($classname)</span><br><span class="line">&#123;</span><br><span class="line">    include_once($classname . ’.php’);</span><br><span class="line">&#125;</span><br><span class="line">$IAT_class = new iat_class();</span><br></pre></td></tr></table></figure>
+
+<p>注意: 在 __autoload 函数中抛出的异常不能被 catch 语句块捕获并导致致命错误。</p>
+<h4 id="11、-isset"><a href="#11、-isset" class="headerlink" title="11、__isset"></a>11、__isset</h4><p>当在一个未定义的属性上调用isset()函数时调用此方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class iat</span><br><span class="line">&#123;</span><br><span class="line">    private $name;</span><br><span class="line">    private $grade;</span><br><span class="line">    public function __construct($name, $grade)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;name = $name;</span><br><span class="line">        $this-&gt;grade = $grade;</span><br><span class="line">    &#125;</span><br><span class="line">    public function __isset($property)</span><br><span class="line">    &#123;</span><br><span class="line">        echo &quot;123&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$IAT = new iat(&quot;iat&quot;, &quot;grade_1&quot;);</span><br><span class="line">if(isset($IAT-&gt;school))</span><br><span class="line">&#123;</span><br><span class="line">    echo &quot;isset school&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="12、-unset"><a href="#12、-unset" class="headerlink" title="12、__unset"></a>12、__unset</h4><p>当在一个未定义的属性上调用unset()函数时调用此方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class iat</span><br><span class="line">&#123;</span><br><span class="line">    private $name;</span><br><span class="line">    private $grade;</span><br><span class="line">    public function __construct($name, $grade)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;name = $name;</span><br><span class="line">        $this-&gt;grade = $grade;</span><br><span class="line">    &#125;</span><br><span class="line">    public function __unset($property)</span><br><span class="line">    &#123;</span><br><span class="line">        echo &quot;123&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$IAT = new iat(&quot;iat&quot;, &quot;grade_1&quot;);</span><br><span class="line">unset($IAT-&gt;school);</span><br></pre></td></tr></table></figure>
+
+<h4 id="13、-invoke"><a href="#13、-invoke" class="headerlink" title="13、__invoke"></a>13、__invoke</h4><p>当尝试以调用函数的方式调用一个对象时，__invoke 方法会被自动调用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class iat</span><br><span class="line">&#123;</span><br><span class="line">    private $name;</span><br><span class="line">    private $grade;</span><br><span class="line">    public function __construct($name, $grade)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;name = $name;</span><br><span class="line">        $this-&gt;grade = $grade;</span><br><span class="line">    &#125;</span><br><span class="line">    public function __invoke()</span><br><span class="line">    &#123;</span><br><span class="line">        echo &quot;123&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$IAT = new iat(&quot;iat&quot;, &quot;grade_1&quot;);</span><br><span class="line">$IAT();</span><br></pre></td></tr></table></figure>
+
+<h4 id="14、-set-state"><a href="#14、-set-state" class="headerlink" title="14、__set_state"></a>14、__set_state</h4><p>当调用var_export()时，这个静态 方法会被调用（自PHP 5.1.0起有效）。var_export 作用为输出变量的结构信息，换句话说，当用它输出对象时，实际是查看对象的属性；其有个特点：返回的结果是合法的php代码，这为它与eval()语法结构函数结合创造了条件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class iat</span><br><span class="line">&#123;</span><br><span class="line">    private $name;</span><br><span class="line">    private $grade;</span><br><span class="line">    public function __construct($name, $grade)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;name = $name;</span><br><span class="line">        $this-&gt;grade = $grade;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$IAT = new iat(&quot;iat&quot;, &quot;grade_1&quot;);</span><br><span class="line">var_export($IAT);</span><br></pre></td></tr></table></figure>
+
+<p>本方法的唯一参数是一个数组，其中包含按array(’property’ =&gt; value, …)格式排列的类属性。可以看到结果iat::<strong>set_state(array( ’name’ =&gt; ’iat’, ’grade’ =&gt; ’grade_1’, ))对象的结构被当作一个大的静态魔术方法，内置为</strong>set_state，其属性用一个数组来表示。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class iat</span><br><span class="line">&#123;</span><br><span class="line">    public $name;</span><br><span class="line">    public $grade;</span><br><span class="line">    public static function __set_state($arr)</span><br><span class="line">    &#123;</span><br><span class="line">        $IAT_A = new iat;</span><br><span class="line">        $IAT_A-&gt;name = &quot;iat&quot;;</span><br><span class="line">        $IAT_A-&gt;grade = &quot;grade_1&quot;;</span><br><span class="line">        return $IAT_A;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$IAT = new iat(&quot;iat&quot;, &quot;grade_1&quot;);</span><br><span class="line">$IAT-&gt;name = &quot;iat&quot;;</span><br><span class="line">$IAT-&gt;grade = &quot;grade_2&quot;;</span><br><span class="line">eval(’$b = ’. var_export($IAT, true) .’;’);</span><br><span class="line">var_dump($b);</span><br></pre></td></tr></table></figure>
+
+<p><strong>set_state()魔术方法是一个与</strong>clone()相似，却更为强劲的类功能方法，因为它可以有选择地克隆，同时可以保留自己的属性且还可以进行其它一些改变。</p>
+<h4 id="15、-callStatic"><a href="#15、-callStatic" class="headerlink" title="15、__callStatic"></a>15、__callStatic</h4><p>它的工作方式类似于 <strong>call() 魔术方法，</strong>callStatic() 是为了处理静态方法调用，当调用过的静态方法不存在或权限不足时调用__callStatic方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class iat</span><br><span class="line">&#123;</span><br><span class="line">    public $name;</span><br><span class="line">    public $grade;</span><br><span class="line">    public static function __callStatic($name, $arg)</span><br><span class="line">    &#123;</span><br><span class="line">        echo &quot;callStatic&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$IAT = new iat(&quot;iat&quot;, &quot;grade_1&quot;);</span><br><span class="line">echo $IAT::getName();</span><br></pre></td></tr></table></figure>
+
+<p>以上就是PHP15种魔术方法的介绍，在PHP面向对象中选用恰当的魔术方法可以使编程更可靠。</p>
+<p>PHP中的8中魔术变量再w3cschool里讲的比较详细了，引用参考<a href="http://www.w3cschool.cc/php/php-magic-constant.html" target="_blank" rel="noopener">http://www.w3cschool.cc/php/php-magic-constant.html</a></p>
+<hr>
+<blockquote>
+<p>参考资料</p>
+<ul>
+<li><a href="http://www.php.net/manual/zh/language.oop5.magic.php" target="_blank" rel="noopener">http://www.php.net/manual/zh/language.oop5.magic.php</a></li>
+</ul>
+</blockquote>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="./15-kinds-of-magic-methods-and-8-kinds-of-variables.html" class="archive-article-date">
+  	<time datetime="2014-04-09T04:12:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-04-09</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="./tags/PHP/">PHP</a></li></ul>
+	</div>
+
+<!--
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="./categories/Study/">Study</a>
+	</div>
+
+
+-->
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="./several-ways-to-send-email.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          PHP发送邮件的几种方法总结
+        
+      </div>
+    </a>
+  
+  
+    <a href="./conclusion-in-linux-php-config.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Linux下PHP配置方面的总结</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2013-2019 iat
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/yaoshanliang/hexo-theme-yilia" target="_blank">Yilia</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: ,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "./"
+	}
+</script>
+
+<script src="././main.js"></script>
+
+
+
+
+
+<!-- Baidu Analytics -->
+<script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a8f517fee81bd1ee9a017d6f0cbfe789";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+      })();
+</script>
+<!-- End Baidu Analytics -->
+
+
+
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="./tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="./tags/Apache/" style="font-size: 10px;">Apache</a> <a href="./tags/Blog/" style="font-size: 12px;">Blog</a> <a href="./tags/Composer/" style="font-size: 10px;">Composer</a> <a href="./tags/DWZ/" style="font-size: 12px;">DWZ</a> <a href="./tags/FuelPHP/" style="font-size: 14px;">FuelPHP</a> <a href="./tags/HTML/" style="font-size: 18px;">HTML</a> <a href="./tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="./tags/Linux/" style="font-size: 10px;">Linux</a> <a href="./tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="./tags/PHP/" style="font-size: 20px;">PHP</a> <a href="./tags/Tool/" style="font-size: 10px;">Tool</a> <a href="./tags/UCenter/" style="font-size: 10px;">UCenter</a> <a href="./tags/Weapp/" style="font-size: 10px;">Weapp</a> <a href="./tags/WebSocket/" style="font-size: 14px;">WebSocket</a> <a href="./tags/Wechat/" style="font-size: 16px;">Wechat</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://limaolong.cn/">green</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://wanghuanming.com/">huanming</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://sukai.me/">kaiyao</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://maywanting.wang/">may</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://mikecoder.cn/">mike</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zalezone.cn/">zale</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Just a beginner.&lt;br /&gt;&lt;a href=&#39;https://about.iat.net.cn&#39; target=&#39;_blank&#39;&gt;profile&lt;/a&gt;</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

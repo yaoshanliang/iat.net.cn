@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>微信开发日记——消息的收发 | iat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="想着之前的二维码签到，寒假中过年之前学习了下微信的公众平台。在家的心总是静不下来，没有好好总结总结。现在来到学校了，离开学还有一个礼拜的时间，回过头来反思一下。">
+<meta name="keywords" content="Wechat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信开发日记——消息的收发">
+<meta property="og:url" content="https://iat.net.cn/send-and-receieve-messages-in-wechat.html">
+<meta property="og:site_name" content="iat">
+<meta property="og:description" content="想着之前的二维码签到，寒假中过年之前学习了下微信的公众平台。在家的心总是静不下来，没有好好总结总结。现在来到学校了，离开学还有一个礼拜的时间，回过头来反思一下。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-20T09:01:36.642Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微信开发日记——消息的收发">
+<meta name="twitter:description" content="想着之前的二维码签到，寒假中过年之前学习了下微信的公众平台。在家的心总是静不下来，没有好好总结总结。现在来到学校了，离开学还有一个礼拜的时间，回过头来反思一下。">
+  
+    <link rel="alternative" href="/atom.xml" title="iat" type="application/atom+xml">
+  
+  
+  <script src="./style.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="./avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">iat</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+	        
+				<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+	        
+				<li><a href="https://about.iat.net.cn">关于我</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">Archive</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">Tags</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">Links</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">About</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+		        
+					<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">iat</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="./avatar.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">iat</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+		        
+					<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+		        
+					<li><a href="https://about.iat.net.cn">关于我</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-send-and-receieve-messages-in-wechat" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      微信开发日记——消息的收发
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>想着之前的二维码签到，寒假中过年之前学习了下微信的公众平台。在家的心总是静不下来，没有好好总结总结。现在来到学校了，离开学还有一个礼拜的时间，回过头来反思一下。</p>
+<a id="more"></a>
+
+<p>微信公众平台开发者文档（<a href="http://mp.weixin.qq.com/wiki/index.php?title=%E9%A6%96%E9%A1%B5" target="_blank" rel="noopener">http://mp.weixin.qq.com/wiki/index.php?title=%E9%A6%96%E9%A1%B5</a>）是主要的学习资料。当然，首先要注册开发者账号啦，进入管理页关闭编辑模式，选择开发模式。接下来就是服务器配置，URL填写服务器的网址，Token是签名，会和URL文件里的Token相匹对，一致的话才能通过验证，才能添加代码实现下面的功能，检验signature的PHP示例代码可以在接入指南里下载。</p>
+<p>下面就是实际的收发消息了，微信的收发是通过XML实现的。当用户发送一段文字给公众账号时，服务器端收到的信息包括发送方的名称FromUserName、接收方的名称ToUserName、发送时间戳CreateTime、消息类型MsgType、消息内容Content以及消息的编号MsgId，返回消息时通过交换FromUserName与ToUserName就可以实现了。</p>
+<p>responseMsg()函数通常是用户与公众账号交流的主入口，$postStr = $GLOBALS[“HTTP_RAW_POST_DATA”]总是产生 $HTTP_RAW_POST_DATA 变量包含有原始的 POST 数据，接下来的simplexml_load_string()函数是把XML字符串载入对象中，也就得到了用户的一个对象。</p>
+<p>为了方便回复文本消息，写成transmitText()函数，第一个参数时用户对象，第二个是需要回复的文本内容。返回值是通过sprintf()函数合成字符串，这是一个字符串格式化命令，把格式化的数据写入字符串变量中。这样也就组合成一个返回的消息字符串，再echo一下就可以发出去了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">private function transmitText($object, $content)</span><br><span class="line">&#123;</span><br><span class="line">        $textTpl = &quot;&lt;xml&gt;</span><br><span class="line">                        &lt;ToUserName&gt;&lt;![CDATA[%s]]&gt;&lt;/ToUserName&gt;</span><br><span class="line">                        &lt;FromUserName&gt;&lt;![CDATA[%s]]&gt;&lt;/FromUserName&gt;</span><br><span class="line">                        &lt;CreateTime&gt;%s&lt;/CreateTime&gt;</span><br><span class="line">                        &lt;MsgType&gt;&lt;![CDATA[text]]&gt;&lt;/MsgType&gt;</span><br><span class="line">                        &lt;Content&gt;&lt;![CDATA[%s]]&gt;&lt;/Content&gt;</span><br><span class="line">                        &lt;FuncFlag&gt;%d&lt;/FuncFlag&gt;</span><br><span class="line">                    &lt;/xml&gt;&quot;;</span><br><span class="line">        $resultStr = sprintf($textTpl, $object-&gt;FromUserName, $object-&gt;ToUserName, time(), $content, time());</span><br><span class="line">        return $resultStr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这边可以接入小黄鸡的聊天程序，私有函数如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">private function chatWithSimsimi($object)//小黄鸡</span><br><span class="line">&#123;</span><br><span class="line">        $keyword = trim($object-&gt;Content);</span><br><span class="line">        include(’simsimi.php’);</span><br><span class="line">        $contentStr = callSimsimi($keyword);</span><br><span class="line">        return $contentStr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>simsimi.php文件可以再小黄鸡的网站上下载到，就是callSimsimi()函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">function callSimsimi($keyword)</span><br><span class="line">&#123;</span><br><span class="line">    $params[’key’] = &quot;c7b90c2f-1197-46db-8998-61fb738bb8e1&quot;;</span><br><span class="line">    $params[’lc’] = &quot;ch&quot;;</span><br><span class="line">    $params[’ft’] = &quot;1.0&quot;;</span><br><span class="line">    $params[’text’] = $keyword;</span><br><span class="line"></span><br><span class="line">    $url = &quot;http://sandbox.api.simsimi.com/request.p?&quot;.http_build_query($params);</span><br><span class="line">    $ch = curl_init();</span><br><span class="line">    curl_setopt($ch, CURLOPT_URL, $url);</span><br><span class="line">    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);</span><br><span class="line">    $output = curl_exec($ch);</span><br><span class="line">    curl_close($ch);</span><br><span class="line"></span><br><span class="line">    $message = json_decode($output,true);</span><br><span class="line">    $result = &quot;&quot;;</span><br><span class="line">    if ($message[’result’] == 100)&#123;</span><br><span class="line">        $result = $message[’response’];</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        $result = $message[’result’].&quot;-&quot;.$message[’msg’];</span><br><span class="line">    &#125;</span><br><span class="line">    return $result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在该文件里需要填写申请的密钥$params[’key’] ，而且申请只有7天的有效期，上面的那个已经过期了吧，长期的是要付费的。</p>
+<p>这样一来一个简单的收发消息就可以实现了，呃，不！这只是简单中的收发文本消息，对于图片、语音、视频、地理位置、链接等通过类似的方法，注意XML中的数据就行了。值得一提的是图文消息，也就是我们通常看到的腾讯新闻推送的类型，<articlecount>指的是图文消息个数，限制为10条以内，有多少个下面的<item>就需要有多少，<item></item>里包含<title>图文消息的标题，<description>图文消息描述，<picurl> 图片链接，<url> 点击图文消息跳转链接。</url></picurl></description></title></item></articlecount></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="./send-and-receieve-messages-in-wechat.html" class="archive-article-date">
+  	<time datetime="2014-02-10T04:12:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-02-10</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="./tags/Wechat/">Wechat</a></li></ul>
+	</div>
+
+<!--
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="./categories/Study/">Study</a>
+	</div>
+
+
+-->
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="./event-push-in-wechat.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          微信开发日记——事件的推送
+        
+      </div>
+    </a>
+  
+  
+    <a href="./combine-wechat-and-qrcode.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">如果将”微信”与”二维码签到”结合起来</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2013-2019 iat
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/yaoshanliang/hexo-theme-yilia" target="_blank">Yilia</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: ,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "./"
+	}
+</script>
+
+<script src="././main.js"></script>
+
+
+
+
+
+<!-- Baidu Analytics -->
+<script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a8f517fee81bd1ee9a017d6f0cbfe789";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+      })();
+</script>
+<!-- End Baidu Analytics -->
+
+
+
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="./tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="./tags/Apache/" style="font-size: 10px;">Apache</a> <a href="./tags/Blog/" style="font-size: 12px;">Blog</a> <a href="./tags/Composer/" style="font-size: 10px;">Composer</a> <a href="./tags/DWZ/" style="font-size: 12px;">DWZ</a> <a href="./tags/FuelPHP/" style="font-size: 14px;">FuelPHP</a> <a href="./tags/HTML/" style="font-size: 18px;">HTML</a> <a href="./tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="./tags/Linux/" style="font-size: 10px;">Linux</a> <a href="./tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="./tags/PHP/" style="font-size: 20px;">PHP</a> <a href="./tags/Tool/" style="font-size: 10px;">Tool</a> <a href="./tags/UCenter/" style="font-size: 10px;">UCenter</a> <a href="./tags/Weapp/" style="font-size: 10px;">Weapp</a> <a href="./tags/WebSocket/" style="font-size: 14px;">WebSocket</a> <a href="./tags/Wechat/" style="font-size: 16px;">Wechat</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://limaolong.cn/">green</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://wanghuanming.com/">huanming</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://sukai.me/">kaiyao</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://maywanting.wang/">may</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://mikecoder.cn/">mike</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zalezone.cn/">zale</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Just a beginner.&lt;br /&gt;&lt;a href=&#39;https://about.iat.net.cn&#39; target=&#39;_blank&#39;&gt;profile&lt;/a&gt;</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>PDO | iat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="PDO（PHP Data Object）提供通用接口访问多种数据库，是建立PHP以及PHP连接数据库之间的抽象层。使用传统的mysql_connect() mysql_query()方法连接查询数据库，如果过滤不严，很容易产生SQL注入的风险。虽然可以使用mysql_real_escape_string()等函数过滤用户提交的值，但还是在安全、性能方面有缺陷。">
+<meta name="keywords" content="PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PDO">
+<meta property="og:url" content="https://iat.net.cn/pdo.html">
+<meta property="og:site_name" content="iat">
+<meta property="og:description" content="PDO（PHP Data Object）提供通用接口访问多种数据库，是建立PHP以及PHP连接数据库之间的抽象层。使用传统的mysql_connect() mysql_query()方法连接查询数据库，如果过滤不严，很容易产生SQL注入的风险。虽然可以使用mysql_real_escape_string()等函数过滤用户提交的值，但还是在安全、性能方面有缺陷。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-20T09:01:36.641Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PDO">
+<meta name="twitter:description" content="PDO（PHP Data Object）提供通用接口访问多种数据库，是建立PHP以及PHP连接数据库之间的抽象层。使用传统的mysql_connect() mysql_query()方法连接查询数据库，如果过滤不严，很容易产生SQL注入的风险。虽然可以使用mysql_real_escape_string()等函数过滤用户提交的值，但还是在安全、性能方面有缺陷。">
+  
+    <link rel="alternative" href="/atom.xml" title="iat" type="application/atom+xml">
+  
+  
+  <script src="./style.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="./avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">iat</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+	        
+				<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+	        
+				<li><a href="https://about.iat.net.cn">关于我</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">Archive</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">Tags</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">Links</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">About</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+		        
+					<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">iat</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="./avatar.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">iat</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+		        
+					<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+		        
+					<li><a href="https://about.iat.net.cn">关于我</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-pdo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      PDO
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>PDO</strong>（PHP Data Object）提供通用接口访问多种数据库，是建立PHP以及PHP连接数据库之间的抽象层。使用传统的<code>mysql_connect()</code> <code>mysql_query()</code>方法连接查询数据库，如果过滤不严，很容易产生SQL注入的风险。虽然可以使用<code>mysql_real_escape_string()</code>等函数过滤用户提交的值，但还是在安全、性能方面有缺陷。</p>
+<a id="more"></a>
+
+<h4 id="连接与获取"><a href="#连接与获取" class="headerlink" title="连接与获取"></a>连接与获取</h4><p>在使用PDO连接到数据库需要实例化一个PDO对象并且传递一个<strong>DSN</strong>（Data Source Name），包括数据库类型、主机地址、数据库名、用户名、密码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$dsn = &quot;$db_type:host = $db_host; dbname = $db_name&quot;;//数据库类型、主机地址、数据库名</span><br><span class="line">$conn = new PDO($dsn, $db_user, $db_password);//数据源名称、用户名、密码</span><br></pre></td></tr></table></figure>
+
+<p>♠以user表为例，获取其中的所有数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$sql = &quot;SELECT * FROM `user`&quot;;</span><br><span class="line">$stmt = $conn-&gt;prepare($sql);//预编译</span><br><span class="line">$stmt-&gt;execute();//执行</span><br><span class="line">$result = $stmt-&gt;fetchAll();//获取</span><br><span class="line">var_dump($result);</span><br><span class="line">$conn = NULL;//释放</span><br></pre></td></tr></table></figure>
+
+<p>获取有两种类型<code>fetch()</code>（获取下一条记录）和<code>fetchAll()</code>（获取所有记录）都接受fetch_style参数，该参数定义如何格式化结果集。</p>
+<ul>
+<li><strong>PDO::FETCH_ASSOC</strong>：返回列名键组</li>
+<li><strong>PDO::FETCH_NUM</strong>：返回数字键组</li>
+<li><strong>PDO::FETCH_BOTH</strong>：结合了PDO::FETCH_ASSOC和PDO::NUM，返回每个值都出现两次的数组，一次使用列名，一次使用数字索引</li>
+<li><strong>PDO::FETCH_CLASS</strong>：返回一个类的对象，列的名字设置到其属性当中。</li>
+</ul>
+<h4 id="参数绑定与预编译"><a href="#参数绑定与预编译" class="headerlink" title="参数绑定与预编译"></a>参数绑定与预编译</h4><p>PDO最大的特点就是参数绑定和预编译，绑定有两种：参数绑定和变量绑定。</p>
+<p>♠以从user表里获取name为iat的用户为例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$name = &apos;iat&apos;;</span><br><span class="line">$sql = &quot;SELECT * FROM `user` WHERE name = :name&quot;;</span><br><span class="line">$stmt = $conn-&gt;prepare($sql);</span><br><span class="line">$stmt-&gt;bindParam(&apos;:name&apos;, $name);//绑定参数</span><br><span class="line">$stmt-&gt;bindValue(&apos;:name&apos;, &apos;iat&apos;);//绑定变量</span><br><span class="line">$stmt-&gt;execute();</span><br></pre></td></tr></table></figure>
+
+<p>PDO中的<code>bindParam()</code>方法还有第三个可选参数，即可把传入的参数转化为需要的类型，类型对应如下</p>
+<ul>
+<li><strong>PDO::PARAM_BOOL</strong>：布尔类型</li>
+<li><strong>PDO::PARAM_NULL</strong>：NULL类型</li>
+<li><strong>PDO::PARAM_INT</strong>：整数类型</li>
+<li><strong>PDO::PARAM_STR</strong>：字符串类型</li>
+</ul>
+<p>等等，这样的话数据经过相应的处理就相对安全些了。</p>
+<p><code>bindValue()</code>为绑定具体的值，变量作为引用被绑定，并只在execute() 被调用的时候才取其值。</p>
+<p>占位符有两种形式：名称和问号，用问号的话则需要注意在传入execute()的时候，数组的值需要与对应的问号保持一致。如果SQL语句比较复杂，命名占位符更容易理解，更容易看出哪个值属于哪个参数。</p>
+<p>♠以user表绑定name为例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//名称形式占位</span><br><span class="line">sql = &quot;SELECT * FROM `user` WHERE name = :name&quot;;</span><br><span class="line">$stmt = $conn-&gt;prepare($sql);</span><br><span class="line">$stmt-&gt;execute(array(&apos;:name&apos; =&gt; &apos;iat&apos;));</span><br><span class="line">//问号形式占位</span><br><span class="line">sql = &quot;SELECT * FROM `user` WHERE name = ？&quot;;</span><br><span class="line">$stmt = $conn-&gt;prepare($sql);</span><br><span class="line">$stmt-&gt;execute(array(&apos;iat&apos;));</span><br></pre></td></tr></table></figure>
+
+<p>在mysql中，为了防止注入攻击，通常使用</p>
+<ul>
+<li><code>addslashes()</code>：特殊字符前加反斜线</li>
+<li><code>mysql_escape_string()</code>：转义SQL字符串的特殊字符</li>
+<li><code>mysql_real_escape_string()</code>：转义SQL字符串的特殊字符，并考虑连接的当前字符</li>
+<li><code>htmlspecialchars()</code>：把一些预定义的字符转换为html实体</li>
+<li><code>strip_tags()</code>：去除一些html和php标签</li>
+</ul>
+<p>等等。当调用prepare()的时候，查询语句已经发送给服务器，此时是占位符发送了过去，没有用户提交的数据。而当调用execute()时，用户提交过来的数据才会传送过去，两者是相互独立的。在使用普通的mysql函数时需要使用mysql_escape_string()等函数过滤特殊的字符，而使用PDO的预处理语句已经帮我们完成了这一步骤。</p>
+<p>使用预编译的好处是，查询只需被解析一次，但可以使用不同的参数执行多次。对于复杂查询来说，如果需要重复执行许多次有不同参数但结构相同的查询，这个过程会占用大量的时间。通过一个预编译语句可以避免重复分析、编译、优化环节。</p>
+<h4 id="异常与错误"><a href="#异常与错误" class="headerlink" title="异常与错误"></a>异常与错误</h4><p>PDO提供异常处理类PDOException，使用<code>getMessage()</code>方法可以获得抛出异常的原因。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">try&#123;</span><br><span class="line">    $conn = new PDO($dsn, $db_user, $db_password);</span><br><span class="line">    ...</span><br><span class="line">&#125;catch(PDOException  $e)&#123;</span><br><span class="line">    echo $e-&gt;getMessage();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果不是由于异常引起的错误，PDO并不会有任何解释的，这时候就需要使用PDO或PDOStatement类的<code>errorInfo()</code>方法找出错误的原因，该方法返回一个数组，包括</p>
+<ul>
+<li>SQLSTATE，错误产生原因的ANSI SQL标准码</li>
+<li>数据库驱动的错误代码</li>
+<li>数据库驱动的错误消息</li>
+</ul>
+<p>♠以select数据失败为例，返回false</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$sql = &quot;SELECT * FROM `user`&quot;;</span><br><span class="line">$stmt = $conn-&gt;prepare($sql);</span><br><span class="line">if (!$stmt-&gt;execute()) &#123;</span><br><span class="line">    echo $stmt-&gt;errorInfo[2];//直接echo第三个数字键错误消息</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h4><p>使用PDO中的事务的时候只需要</p>
+<ul>
+<li>语句运行之前调用<code>beginTransaction()</code>方法启动事务</li>
+<li>语句执行后调用<code>commit()</code>方法提交事务</li>
+<li>出错的时候调用<code>rollback()</code>回滚</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">try&#123;</span><br><span class="line">    $conn = new PDO($dsn, $db_user, $db_password);</span><br><span class="line">    $conn-&gt;beginTransaction();</span><br><span class="line">    ...</span><br><span class="line">    $conn-&gt;commit();</span><br><span class="line">    ...</span><br><span class="line">&#125;catch(PDOException  $e)&#123;</span><br><span class="line">    $conn-&gt;rollBack();</span><br><span class="line">    echo $e-&gt;getMessage();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<blockquote>
+<p>参考资料：</p>
+</blockquote>
+<ul>
+<li><p><a href="php.net/manual/zh/class.pdo.php">php.net/manual/zh/class.pdo.php</a></p>
+</li>
+<li><p><a href="zhangxugg-163-com.iteye.com/blog/1835721">zhangxugg-163-com.iteye.com/blog/1835721</a></p>
+</li>
+<li><p>《PHP精粹》2.4PHP数据库对象</p>
+</li>
+<li><p>《PHP核心技术与最佳实践》5.1什么是PDO</p>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="./pdo.html" class="archive-article-date">
+  	<time datetime="2014-10-06T04:12:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-10-06</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="./tags/PHP/">PHP</a></li></ul>
+	</div>
+
+<!--
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="./categories/Study/">Study</a>
+	</div>
+
+
+-->
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="./double-equals-and-triple-equals-in-php.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          PHP中的两个等号与三个等号
+        
+      </div>
+    </a>
+  
+  
+    <a href="./php-end-tag.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">PHP结束标记</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2013-2019 iat
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/yaoshanliang/hexo-theme-yilia" target="_blank">Yilia</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: ,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "./"
+	}
+</script>
+
+<script src="././main.js"></script>
+
+
+
+
+
+<!-- Baidu Analytics -->
+<script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a8f517fee81bd1ee9a017d6f0cbfe789";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+      })();
+</script>
+<!-- End Baidu Analytics -->
+
+
+
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="./tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="./tags/Apache/" style="font-size: 10px;">Apache</a> <a href="./tags/Blog/" style="font-size: 12px;">Blog</a> <a href="./tags/Composer/" style="font-size: 10px;">Composer</a> <a href="./tags/DWZ/" style="font-size: 12px;">DWZ</a> <a href="./tags/FuelPHP/" style="font-size: 14px;">FuelPHP</a> <a href="./tags/HTML/" style="font-size: 18px;">HTML</a> <a href="./tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="./tags/Linux/" style="font-size: 10px;">Linux</a> <a href="./tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="./tags/PHP/" style="font-size: 20px;">PHP</a> <a href="./tags/Tool/" style="font-size: 10px;">Tool</a> <a href="./tags/UCenter/" style="font-size: 10px;">UCenter</a> <a href="./tags/Weapp/" style="font-size: 10px;">Weapp</a> <a href="./tags/WebSocket/" style="font-size: 14px;">WebSocket</a> <a href="./tags/Wechat/" style="font-size: 16px;">Wechat</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://limaolong.cn/">green</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://wanghuanming.com/">huanming</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://sukai.me/">kaiyao</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://maywanting.wang/">may</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://mikecoder.cn/">mike</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zalezone.cn/">zale</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Just a beginner.&lt;br /&gt;&lt;a href=&#39;https://about.iat.net.cn&#39; target=&#39;_blank&#39;&gt;profile&lt;/a&gt;</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
