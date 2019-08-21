@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>PHP环境安装(ubuntu) | iat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1、安装系统环境（基于Ubuntu 16.04） 更新系统  apt-get update 安装git  apt-get install git  git --version #git version 2.7.4">
+<meta name="keywords" content="PHP,ubuntu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP环境安装(ubuntu)">
+<meta property="og:url" content="https://iat.net.cn/ubuntu-php.html">
+<meta property="og:site_name" content="iat">
+<meta property="og:description" content="1、安装系统环境（基于Ubuntu 16.04） 更新系统  apt-get update 安装git  apt-get install git  git --version #git version 2.7.4">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-21T01:28:30.418Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP环境安装(ubuntu)">
+<meta name="twitter:description" content="1、安装系统环境（基于Ubuntu 16.04） 更新系统  apt-get update 安装git  apt-get install git  git --version #git version 2.7.4">
+  
+    <link rel="alternative" href="/atom.xml" title="iat" type="application/atom+xml">
+  
+  
+  <script src="./style.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="./avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">iat</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a target="_blank" href="http://ucenter.iat.net.cn">用户中心</a></li>
+	        
+				<li><a target="_blank" href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+	        
+				<li><a target="_blank" href="https://about.iat.net.cn">关于我</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">归档</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+		        
+					<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">iat</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="./avatar.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">iat</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+		        
+					<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+		        
+					<li><a href="https://about.iat.net.cn">关于我</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-ubuntu-php" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      PHP环境安装(ubuntu)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1、安装系统环境（基于Ubuntu-16-04）"><a href="#1、安装系统环境（基于Ubuntu-16-04）" class="headerlink" title="1、安装系统环境（基于Ubuntu 16.04）"></a>1、安装系统环境（基于Ubuntu 16.04）</h2><ul>
+<li>更新系统</li>
+</ul>
+<pre><code>apt-get update</code></pre><ul>
+<li>安装git</li>
+</ul>
+<pre><code>apt-get install git
+
+git --version
+#git version 2.7.4</code></pre><a id="more"></a>
+
+<ul>
+<li>安装nginx </li>
+</ul>
+<pre><code>apt-get install nginx
+
+nginx -v
+#nginx version: nginx/1.10.3 (Ubuntu)</code></pre><ul>
+<li>安装mysql</li>
+</ul>
+<pre><code>apt-get install mysql-server
+
+mysql -V
+#mysql  Ver 14.14 Distrib 5.7.18</code></pre><ul>
+<li>安装php7.0</li>
+</ul>
+<pre><code>apt-get install php7.0 php7.0-*
+apt-get install snmp
+
+php -v
+#PHP 7.0.18-0ubuntu0.16.04.1 (cli) ( NTS )
+
+# 修改php上传文件限制
+vi /etc/php/7.0/fpm/php.ini
+post_max_size = 20M
+upload_max_filesize = 20M
+
+# 重启fpm
+service php7.0-fpm restart</code></pre><ul>
+<li>安装php7.1</li>
+</ul>
+<pre><code>sudo apt-get install -y python-software-properties
+sudo add-apt-repository -y ppa:ondrej/php
+sudo apt-get update -y
+
+sudo apt-get -y install php7.1
+sudo apt-get -y install php7.1-mysql
+sudo apt-get install php7.1-fpm
+
+sudo apt-get install php7.1-curl php7.1-xml php7.1-mcrypt php7.1-json php7.1-gd php7.1-mbstring</code></pre><ul>
+<li>安装composer</li>
+</ul>
+<pre><code>php -r &quot;copy(&apos;https://install.phpcomposer.com/installer&apos;, &apos;composer-setup.php&apos;);&quot;
+php composer-setup.php
+php -r &quot;unlink(&apos;composer-setup.php&apos;);&quot;
+sudo mv composer.phar /usr/local/bin/composer
+composer -V
+# Composer version 1.4.2</code></pre><h2 id="2、部署代码"><a href="#2、部署代码" class="headerlink" title="2、部署代码"></a>2、部署代码</h2><ul>
+<li>clone 代码</li>
+</ul>
+<pre><code>cd /var/www/html
+git clone https://git.coding.net/iat/example.git example</code></pre><ul>
+<li>代码依赖</li>
+</ul>
+<pre><code>cd example
+composer install</code></pre><ul>
+<li>代码配置</li>
+</ul>
+<pre><code>cd example
+chmod -R 777 storage
+chmod -R 777 bootstrap
+chmod -R 777 public/storage
+cp .env.example .env
+vi .env
+#修改对应的数据库配置
+
+php artisan key:generate
+php artisan migrate
+php artisan db:seed</code></pre><ul>
+<li>nginx 配置</li>
+</ul>
+<pre><code>vi /etc/nginx/sites-available/default
+
+server {
+    listen 80;
+
+    root /var/www/html/example/public;
+          client_max_body_size 20M;
+          index index.php index.html index.htm index.nginx-debian.html;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+        include fastcgi_params;
+    }
+}
+
+sudo service nginx restart</code></pre><ul>
+<li>允许mysql远程访问</li>
+</ul>
+<pre><code>vi /etc/mysql/mysql.conf.d/mysqld.cnf
+bind-address            = 0.0.0.0
+
+# 登录mysql
+GRANT ALL PRIVILEGES ON *.* TO &apos;root&apos;@&apos;%&apos; IDENTIFIED BY &apos;123456&apos; WITH GRANT OPTION;
+FLUSH PRIVILEGES
+
+service mysql restart</code></pre>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="./ubuntu-php.html" class="archive-article-date">
+  	<time datetime="2018-04-24T04:12:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2018-04-24</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="./tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="./tags/ubuntu/">ubuntu</a></li></ul>
+	</div>
+
+<!--
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="./categories/Study/">Study</a>
+	</div>
+
+
+-->
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="./git-hook.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          GIT自动部署
+        
+      </div>
+    </a>
+  
+  
+    <a href="./mac-php.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">mac php php-fpm nginx mysql 安装</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+					<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/yaoshanliang/hexo-theme-yilia" target="_blank">Yilia</a>
+    	</div>
+      	<div class="footer-right">
+						&copy; 2013-2019 iat	苏ICP备18065142号-1 
+      	</div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: ,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "./"
+	}
+</script>
+
+<script src="././main.js"></script>
+
+
+
+
+
+<!-- Baidu Analytics -->
+<script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a8f517fee81bd1ee9a017d6f0cbfe789";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+      })();
+</script>
+<!-- End Baidu Analytics -->
+
+
+
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="./tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="./tags/Apache/" style="font-size: 10px;">Apache</a> <a href="./tags/Blog/" style="font-size: 12px;">Blog</a> <a href="./tags/Composer/" style="font-size: 10px;">Composer</a> <a href="./tags/DWZ/" style="font-size: 12px;">DWZ</a> <a href="./tags/FuelPHP/" style="font-size: 14px;">FuelPHP</a> <a href="./tags/GIT/" style="font-size: 10px;">GIT</a> <a href="./tags/HTML/" style="font-size: 18px;">HTML</a> <a href="./tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="./tags/Linux/" style="font-size: 10px;">Linux</a> <a href="./tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="./tags/PHP/" style="font-size: 20px;">PHP</a> <a href="./tags/Tool/" style="font-size: 10px;">Tool</a> <a href="./tags/UCenter/" style="font-size: 10px;">UCenter</a> <a href="./tags/Weapp/" style="font-size: 10px;">Weapp</a> <a href="./tags/WebSocket/" style="font-size: 14px;">WebSocket</a> <a href="./tags/Wechat/" style="font-size: 16px;">Wechat</a> <a href="./tags/ubuntu/" style="font-size: 10px;">ubuntu</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://limaolong.cn/">green</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://wanghuanming.com/">huanming</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://sukai.me/">kaiyao</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://maywanting.wang/">may</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://mikecoder.cn/">mike</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zalezone.cn/">zale</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

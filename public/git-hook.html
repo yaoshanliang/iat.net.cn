@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>GIT自动部署 | iat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1、查看nginx所属用户vi /etc/nginx/nginx.conf  user www-data; worker_processes 4; pid /run/nginx.pid;  可以看到用户为www-data(注意：接下来的权限都要配置为该用户） 2、创建web服务器用户目录sudo mkdir /var/www/html/.ssh sudo chown -R www-data:www">
+<meta name="keywords" content="GIT">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GIT自动部署">
+<meta property="og:url" content="https://iat.net.cn/git-hook.html">
+<meta property="og:site_name" content="iat">
+<meta property="og:description" content="1、查看nginx所属用户vi /etc/nginx/nginx.conf  user www-data; worker_processes 4; pid /run/nginx.pid;  可以看到用户为www-data(注意：接下来的权限都要配置为该用户） 2、创建web服务器用户目录sudo mkdir /var/www/html/.ssh sudo chown -R www-data:www">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-21T01:14:33.902Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GIT自动部署">
+<meta name="twitter:description" content="1、查看nginx所属用户vi /etc/nginx/nginx.conf  user www-data; worker_processes 4; pid /run/nginx.pid;  可以看到用户为www-data(注意：接下来的权限都要配置为该用户） 2、创建web服务器用户目录sudo mkdir /var/www/html/.ssh sudo chown -R www-data:www">
+  
+    <link rel="alternative" href="/atom.xml" title="iat" type="application/atom+xml">
+  
+  
+  <script src="./style.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="./avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">iat</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a target="_blank" href="http://ucenter.iat.net.cn">用户中心</a></li>
+	        
+				<li><a target="_blank" href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+	        
+				<li><a target="_blank" href="https://about.iat.net.cn">关于我</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">归档</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+		        
+					<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">iat</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="./avatar.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">iat</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="http://ucenter.iat.net.cn">用户中心</a></li>
+		        
+					<li><a href="http://ucenter-open.iat.net.cn">开放平台</a></li>
+		        
+					<li><a href="https://about.iat.net.cn">关于我</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/yaoshanliang" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="mailto:i@iat.net.cn" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-git-hook" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      GIT自动部署
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1、查看nginx所属用户"><a href="#1、查看nginx所属用户" class="headerlink" title="1、查看nginx所属用户"></a>1、查看nginx所属用户</h3><pre><code>vi /etc/nginx/nginx.conf
+
+user www-data;
+worker_processes 4;
+pid /run/nginx.pid;</code></pre><p>  可以看到用户为www-data(注意：接下来的权限都要配置为该用户）</p>
+<h3 id="2、创建web服务器用户目录"><a href="#2、创建web服务器用户目录" class="headerlink" title="2、创建web服务器用户目录"></a>2、创建web服务器用户目录</h3><pre><code>sudo mkdir /var/www/html/.ssh
+sudo chown -R www-data:www-data /var/www/html/.ssh/</code></pre> <a id="more"></a>
+
+<h3 id="3、修改web目录用户权限"><a href="#3、修改web目录用户权限" class="headerlink" title="3、修改web目录用户权限"></a>3、修改web目录用户权限</h3><pre><code>sudo chown -R www-data:www-data /var/www/html</code></pre><h3 id="4、准备钩子文件"><a href="#4、准备钩子文件" class="headerlink" title="4、准备钩子文件"></a>4、准备钩子文件</h3><p> 在web目录html下建立一个目录githook, 里面放上一个php文件index.php，并确保该项目可以被外部访问，如<code>http://example.com/githook/index.php</code></p>
+<pre><code>&lt;?php
+
+    error_reporting(1);
+
+    $root = &apos;/var/www/html/&apos;; // 服务器目录
+    $token = &apos;coding&apos;; // token
+    $wwwUser = &apos;www-data&apos;;
+    $wwwGroup = &apos;www&apos;;
+    $log = &apos;[&apos; . date(&apos;Y-m-d H:i:s&apos;) . &apos;]&apos;;
+
+    $json = json_decode(file_get_contents(&apos;php://input&apos;), true);
+
+    /*if (empty($json[&apos;token&apos;]) || $json[&apos;token&apos;] !== $token) {
+        $log = &apos; 缺少token或token错误&apos;;
+        file_put_contents(&apos;log&apos;, $log, FILE_APPEND);
+        exit;
+    }*/
+
+
+    if (! ($repo = $_GET[&apos;repo&apos;])) {
+        $repo = $json[&apos;repository&apos;][&apos;name&apos;];
+    }
+
+    $folder = $root . $repo;
+
+    //$cmd = &quot;sudo -Hu &quot; . $wwwUser . &quot; cd $folder &amp;&amp; git pull 2&gt;&amp;1&quot;;
+    //$log .= $cmd;
+    $cmd =  &quot; cd $folder &amp;&amp; git pull 2&gt;&amp;1 &quot;;
+    $log .= $cmd;
+
+    $res = shell_exec($cmd);
+    $log .= json_encode($res);
+    $log .= &quot;\n&quot;;
+
+    file_put_contents(&apos;log&apos;, $log, FILE_APPEND);
+
+    echo $log;</code></pre><h3 id="5、生成部署公钥"><a href="#5、生成部署公钥" class="headerlink" title="5、生成部署公钥"></a>5、生成部署公钥</h3><p>  粘贴公钥至git平台（如：coding，注意：粘贴至部署公钥，非个人公钥）</p>
+<pre><code>sudo -Hu www-data ssh-keygen -t rsa # 请选择 &quot;no passphrase&quot;，一直回车下去
+sudo cat /var/www/html/.ssh/id_rsa.pub</code></pre><h3 id="6、clone项目"><a href="#6、clone项目" class="headerlink" title="6、clone项目"></a>6、clone项目</h3><p>  我们需要先在服务器上clone一次，以后都可以实现自动部署了：</p>
+<pre><code>sudo -Hu www-data git clone git@git.coding.net:you/repo.git</code></pre><h3 id="7、测试"><a href="#7、测试" class="headerlink" title="7、测试"></a>7、测试</h3><p>  本地推送代码，看看线上有没有自动部署</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="./git-hook.html" class="archive-article-date">
+  	<time datetime="2019-03-13T04:12:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2019-03-13</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="./tags/GIT/">GIT</a></li></ul>
+	</div>
+
+<!--
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="./categories/Study/">Study</a>
+	</div>
+
+
+-->
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="./ubuntu-php.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">PHP环境安装(ubuntu)</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+					<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/yaoshanliang/hexo-theme-yilia" target="_blank">Yilia</a>
+    	</div>
+      	<div class="footer-right">
+						&copy; 2013-2019 iat	苏ICP备18065142号-1 
+      	</div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: ,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "./"
+	}
+</script>
+
+<script src="././main.js"></script>
+
+
+
+
+
+<!-- Baidu Analytics -->
+<script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a8f517fee81bd1ee9a017d6f0cbfe789";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+      })();
+</script>
+<!-- End Baidu Analytics -->
+
+
+
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="./tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="./tags/Apache/" style="font-size: 10px;">Apache</a> <a href="./tags/Blog/" style="font-size: 12px;">Blog</a> <a href="./tags/Composer/" style="font-size: 10px;">Composer</a> <a href="./tags/DWZ/" style="font-size: 12px;">DWZ</a> <a href="./tags/FuelPHP/" style="font-size: 14px;">FuelPHP</a> <a href="./tags/GIT/" style="font-size: 10px;">GIT</a> <a href="./tags/HTML/" style="font-size: 18px;">HTML</a> <a href="./tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="./tags/Linux/" style="font-size: 10px;">Linux</a> <a href="./tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="./tags/PHP/" style="font-size: 20px;">PHP</a> <a href="./tags/Tool/" style="font-size: 10px;">Tool</a> <a href="./tags/UCenter/" style="font-size: 10px;">UCenter</a> <a href="./tags/Weapp/" style="font-size: 10px;">Weapp</a> <a href="./tags/WebSocket/" style="font-size: 14px;">WebSocket</a> <a href="./tags/Wechat/" style="font-size: 16px;">Wechat</a> <a href="./tags/ubuntu/" style="font-size: 10px;">ubuntu</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://limaolong.cn/">green</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://wanghuanming.com/">huanming</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://sukai.me/">kaiyao</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://maywanting.wang/">may</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://mikecoder.cn/">mike</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://zalezone.cn/">zale</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
